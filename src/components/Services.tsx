@@ -44,7 +44,8 @@ const Services = () => {
     },
     {
       title: "Team Building",
-      description: "Team workshops in nature, fostering green minds through chess and eco challenges.",
+      description:
+        "Team workshops in nature, fostering green minds through chess and eco challenges.",
       image: "/images/tree-team.jpg",
       badge: "Nature-led",
       icon: Users,
@@ -71,7 +72,12 @@ const Services = () => {
                 className="text-lg text-gray-700 leading-relaxed max-w-[1100px]"
                 style={{ fontFamily: "Outfit, sans-serif" }}
               >
-              As online presence becomes increasingly essential, every website visit, data transfer, and server operation consumes energy, which adds to digital carbon footprint. Inspired by nature and driven by our passion for web development, we create eco-friendly websites that focus on design and technology to reduce environmental impact
+                As online presence becomes increasingly essential, every website
+                visit, data transfer, and server operation consumes energy,
+                which adds to digital carbon footprint. Inspired by nature and
+                driven by our passion for web development, we create
+                eco-friendly websites that focus on design and technology to
+                reduce environmental impact
               </p>
             </div>
             <div className="mt-8 lg:mt-0">
@@ -110,12 +116,28 @@ const Services = () => {
 
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-lg font-semibold text-white mb-1">
+                    <h3
+                      className="text-lg font-semibold text-white mb-2"
+                      style={{ fontFamily: "Merriweather, serif" }}
+                    >
                       {service.title}
                     </h3>
-                    <p className="text-gray-200 text-xs leading-relaxed">
-                      {service.description}
-                    </p>
+                    <div className="space-y-1">
+                      <p
+                        className="text-gray-200 text-sm leading-relaxed tracking-wide max-w-m"
+                        style={{ fontFamily: "Outfit, sans-serif" }}
+                      >
+                        {service.description.split(". ")[0]}.
+                      </p>
+                      {service.description.includes(". ") && (
+                        <p
+                          className="text-gray-200 text-sm leading-relaxed tracking-wide max-w-m"
+                          style={{ fontFamily: "Outfit, sans-serif" }}
+                        >
+                          {service.description.split(". ").slice(1).join(". ")}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -146,12 +168,31 @@ const Services = () => {
 
                     {/* Content */}
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="text-xl font-bold text-white mb-2">
+                      <h3
+                        className="text-xl font-bold text-white mb-3"
+                        style={{ fontFamily: "Merriweather, serif" }}
+                      >
                         {service.title}
                       </h3>
-                      <p className="text-gray-200 text-sm leading-relaxed">
-                        {service.description}
-                      </p>
+                      <div className="space-y-1">
+                        <p
+                          className="text-gray-200 text-base leading-relaxed tracking-wide max-w-l"
+                          style={{ fontFamily: "Outfit, sans-serif" }}
+                        >
+                          {service.description.split(". ")[0]}.
+                        </p>
+                        {service.description.includes(". ") && (
+                          <p
+                            className="text-gray-200 text-base leading-relaxed tracking-wide max-w-l"
+                            style={{ fontFamily: "Outfit, sans-serif" }}
+                          >
+                            {service.description
+                              .split(". ")
+                              .slice(1)
+                              .join(". ")}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
