@@ -7,17 +7,17 @@ const Testimonial = () => {
   };
 
   return (
-    <section id="testimonial" className="relative py-20 overflow-hidden">
+    <section id="testimonial" className="relative py-32 overflow-hidden sm:mb-20">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-right-top bg-no-repeat"
         style={{
-          backgroundImage: `url('https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1920')`,
+          backgroundImage: `url('/images/miracle-nature.jpg')`,
         }}
       ></div>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      {/* Gradient Overlay - Luminos sus, umbrit jos */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
@@ -35,7 +35,7 @@ const Testimonial = () => {
 
               <button
                 onClick={scrollToContact}
-                className="inline-flex items-center bg-white text-slate-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="inline-flex items-center bg-orange-400 text-slate-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 Let's Talk Now
               </button>
@@ -73,7 +73,7 @@ const Testimonial = () => {
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/30">
                   <img
-                    src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200"
+                    src="/images/miracle-nature.jpg"
                     alt="Thomas Clarkson"
                     className="w-full h-full object-cover"
                   />

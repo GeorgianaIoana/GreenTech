@@ -31,25 +31,20 @@ const Hero = () => {
           {/* Main Content */}
           <div className="text-white -mt-12 md:-mt-20 sm:pt-0 pt-32">
             {/* Main Heading */}
-            <h1
-              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 leading-tight font-montserratAlt"
-             
-            >
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 leading-tight font-montserratAlt">
               Web Development
               <br />
               Powered by the Sun
             </h1>
 
             {/* Description */}
-            <p
-              className="md:text-xl max-w-[500px] text-sm text-white mb-8 text-[19px] leading-relaxed font-montserratAlt"
-           
-            >
-              We help your business shine online with fast websites, efficient code, stunning UI/UX, and hosting that runs on clean solar energy.
+            <p className="md:text-xl max-w-[500px] text-sm text-white mb-8 text-[19px] leading-relaxed font-montserratAlt">
+              We help your business shine online with fast websites, efficient
+              code, stunning UI/UX, and hosting that runs on clean solar energy.
             </p>
 
             {/* CTA Button */}
-            <button 
+            <button
               onClick={scrollToServices}
               className="sm:mb-[80px] inline-flex items-center justify-center bg-orange-400 text-slate-900 px-8 py-4 rounded-full font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt"
             >

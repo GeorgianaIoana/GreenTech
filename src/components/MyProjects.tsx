@@ -69,32 +69,28 @@ const MyProjects = () => {
     {
       id: 1,
       title: "MA2",
-      image:
-        "https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=600",
+      image: "/images/cosmetics.png",
       category: "Web Design",
       number: "01",
     },
     {
       id: 2,
       title: "Select Sites",
-      image:
-        "https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=600",
+      image: "/images/food-wishes.png",
       category: "Mobile App",
       number: "02",
     },
     {
       id: 3,
       title: "Province La Spezia",
-      image:
-        "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=600",
+      image: "/images/travel-agency.png",
       category: "Branding",
       number: "03",
     },
     {
       id: 4,
       title: "Look Deep Into Nature",
-      image:
-        "https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=600",
+      image: "/images/e-commerce-wood.png",
       category: "E-commerce",
       number: "04",
     },
@@ -164,7 +160,9 @@ const MyProjects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover ${
+                      project.id === 4 ? "object-left" : ""
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                   <div className="absolute top-6 right-6">
@@ -203,7 +201,9 @@ const MyProjects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover ${
+                      project.id === 4 ? "object-left" : ""
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                   <div className="absolute top-6 right-6">
