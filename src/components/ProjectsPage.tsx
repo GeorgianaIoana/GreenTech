@@ -9,6 +9,11 @@ const ProjectsPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [cardVisible, setCardVisible] = useState(false);
+  const [visibleWords, setVisibleWords] = useState(0);
+  const [visibleStats, setVisibleStats] = useState(0);
+  const [buttonHighlighted, setButtonHighlighted] = useState(false);
+  
+  const titleWords = ["My", "Personal", "Web", "Development", "Projects", "Portfolio"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +62,16 @@ const ProjectsPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Animate title words appearing one by one
+  useEffect(() => {
+    if (visibleWords < titleWords.length) {
+      const timer = setTimeout(() => {
+        setVisibleWords(visibleWords + 1);
+      }, 300); // 300ms delay between each word
+      return () => clearTimeout(timer);
+    }
+  }, [visibleWords, titleWords.length]);
+
   const goToContact = () => {
     navigate("/#contact");
   };
@@ -72,36 +87,56 @@ const ProjectsPage = () => {
     { number: "4", label: "delivery" },
   ];
 
+  // Animate stats (numbers) appearing one by one after title is complete
+  useEffect(() => {
+    if (visibleWords === titleWords.length && visibleStats < stats.length) {
+      const timer = setTimeout(() => {
+        setVisibleStats(visibleStats + 1);
+      }, 400); // 400ms delay between each stat
+      return () => clearTimeout(timer);
+    }
+  }, [visibleWords, visibleStats, titleWords.length, stats.length]);
+
+  // Highlight button after all stats are visible
+  useEffect(() => {
+    if (visibleStats === stats.length) {
+      const timer = setTimeout(() => {
+        setButtonHighlighted(true);
+      }, 500); // Wait 500ms after last stat appears
+      return () => clearTimeout(timer);
+    }
+  }, [visibleStats, stats.length]);
+
   const projects = [
     {
       title: "E-Commerce Platform",
       description:
         "A modern e-commerce platform built with React and Node.js, featuring real-time inventory management, secure payments, and responsive design...",
       buttonText: "View Project",
-      bgColor: "#2e4d70", // Dark blue
+      bgColor: "#fb923c", 
       projectNumber: "01",
-      image:
-        "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Task Management App",
-      description:
-        "A collaborative task management application with real-time updates, team collaboration features, and intuitive drag-and-drop interface...",
-      buttonText: "Explore App",
-      bgColor: "#856546", // Brown
-      projectNumber: "02",
-      image:
-        "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/first-card.webp",
+      url: "https://www.thesquarechessclub.com/",
     },
     {
       title: "Portfolio Website",
       description:
         "A stunning portfolio website showcasing creative work with smooth animations, interactive galleries, and optimized performance...",
       buttonText: "See Portfolio",
-      bgColor: "#05625c", // Dark teal
-      projectNumber: "03",
+      bgColor: "#fb7185", // rose-400
+      projectNumber: "02",
       image:
         "https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=800",
+    },
+    {
+      title: "Task Management App",
+      description:
+        "A collaborative task management application with real-time updates, team collaboration features, and intuitive drag-and-drop interface...",
+      buttonText: "Explore App",
+      bgColor: "#07615b",
+      projectNumber: "03",
+      image:
+        "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
   ];
 
@@ -135,31 +170,25 @@ const ProjectsPage = () => {
 
   // Calculate blended background color based on scroll progress
   const getBlendedBackgroundColor = () => {
-    if (scrollProgress < 0.25) {
-      // Pure first color
+    if (scrollProgress <= 0.33) {
+      // Pure first color - matches transition SVG exactly
       return projects[0].bgColor;
-    } else if (scrollProgress < 0.42) {
+    } else if (scrollProgress < 0.66) {
       // Transition from first to second color
-      const localProgress = (scrollProgress - 0.25) / 0.17;
+      const localProgress = (scrollProgress - 0.33) / 0.33;
       return interpolateColor(
         projects[0].bgColor,
         projects[1].bgColor,
         localProgress
       );
-    } else if (scrollProgress < 0.58) {
-      // Pure second color
-      return projects[1].bgColor;
-    } else if (scrollProgress < 0.75) {
+    } else {
       // Transition from second to third color
-      const localProgress = (scrollProgress - 0.58) / 0.17;
+      const localProgress = (scrollProgress - 0.66) / 0.34;
       return interpolateColor(
         projects[1].bgColor,
         projects[2].bgColor,
         localProgress
       );
-    } else {
-      // Pure third color
-      return projects[2].bgColor;
     }
   };
 
@@ -173,65 +202,126 @@ const ProjectsPage = () => {
       {/* Hero Section with Video */}
       <section className="min-h-screen relative overflow-hidden flex items-center">
         {/* Background Video */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover object-top"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/images/video-page-two.mp4" type="video/mp4" />
-        </video>
+        <div className="absolute inset-0 w-full h-full z-0">
+          <video
+            className="w-full h-full object-cover object-center"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            style={{ width: '100%', height: '100%' }}
+          >
+            <source src="/projects-banner.mp4" type="video/mp4" />
+            Browser-ul tău nu suportă tag-ul video.
+          </video>
+        </div>
 
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <div className="max-w-5xl mx-auto">
+        <div className="container  z-10">
+          <div className="max-w-6xl mx-auto ">
             {/* Main Title */}
-            <h1
-              className="text-3xl md:text-4xl lg:text-5xl font-light text-white mb-8 leading-tight max-w-4xl mx-auto"
-              style={{ fontFamily: "Merriweather, serif" }}
-            >
-              My Personal Web Development
-              <br />
-              Projects Portfolio
-            </h1>
+            <div className="flex justify-start">
+              <div className="max-w-xl text-left">
+                <h1
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight font-montserratAlt"
+                >
+                  <span className="inline-block">
+                    {titleWords.slice(0, 4).map((word, index) => (
+                      <span
+                        key={index}
+                        className={`inline-block ${
+                          visibleWords > index
+                            ? "opacity-100 animate-bounce-in"
+                            : "opacity-0 translate-y-8 scale-75"
+                        }`}
+                        style={{
+                          transitionDelay: `${index * 150}ms`,
+                          animationDelay: `${index * 150}ms`,
+                        }}
+                      >
+                        {word}
+                        {index < 3 && "\u00A0"}
+                      </span>
+                    ))}
+                  </span>
+                  <br />
+                  <span className="inline-block">
+                    {titleWords.slice(4).map((word, index) => (
+                      <span
+                        key={index + 4}
+                        className={`inline-block ${
+                          visibleWords > index + 4
+                            ? "opacity-100 animate-bounce-in"
+                            : "opacity-0 translate-y-8 scale-75"
+                        }`}
+                        style={{
+                          transitionDelay: `${(index + 4) * 150}ms`,
+                          animationDelay: `${(index + 4) * 150}ms`,
+                        }}
+                      >
+                        {word}
+                        {index < 1 && "\u00A0"}
+                      </span>
+                    ))}
+                  </span>
+                </h1>
 
-            <p
-              className="text-lg text-white/80 mb-40 max-w-2xl mx-auto"
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
-              Explore my latest web development projects showcasing modern
-              technologies, creative solutions, and user-centered design
-              approaches.
-            </p>
+                <p
+                  className="text-lg text-white/80 mb-40 font-montserratAlt"
+                >
+                  Explore my latest web development projects showcasing modern
+                  technologies, creative solutions, and user-centered design
+                  approaches.
+                </p>
+              </div>
+            </div>
 
-            {/* Stats Section */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-              {stats.map(({ number, label }) => (
-                <div key={label} className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 border border-white/30 rounded-full mb-4">
-                    <span className="text-lg font-bold text-white">
+            {/* Stats on the right side - vertical */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-8 items-center pr-2 md:pr-4 z-20 md:mr-14 md:mt-10">
+              {stats.map(({ number, label }, index) => (
+                <div
+                  key={label}
+                  className={`flex flex-col items-center transition-all duration-500 ${
+                    visibleStats > index
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 translate-x-8"
+                  }`}
+                  style={{
+                    transitionDelay: `${index * 100}ms`,
+                  }}
+                >
+                  <div className="inline-flex items-center justify-center w-12 h-12 border border-yellow-100/30 rounded-full mb-2">
+                    <span className="text-lg font-bold text-yellow-100">
                       {number}
                     </span>
                   </div>
-                  <div className="text-white/70 text-sm uppercase tracking-wider">
+                  <div className="text-yellow-100 text-sm uppercase tracking-wider font-montserratAlt">
                     {label}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Navigation Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-16">
+            <div className="flex flex-col sm:flex-row items-center justify-start gap-4 mt-16 max-w-xl">
               <button
                 onClick={goHome}
-                className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:bg-white/20"
+                className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:bg-white/20 font-montserratAlt"
               >
                 <ArrowLeft className="w-5 h-5" />
                 <span>Back to Home</span>
               </button>
               <button
                 onClick={goToContact}
-                className="inline-flex items-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className={`inline-flex items-center space-x-3 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
+                  buttonHighlighted ? "animate-pulse ring-4 ring-yellow-500 ring-opacity-75" : ""
+                }`}
+                style={{ backgroundColor: "#fb923c" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#eab308";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#fb923c";
+                }}
               >
                 <span>Get Started</span>
                 <ArrowRight className="w-5 h-5" />
@@ -241,12 +331,12 @@ const ProjectsPage = () => {
         </div>
 
         {/* Bottom Transition */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute bottom-0 left-0 right-0 z-20">
           <svg
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
-            className="w-full h-20"
-            style={{ fill: "#2e4d70" }}
+            className="w-full h-20 transition-banner"
+            style={{ fill: projects[0].bgColor }}
           >
             <polygon points="0,120 0,80 350,30 500,80 700,60 1000,10 1200,80 1200,120"></polygon>
           </svg>
@@ -259,44 +349,48 @@ const ProjectsPage = () => {
         style={{
           backgroundColor: blendedBgColor,
           transition: "background-color 0.3s ease-out",
-          minHeight: "400vh", // Large scroll space for smooth animation
+          minHeight: "350vh", // Scroll space for smooth animation with 3 projects
         }}
       >
         {/* Left side text sections */}
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto ">
           <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
             {/* Left Column - Text Sections */}
-            <div className="space-y-[100vh]">
+            <div className="space-y-[80vh]">
               {projects.map((project, index) => (
-                <div key={project.projectNumber} className="py-20">
+                <div key={project.projectNumber} className="py-20 max-w-[400px]">
                   {/* Project Number */}
                   <div className="flex items-center space-x-3 mb-8">
                     <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <span className="text-sm font-medium tracking-wider uppercase text-white/80">
+                    <span className="text-sm font-medium tracking-wider uppercase text-white/80 font-montserratAlt">
                       {project.projectNumber} Project
                     </span>
                   </div>
 
                   {/* Title */}
                   <h2
-                    className="text-4xl lg:text-6xl font-bold leading-tight mb-8 text-white transition-all duration-1000 ease-in-out"
-                    style={{ fontFamily: "Merriweather, serif" }}
+                    className="text-4xl lg:text-6xl font-bold leading-tight mb-8 text-white transition-all duration-1000 ease-in-out font-montserratAlt"
                   >
                     {project.title}
                   </h2>
 
                   {/* Description */}
                   <p
-                    className="text-xl text-white/90 leading-relaxed max-w-2xl mb-12 transition-all duration-1000 ease-in-out"
-                    style={{ fontFamily: "Outfit, sans-serif" }}
+                    className="text-xl text-white/90 leading-relaxed max-w-2xl mb-12 transition-all duration-1000 ease-in-out font-montserratAlt"
                   >
                     {project.description}
                   </p>
 
                   {/* Button */}
                   <button
-                    onClick={goToContact}
-                    className="inline-flex items-center space-x-3 bg-white text-slate-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                    onClick={() => {
+                      if (project.url) {
+                        window.open(project.url, "_blank", "noopener,noreferrer");
+                      } else {
+                        goToContact();
+                      }
+                    }}
+                    className="inline-flex items-center space-x-3 bg-emerald-950 hover:bg-emerald-900 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt"
                   >
                     <span>{project.buttonText}</span>
                     <ArrowRight className="w-5 h-5" />
@@ -308,60 +402,62 @@ const ProjectsPage = () => {
             {/* Right Column - Sticky Card */}
             <div className="lg:sticky lg:top-24 lg:h-fit">
               <div
-                className={`rounded-3xl p-8 lg:p-12 h-[70vh] flex items-center shadow-2xl`}
+                className={`rounded-3xl px-8 lg:px-12 py-16 lg:py-24 h-[75vh] flex items-center shadow-2xl mx-8 lg:mx-20 relative overflow-hidden`}
                 style={{
-                  backgroundColor: blendedBgColor,
-                  transition: "background-color 0.3s ease-out",
+                  background: currentImageIndex === 2 
+                    ? `linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.15) 45%, #d1abb1 60%, #d1abb1 100%)`
+                    : `linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.15) 45%, ${blendedBgColor} 60%, ${blendedBgColor} 100%)`,
+                  transition: "background 0.3s ease-out",
                 }}
               >
                 <div className="w-full">
                   {/* Device Frame with Static Image */}
                   <div className="relative h-full flex items-center">
                     {/* Image Container */}
-                    <div className="relative w-4/5 h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl mx-auto">
+                    <div className="relative w-[90%] h-96 lg:h-[28rem] rounded-lg overflow-hidden mx-auto" style={{ boxShadow: '20px 50px 120px -20px rgba(0, 0, 0, 0.7), 10px 25px 60px -15px rgba(0, 0, 0, 0.5)' }}>
                       {/* Image Stack - Instagram Style */}
                       <div className="relative w-full h-full">
                         {projects.map((project, index) => {
                           let translateY = 0;
 
                           // Adjust scroll regions to start transition after text
-                          if (scrollProgress < 0.4) {
-                            // First image region (0 - 0.33)
+                          if (scrollProgress < 0.33) {
+                            // First image region
                             if (index === 0) {
                               translateY = 0;
                             } else if (index === 1) {
                               // Start transition only after 0.25 (after first text)
                               const localProgress = Math.max(
                                 0,
-                                (scrollProgress - 0.25) / 0.15
+                                (scrollProgress - 0.25) / 0.08
                               );
                               translateY = 100 - localProgress * 100;
                             } else {
                               translateY = 100;
                             }
-                          } else if (scrollProgress < 0.7) {
-                            // Second image region (0.33 - 0.66)
+                          } else if (scrollProgress < 0.66) {
+                            // Second image region
                             if (index === 0) {
                               const localProgress =
-                                (scrollProgress - 0.4) / 0.15;
+                                (scrollProgress - 0.33) / 0.08;
                               translateY = -(localProgress * 100);
                             } else if (index === 1) {
                               translateY = 0;
                             } else if (index === 2) {
-                              // Start transition only after 0.55 (after second text)
+                              // Start transition only after 0.58 (after second text)
                               const localProgress = Math.max(
                                 0,
-                                (scrollProgress - 0.55) / 0.15
+                                (scrollProgress - 0.58) / 0.08
                               );
                               translateY = 100 - localProgress * 100;
                             }
                           } else {
-                            // Third image region (0.66 - 1)
+                            // Third image region
                             if (index === 0) {
                               translateY = -100;
                             } else if (index === 1) {
                               const localProgress =
-                                (scrollProgress - 0.7) / 0.15;
+                                (scrollProgress - 0.66) / 0.08;
                               translateY = -(localProgress * 100);
                             } else if (index === 2) {
                               translateY = 0;
@@ -377,11 +473,27 @@ const ProjectsPage = () => {
                                 transition: "none", // Remove CSS transitions, use scroll-based animation
                               }}
                             >
-                              <img
-                                src={project.image}
-                                alt={project.title}
-                                className="w-full h-full object-cover"
-                              />
+                              {project.url ? (
+                                <button
+                                  onClick={() => {
+                                    window.open(project.url, "_blank", "noopener,noreferrer");
+                                  }}
+                                  className="w-full h-full cursor-pointer hover:opacity-90 transition-opacity"
+                                  aria-label={`Visit ${project.title}`}
+                                >
+                                  <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="w-full h-full object-cover"
+                                  />
+                                </button>
+                              ) : (
+                                <img
+                                  src={project.image}
+                                  alt={project.title}
+                                  className="w-full h-full object-cover"
+                                />
+                              )}
                             </div>
                           );
                         })}
@@ -395,20 +507,6 @@ const ProjectsPage = () => {
         </div>
       </section>
 
-      {/* Bottom section to allow scroll past the card */}
-      <section className="py-20 bg-gray-100">
-        <div className="container mx-auto px-6 text-center">
-          <h3 className="text-3xl font-bold text-slate-900 mb-8">
-            Ready to start your project?
-          </h3>
-          <button
-            onClick={goToContact}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300"
-          >
-            Contact Me
-          </button>
-        </div>
-      </section>
     </div>
   );
 };

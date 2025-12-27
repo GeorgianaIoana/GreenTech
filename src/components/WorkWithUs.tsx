@@ -94,7 +94,7 @@ const WorkWithUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-teal-50 sm:mb-20">
+    <section className="py-20 bg-teal-50">
       <div className="container mx-auto px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}

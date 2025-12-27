@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
-import { ArrowRight } from "lucide-react";
-import ProjectCard from "./ProjectCard";
+import { useEffect, useRef } from "react";
 
 const MyProjects = () => {
   const leftProjectsRef = useRef<HTMLDivElement>(null);
   const rightProjectsRef = useRef<HTMLDivElement>(null);
+  const leftProjectsTabletRef = useRef<HTMLDivElement>(null);
+  const rightProjectsTabletRef = useRef<HTMLDivElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,46 +19,87 @@ const MyProjects = () => {
 
       const leftProjects = leftProjectsRef.current;
       const rightProjects = rightProjectsRef.current;
+      const leftProjectsTablet = leftProjectsTabletRef.current;
+      const rightProjectsTablet = rightProjectsTabletRef.current;
       const textContent = textContentRef.current;
 
-      // Left side cards - push to the left
-      if (leftProjects) {
+      // Check if we're on desktop (lg breakpoint = 1024px)
+      const isDesktop = window.innerWidth >= 1024;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+
+      // Desktop: Left side cards - push to the left
+      if (isDesktop && leftProjects) {
         const cards = leftProjects.children;
         for (let i = 0; i < cards.length; i++) {
           const card = cards[i] as HTMLElement;
-          const rotation = scrollProgress * (-15 - i * 8); // Rotate as they move
-          const translateX = -scrollProgress * (200 + i * 60); // Push further left
-          const translateY = scrollProgress * (i * 40); // Slight vertical spread
-
+          const rotation = scrollProgress * (-12 - i * 6);
+          const translateX = -scrollProgress * (180 + i * 50);
+          const translateY = scrollProgress * (i * 40);
           card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotation}deg)`;
         }
       }
 
-      // Right side cards - push to the right
-      if (rightProjects) {
+      // Desktop: Right side cards - push to the right
+      if (isDesktop && rightProjects) {
         const cards = rightProjects.children;
         for (let i = 0; i < cards.length; i++) {
           const card = cards[i] as HTMLElement;
-          const rotation = scrollProgress * (15 + i * 8); // Rotate as they move
-          const translateX = scrollProgress * (200 + i * 60); // Push further right
-          const translateY = scrollProgress * (i * 40); // Slight vertical spread
+          const rotation = scrollProgress * (12 + i * 6);
+          const translateX = scrollProgress * (180 + i * 50);
+          const translateY = scrollProgress * (i * 40);
+          card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotation}deg)`;
+        }
+      }
 
+      // Tablet: Left side cards - push to the left
+      if (isTablet && leftProjectsTablet) {
+        const cards = leftProjectsTablet.children;
+        for (let i = 0; i < cards.length; i++) {
+          const card = cards[i] as HTMLElement;
+          const rotation = scrollProgress * (-8 - i * 4);
+          const translateX = -scrollProgress * (100 + i * 30);
+          const translateY = scrollProgress * (i * 30);
+          card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotation}deg)`;
+        }
+      }
+
+      // Tablet: Right side cards - push to the right
+      if (isTablet && rightProjectsTablet) {
+        const cards = rightProjectsTablet.children;
+        for (let i = 0; i < cards.length; i++) {
+          const card = cards[i] as HTMLElement;
+          const rotation = scrollProgress * (8 + i * 4);
+          const translateX = scrollProgress * (100 + i * 30);
+          const translateY = scrollProgress * (i * 30);
           card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotation}deg)`;
         }
       }
 
       // Text reveal animation
       if (textContent) {
-        const textOpacity = scrollProgress; // Text appears as cards move
-        const textScale = 0.9 + scrollProgress * 0.1; // Subtle scale
-
+        if (isDesktop) {
+          // Desktop: original animation
+          const textOpacity = scrollProgress;
+          const textScale = 0.9 + scrollProgress * 0.1;
         textContent.style.opacity = Math.min(textOpacity * 1.5, 1).toString();
         textContent.style.transform = `scale(${textScale})`;
+        } else {
+          // Mobile/Tablet: text visible from start, subtle fade-in
+          const textOpacity = Math.min(0.3 + scrollProgress * 0.7, 1);
+          textContent.style.opacity = textOpacity.toString();
+          textContent.style.transform = "scale(1)";
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll); // Recalculate on resize
+    handleScroll(); // Initial call
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const scrollToContact = () => {
@@ -102,12 +143,12 @@ const MyProjects = () => {
   return (
     <section
       id="my-projects"
-      className="bg-gradient-to-b from-teal-700 to-teal-50"
+      className="bg-gradient-to-b from-teal-700 to-teal-50 overflow-hidden"
     >
       {/* Animated Projects Section */}
-      <div className="py-20 overflow-hidden relative min-h-screen flex items-center">
+      <div className="py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-24 xl:px-32 relative min-h-screen lg:min-h-screen flex flex-col md:flex-row md:items-center overflow-hidden">
         {/* Text Content - Always centered */}
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 w-full">
           <div
             ref={textContentRef}
             className="max-w-4xl mx-auto text-center transition-all duration-500 ease-out"
@@ -115,7 +156,7 @@ const MyProjects = () => {
           >
             {/* Main Heading */}
             <h2
-              className="text-4xl md:text-5xl font-bold text-teal-50 mb-4"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-teal-50 mb-4"
               style={{ fontFamily: "Merriweather, serif" }}
             >
               Some Of
@@ -125,7 +166,7 @@ const MyProjects = () => {
 
             {/* Description */}
             <p
-              className="text-lg text-gray-700 leading-relaxed max-w-[300px] mx-auto mb-12 max-w-3xl sm:pr-[30px]"
+              className="text-base md:text-lg text-gray-700 leading-relaxed max-w-[300px] md:max-w-3xl mx-auto mb-8 md:mb-12"
               style={{ fontFamily: "Outfit, sans-serif" }}
             >
               Each project in our collection reflects the passion and creativity
@@ -135,20 +176,20 @@ const MyProjects = () => {
             {/* CTA Button */}
             <button
               onClick={scrollToContact}
-              className="inline-flex items-center space-x-3 bg-orange-400 hover:bg-yellow-400 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="inline-flex items-center space-x-3 bg-orange-400 hover:bg-yellow-400 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-sm md:text-base"
             >
               <span className="text-black">Explore our work</span>
             </button>
           </div>
         </div>
 
-        {/* Project Cards - Positioned to initially cover text */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {/* Desktop Cards - Positioned to initially cover text (lg and above) */}
+        <div className="hidden lg:block absolute inset-0 flex items-center justify-center pointer-events-none">
           {/* Left Side - 2 Cards */}
           <div
             ref={leftProjectsRef}
             className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-4"
-            style={{ marginLeft: "-200px" }}
+            style={{ marginLeft: "-180px" }}
           >
             {leftProjects.map((project, index) => (
               <div
@@ -187,7 +228,7 @@ const MyProjects = () => {
           <div
             ref={rightProjectsRef}
             className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex -space-x-32"
-            style={{ marginLeft: "200px" }}
+            style={{ marginLeft: "180px" }}
           >
             {rightProjects.map((project, index) => (
               <div
@@ -217,6 +258,128 @@ const MyProjects = () => {
                         {project.category}
                       </div>
                       <div className="font-bold text-2xl">{project.title}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tablet Cards - Side by side layout (md to lg) */}
+        <div className="hidden md:block lg:hidden absolute inset-0 flex items-center justify-center pointer-events-none">
+          {/* Left Side - 2 Cards */}
+          <div
+            ref={leftProjectsTabletRef}
+            className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-3"
+            style={{ marginLeft: "-100px" }}
+          >
+            {leftProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className="w-56 h-72 rounded-xl overflow-hidden shadow-2xl transition-transform duration-500 ease-out"
+                style={{ zIndex: 10 + index }}
+              >
+                <div className="relative w-full h-full">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className={`w-full h-full object-cover ${
+                      project.id === 4 ? "object-left" : ""
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div className="absolute top-4 right-4">
+                    <div className="text-white text-base font-bold">
+                      {project.number}
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="text-white">
+                      <div className="text-xs text-gray-300 mb-1">
+                        {project.category}
+                      </div>
+                      <div className="font-bold text-lg">{project.title}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Side - 2 Cards */}
+          <div
+            ref={rightProjectsTabletRef}
+            className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex -space-x-20"
+            style={{ marginLeft: "100px" }}
+          >
+            {rightProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`w-56 h-72 rounded-xl overflow-hidden shadow-2xl transition-transform duration-500 ease-out ${
+                  index === 1 ? "-mt-6" : ""
+                }`}
+                style={{ zIndex: 10 + index }}
+              >
+                <div className="relative w-full h-full">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className={`w-full h-full object-cover ${
+                      project.id === 4 ? "object-left" : ""
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div className="absolute top-4 right-4">
+                    <div className="text-white text-base font-bold">
+                      {project.number}
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="text-white">
+                      <div className="text-xs text-gray-300 mb-1">
+                        {project.category}
+                      </div>
+                      <div className="font-bold text-lg">{project.title}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Cards - Grid layout (below md) */}
+        <div className="block md:hidden mt-8 relative z-10">
+          <div className="grid grid-cols-2 gap-4 px-4">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="relative rounded-xl overflow-hidden shadow-xl aspect-[3/4] transition-transform duration-500 ease-out"
+                style={{ opacity: 1 }}
+              >
+                <div className="relative w-full h-full">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className={`w-full h-full object-cover ${
+                      project.id === 4 ? "object-left" : ""
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div className="absolute top-3 right-3">
+                    <div className="text-white text-sm font-bold">
+                      {project.number}
+                    </div>
+                  </div>
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <div className="text-white">
+                      <div className="text-xs text-gray-300 mb-1">
+                        {project.category}
+                      </div>
+                      <div className="font-bold text-base leading-tight">
+                        {project.title}
+                      </div>
                     </div>
                   </div>
                 </div>

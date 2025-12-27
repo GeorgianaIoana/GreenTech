@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact: React.FC = () => {
   const [name, setName] = useState("");
@@ -6,18 +7,60 @@ const Contact: React.FC = () => {
   const [message, setMessage] = useState("");
   const [service, setService] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [consent, setConsent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consent) return;
+    
+    setLoading(true);
+    setError("");
+
+    // EmailJS configuration
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // Check if EmailJS is configured
+    if (!serviceId || !templateId || !publicKey || 
+        serviceId === "YOUR_SERVICE_ID" || 
+        templateId === "YOUR_TEMPLATE_ID" || 
+        publicKey === "YOUR_PUBLIC_KEY") {
+      setError("EmailJS nu este configurat. Te rugăm să adaugi credențialele în fișierul .env. Vezi QUICK_SETUP.md pentru instrucțiuni.");
+      setLoading(false);
+      return;
+    }
+
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      service: service,
+      message: message,
+    };
+
+    try {
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2000);
+      setLoading(false);
+      setTimeout(() => {
+        setSubmitted(false);
     setName("");
     setEmail("");
     setMessage("");
     setService("");
     setConsent(false);
+      }, 3000);
+    } catch (err: any) {
+      console.error("EmailJS error:", err);
+      if (err.text) {
+        setError(`Eroare: ${err.text}. Verifică configurația EmailJS.`);
+      } else {
+        setError("A apărut o eroare la trimiterea mesajului. Te rugăm să încerci din nou sau verifică configurația EmailJS.");
+      }
+      setLoading(false);
+    }
   };
 
   return (
@@ -275,12 +318,18 @@ const Contact: React.FC = () => {
               </label>
             </div>
 
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+                {error}
+              </div>
+            )}
+
             <button
               type="submit"
-              disabled={submitted || !consent}
-              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors disabled:opacity-60"
+              disabled={submitted || !consent || loading}
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {submitted ? "Mesaj trimis!" : "Trimite mesajul"}
+              {loading ? "Se trimite..." : submitted ? "Mesaj trimis!" : "Trimite mesajul"}
             </button>
           </form>
         </div>

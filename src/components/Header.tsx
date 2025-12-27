@@ -39,8 +39,13 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
-            <Code2 className="w-8 h-8 text-blue-500" />
-            <span className="sm:text-[30px] text-[22px] font-bold text-white tracking-wide " style={{ fontFamily: 'Merriweather, serif' }}>SoftDesign</span>
+            <button
+              onClick={() => navigate('/')}
+              className="sm:text-[30px] text-[22px] font-bold text-white tracking-wide hover:opacity-80 transition-opacity cursor-pointer"
+              style={{ fontFamily: 'Merriweather, serif' }}
+            >
+              Bloomsoft
+            </button>
           </div>
 
           {/* Desktop Navigation */}
