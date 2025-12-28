@@ -10,6 +10,7 @@ import MyProjects from "./components/MyProjects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ProjectsPage from "./components/ProjectsPage";
+import ThankYou from "./components/ThankYou";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 
 // Home Page Component
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
         <Footer />
         <FloatingWhatsApp />

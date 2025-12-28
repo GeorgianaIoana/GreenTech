@@ -12,8 +12,18 @@ const ProjectsPage = () => {
   const [visibleWords, setVisibleWords] = useState(0);
   const [visibleStats, setVisibleStats] = useState(0);
   const [buttonHighlighted, setButtonHighlighted] = useState(false);
+  const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
   
   const titleWords = ["My", "Personal", "Web", "Development", "Projects", "Portfolio"];
+
+  // Carousel navigation functions for mobile
+  const nextCarousel = () => {
+    setCurrentCarouselIndex((prev) => (prev + 1) % projects.length);
+  };
+
+  const prevCarousel = () => {
+    setCurrentCarouselIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -208,7 +218,7 @@ const ProjectsPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Video */}
-      <section className="min-h-screen relative overflow-hidden flex items-center">
+      <section className="min-h-screen md:min-h-[90vh] relative overflow-hidden flex items-center py-12 md:py-20">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
@@ -225,13 +235,13 @@ const ProjectsPage = () => {
           </video>
         </div>
 
-        <div className="container  z-10">
-          <div className="max-w-6xl mx-auto ">
+        <div className="container z-10 px-4 md:px-6">
+          <div className="max-w-6xl mx-auto">
             {/* Main Title */}
             <div className="flex justify-start">
-              <div className="max-w-xl text-left">
+              <div className="max-w-xl md:max-w-2xl text-left">
                 <h1
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight font-montserratAlt"
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 md:mb-8 leading-tight font-montserratAlt"
                 >
                   <span className="inline-block">
                     {titleWords.slice(0, 4).map((word, index) => (
@@ -275,10 +285,9 @@ const ProjectsPage = () => {
                 </h1>
 
                 <p
-                  className="text-lg text-white/80 mb-40 font-montserratAlt"
+                  className="text-sm sm:text-base md:text-lg text-white/80 mb-8 md:mb-12 lg:mb-40 font-montserratAlt max-w-full md:max-w-[400px]"
                   style={{
-                    textShadow: '3px 3px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 0, 0, 0.4)',
-                    maxWidth: '400px'
+                    textShadow: '3px 3px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 0, 0, 0.4)'
                   }}
                 >
                   Explore my latest web development projects showcasing modern
@@ -288,8 +297,8 @@ const ProjectsPage = () => {
               </div>
             </div>
 
-            {/* Stats on the right side - vertical */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-8 items-center pr-2 md:pr-4 z-20 md:mr-14 md:mt-10">
+            {/* Stats on the right side - vertical (Desktop/Tablet) */}
+            <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 flex-col gap-8 items-center pr-2 md:pr-4 z-20 md:mr-14 md:mt-10">
               {stats.map(({ number, label }, index) => (
                 <div
                   key={label}
@@ -314,10 +323,11 @@ const ProjectsPage = () => {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-start gap-4 mt-8 max-w-xl">
+            {/* Button for Mobile/Tablet - above stats */}
+            <div className="flex lg:hidden flex-col sm:flex-row items-center justify-start gap-4 mt-4 mb-6 max-w-xl">
               <button
                 onClick={goToContact}
-                className={`inline-flex items-center space-x-3 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
+                className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
                   buttonHighlighted ? "animate-pulse ring-4 ring-yellow-500 ring-opacity-75" : ""
                 }`}
                 style={{ backgroundColor: "#fb923c" }}
@@ -329,7 +339,53 @@ const ProjectsPage = () => {
                 }}
               >
                 <span>Get Started</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Stats horizontal (Mobile/Tablet) */}
+            <div className="flex lg:hidden flex-row gap-4 justify-center items-center mb-6">
+              {stats.map(({ number, label }, index) => (
+                <div
+                  key={label}
+                  className={`flex flex-col items-center transition-all duration-500 ${
+                    visibleStats > index
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4"
+                  }`}
+                  style={{
+                    transitionDelay: `${index * 100}ms`,
+                  }}
+                >
+                  <div className="inline-flex items-center justify-center w-10 h-10 border border-yellow-100/30 rounded-full mb-1">
+                    <span className="text-base font-bold text-yellow-100">
+                      {number}
+                    </span>
+                  </div>
+                  <div className="text-yellow-100 text-xs uppercase tracking-wider font-montserratAlt text-center">
+                    {label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Button for Desktop - below stats */}
+            <div className="hidden lg:flex flex-col sm:flex-row items-center justify-start gap-4 mt-4 md:mt-8 max-w-xl">
+              <button
+                onClick={goToContact}
+                className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
+                  buttonHighlighted ? "animate-pulse ring-4 ring-yellow-500 ring-opacity-75" : ""
+                }`}
+                style={{ backgroundColor: "#fb923c" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#eab308";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#fb923c";
+                }}
+              >
+                <span>Get Started</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -357,8 +413,8 @@ const ProjectsPage = () => {
           minHeight: "350vh", // Scroll space for smooth animation with 3 projects
         }}
       >
-        {/* Left side text sections */}
-        <div className="container mx-auto">
+        {/* Desktop Layout */}
+        <div className="container mx-auto hidden lg:block">
           <div className="grid lg:grid-cols-2 gap-12 max-w-7xl">
             {/* Left Column - Text Sections */}
             <div className="space-y-[80vh]">
@@ -405,7 +461,7 @@ const ProjectsPage = () => {
             </div>
 
             {/* Right Column - Sticky Card */}
-            <div className="lg:sticky lg:top-24 lg:h-fit display:flex">
+            <div className="lg:sticky lg:top-24 lg:h-fit">
               <div
                 className={`rounded-3xl px-8 lg:px-12 py-16 lg:py-24 h-[75vh] flex items-center shadow-2xl mx-8 lg:mx-20 relative overflow-hidden`}
                 style={{
@@ -507,6 +563,143 @@ const ProjectsPage = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tablet and Mobile Layout with Carousel */}
+        <div className="container mx-auto block lg:hidden px-4">
+          <div className="relative overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${currentCarouselIndex * 100}%)`,
+              }}
+            >
+              {projects.map((project, index) => (
+                <div
+                  key={project.projectNumber}
+                  className="w-full flex-shrink-0 px-2"
+                >
+                <div className="py-8">
+                  {/* Project Number */}
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                    <span className="text-sm font-medium tracking-wider uppercase text-white/80 font-montserratAlt">
+                      {project.projectNumber} Project
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h2 className="text-3xl font-bold leading-tight mb-6 text-white font-montserratAlt">
+                    {project.title}
+                  </h2>
+
+                  {/* Description */}
+                  <p className="text-base text-white/90 leading-relaxed mb-8 font-montserratAlt">
+                    {project.description}
+                  </p>
+
+                  {/* Card Image */}
+                  <div className="mb-8">
+                    <div
+                      className="rounded-2xl p-4 md:p-6 min-h-[60vh] md:min-h-[70vh] flex items-center shadow-2xl relative overflow-hidden"
+                      style={{
+                        background: index === 2
+                          ? `linear-gradient(to bottom right, #fce6e7 0%, #e8c5ca 50%, #c79fa5 100%)`
+                          : `linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.15) 45%, ${project.bgColor} 60%, ${project.bgColor} 100%)`,
+                      }}
+                    >
+                      <div className="w-full">
+                        <div className="relative h-full flex items-center justify-center">
+                          <div
+                            className="relative w-[90%] max-w-md h-[50vh] md:h-[60vh] rounded-lg overflow-hidden mx-auto"
+                            style={{
+                              boxShadow:
+                                "20px 50px 120px -20px rgba(0, 0, 0, 0.7), 10px 25px 60px -15px rgba(0, 0, 0, 0.5)",
+                            }}
+                          >
+                            {project.url ? (
+                              <button
+                                onClick={() => {
+                                  window.open(
+                                    project.url,
+                                    "_blank",
+                                    "noopener,noreferrer"
+                                  );
+                                }}
+                                className="w-full h-full cursor-pointer"
+                              >
+                                <img
+                                  src={project.image}
+                                  alt={project.title}
+                                  className="w-full h-full object-contain"
+                                />
+                              </button>
+                            ) : (
+                              <img
+                                src={project.image}
+                                alt={project.title}
+                                className="w-full h-full object-contain"
+                              />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Button */}
+                  <div className="flex justify-center">
+                    <button
+                      onClick={() => {
+                        if (project.url) {
+                          window.open(project.url, "_blank", "noopener,noreferrer");
+                        } else {
+                          goToContact();
+                        }
+                      }}
+                      className="inline-flex items-center space-x-2 bg-emerald-950 hover:bg-emerald-900 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt"
+                    >
+                      <span>{project.buttonText}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Carousel Navigation */}
+            <div className="flex justify-center items-center gap-4 mt-8">
+              <button
+                onClick={prevCarousel}
+                className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all"
+                aria-label="Previous project"
+              >
+                <ArrowRight className="w-5 h-5 rotate-180" />
+              </button>
+              <div className="flex gap-2">
+                {projects.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentCarouselIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentCarouselIndex
+                        ? "bg-white w-8"
+                        : "bg-white/40"
+                    }`}
+                    aria-label={`Go to project ${index + 1}`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={nextCarousel}
+                className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all"
+                aria-label="Next project"
+              >
+                <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </div>

@@ -1,64 +1,58 @@
 import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
+import { useNavigate } from "react-router-dom";
 
 const Contact: React.FC = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [service, setService] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [consent, setConsent] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Replace with your email address
+  const recipientEmail = "georgiana17stanciu@gmail.com";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!consent) return;
+    if (!consent) {
+      setError("Te rugăm să accepți prelucrarea datelor.");
+      return;
+    }
     
     setLoading(true);
     setError("");
 
-    // EmailJS configuration
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    // Check if EmailJS is configured
-    if (!serviceId || !templateId || !publicKey || 
-        serviceId === "YOUR_SERVICE_ID" || 
-        templateId === "YOUR_TEMPLATE_ID" || 
-        publicKey === "YOUR_PUBLIC_KEY") {
-      setError("EmailJS nu este configurat. Te rugăm să adaugi credențialele în fișierul .env. Vezi QUICK_SETUP.md pentru instrucțiuni.");
-      setLoading(false);
-      return;
-    }
-
-    const templateParams = {
-      from_name: name,
-      from_email: email,
-      service: service,
-      message: message,
-    };
-
     try {
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
-    setSubmitted(true);
-      setLoading(false);
-      setTimeout(() => {
-        setSubmitted(false);
-    setName("");
-    setEmail("");
-    setMessage("");
-    setService("");
-    setConsent(false);
-      }, 3000);
-    } catch (err: any) {
-      console.error("EmailJS error:", err);
-      if (err.text) {
-        setError(`Eroare: ${err.text}. Verifică configurația EmailJS.`);
+      const response = await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          service: service,
+          message: message,
+          _subject: `New Contact Form: ${name}`,
+          _captcha: "false", // Set to "true" if you want to enable reCAPTCHA
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success === "true" || response.ok) {
+        // Redirect to thank you page
+        navigate("/thank-you");
       } else {
-        setError("A apărut o eroare la trimiterea mesajului. Te rugăm să încerci din nou sau verifică configurația EmailJS.");
+        setError("A apărut o eroare la trimiterea mesajului. Te rugăm să încerci din nou.");
       }
+    } catch (err: any) {
+      console.error("FormSubmit error:", err);
+      setError("A apărut o eroare la trimiterea mesajului. Te rugăm să încerci din nou.");
+    } finally {
       setLoading(false);
     }
   };
@@ -233,6 +227,7 @@ const Contact: React.FC = () => {
               </label>
               <input
                 id="name"
+                name="name"
                 type="text"
                 required
                 value={name}
@@ -251,6 +246,7 @@ const Contact: React.FC = () => {
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 required
                 value={email}
@@ -269,6 +265,7 @@ const Contact: React.FC = () => {
               </label>
               <select
                 id="service"
+                name="service"
                 required
                 value={service}
                 onChange={(e) => setService(e.target.value)}
@@ -295,6 +292,7 @@ const Contact: React.FC = () => {
               </label>
               <textarea
                 id="message"
+                name="message"
                 rows={5}
                 required
                 value={message}
@@ -326,10 +324,10 @@ const Contact: React.FC = () => {
 
             <button
               type="submit"
-              disabled={submitted || !consent || loading}
+              disabled={!consent || loading}
               className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? "Se trimite..." : submitted ? "Mesaj trimis!" : "Trimite mesajul"}
+              {loading ? "Se trimite..." : "Trimite mesajul"}
             </button>
           </form>
         </div>
