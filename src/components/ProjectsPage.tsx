@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProjectCard from "./ProjectCard";
 
@@ -76,10 +76,6 @@ const ProjectsPage = () => {
     navigate("/#contact");
   };
 
-  const goHome = () => {
-    navigate("/");
-  };
-
   const stats = [
     { number: "1", label: "call" },
     { number: "2", label: "meet" },
@@ -87,7 +83,7 @@ const ProjectsPage = () => {
     { number: "4", label: "delivery" },
   ];
 
-  // Animate stats (numbers) appearing one by one after title is complete
+
   useEffect(() => {
     if (visibleWords === titleWords.length && visibleStats < stats.length) {
       const timer = setTimeout(() => {
@@ -97,21 +93,21 @@ const ProjectsPage = () => {
     }
   }, [visibleWords, visibleStats, titleWords.length, stats.length]);
 
-  // Highlight button after all stats are visible
+
   useEffect(() => {
     if (visibleStats === stats.length) {
       const timer = setTimeout(() => {
         setButtonHighlighted(true);
-      }, 500); // Wait 500ms after last stat appears
+      }, 500);
       return () => clearTimeout(timer);
     }
   }, [visibleStats, stats.length]);
 
   const projects = [
     {
-      title: "E-Commerce Platform",
+      title: "Chess Club Presentation Website",
       description:
-        "A modern e-commerce platform built with React and Node.js, featuring real-time inventory management, secure payments, and responsive design...",
+        "We designed and developed a modern presentation website for a chess club, focused on clearly communicating the club’s identity, values, and activities through a clean and professional digital presence. The interface was designed in Figma with careful attention to branding and usability, then implemented using React and TypeScript to ensure a scalable, high-performance, and maintainable front-end solution.",
       buttonText: "View Project",
       bgColor: "#fb923c", 
       projectNumber: "01",
@@ -119,24 +115,22 @@ const ProjectsPage = () => {
       url: "https://www.thesquarechessclub.com/",
     },
     {
-      title: "Portfolio Website",
+      title: "E-commerce Bags Shop",
       description:
-        "A stunning portfolio website showcasing creative work with smooth animations, interactive galleries, and optimized performance...",
-      buttonText: "See Portfolio",
-      bgColor: "#fb7185", // rose-400
+        "This online store was initially designed in Figma and later developed using HTML, CSS, and JavaScript. The project combines the practical functionality of online sales with a modern, clean, and well-structured visual identity that effectively promotes both the brand and its products. Particular attention was given to usability, intuitive navigation, and visual hierarchy, ensuring a smooth shopping experience that guides users naturally from product discovery to purchase. ",
+      buttonText: "View Project",
+      bgColor: "#fb7185", 
       projectNumber: "02",
-      image:
-        "https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/2sn project.png",
     },
     {
-      title: "Task Management App",
+      title: "Collaboration & Workflow",
       description:
-        "A collaborative task management application with real-time updates, team collaboration features, and intuitive drag-and-drop interface...",
-      buttonText: "Explore App",
+        "Every project is developed through a structured and transparent process, working alongside a dedicated team of designers and developers to ensure high-quality results. We collaborate closely with the client at every stage, from concept and strategy to design and development, transforming ideas into a refined digital product. By combining clear communication, industry best practices, and modern technologies, we deliver websites that are visually compelling, technically reliable, and tailored to support each client’s business goals.",
+      buttonText: "Let's start",
       bgColor: "#07615b",
       projectNumber: "03",
-      image:
-        "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/your-project.jpg",
     },
   ];
 
@@ -193,6 +187,20 @@ const ProjectsPage = () => {
   };
 
   const blendedBgColor = getBlendedBackgroundColor();
+
+  // Function to darken a color for shadow effect
+  const darkenColor = (color: string, factor: number = 0.3) => {
+    const hex = color.replace("#", "");
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    const newR = Math.round(r * (1 - factor));
+    const newG = Math.round(g * (1 - factor));
+    const newB = Math.round(b * (1 - factor));
+    return `#${newR.toString(16).padStart(2, "0")}${newG.toString(16).padStart(2, "0")}${newB.toString(16).padStart(2, "0")}`;
+  };
+
+  const shadowBgColor = darkenColor(blendedBgColor, 0.12);
 
   // Dynamic image - changes with scroll
   const currentImage = currentProject.image;
@@ -268,6 +276,10 @@ const ProjectsPage = () => {
 
                 <p
                   className="text-lg text-white/80 mb-40 font-montserratAlt"
+                  style={{
+                    textShadow: '3px 3px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 0, 0, 0.4)',
+                    maxWidth: '400px'
+                  }}
                 >
                   Explore my latest web development projects showcasing modern
                   technologies, creative solutions, and user-centered design
@@ -302,14 +314,7 @@ const ProjectsPage = () => {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-start gap-4 mt-16 max-w-xl">
-              <button
-                onClick={goHome}
-                className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:bg-white/20 font-montserratAlt"
-              >
-                <ArrowLeft className="w-5 h-5" />
-                <span>Back to Home</span>
-              </button>
+            <div className="flex flex-col sm:flex-row items-center justify-start gap-4 mt-8 max-w-xl">
               <button
                 onClick={goToContact}
                 className={`inline-flex items-center space-x-3 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
@@ -353,8 +358,8 @@ const ProjectsPage = () => {
         }}
       >
         {/* Left side text sections */}
-        <div className="container mx-auto ">
-          <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 max-w-7xl">
             {/* Left Column - Text Sections */}
             <div className="space-y-[80vh]">
               {projects.map((project, index) => (
@@ -376,7 +381,7 @@ const ProjectsPage = () => {
 
                   {/* Description */}
                   <p
-                    className="text-xl text-white/90 leading-relaxed max-w-2xl mb-12 transition-all duration-1000 ease-in-out font-montserratAlt"
+                    className="text-xl text-white/90 leading-relaxed max-w-[350px] mb-12 transition-all duration-1000 ease-in-out font-montserratAlt"
                   >
                     {project.description}
                   </p>
@@ -400,13 +405,13 @@ const ProjectsPage = () => {
             </div>
 
             {/* Right Column - Sticky Card */}
-            <div className="lg:sticky lg:top-24 lg:h-fit">
+            <div className="lg:sticky lg:top-24 lg:h-fit display:flex">
               <div
                 className={`rounded-3xl px-8 lg:px-12 py-16 lg:py-24 h-[75vh] flex items-center shadow-2xl mx-8 lg:mx-20 relative overflow-hidden`}
                 style={{
                   background: currentImageIndex === 2 
-                    ? `linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.15) 45%, #d1abb1 60%, #d1abb1 100%)`
-                    : `linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.15) 45%, ${blendedBgColor} 60%, ${blendedBgColor} 100%)`,
+                    ? `linear-gradient(to bottom right, #fce6e7 0%, #e8c5ca 50%, #c79fa5 100%)`
+                    : `linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.15) 45%, ${blendedBgColor} 60%, ${shadowBgColor} 85%, ${shadowBgColor} 100%)`,
                   transition: "background 0.3s ease-out",
                 }}
               >
