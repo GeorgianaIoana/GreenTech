@@ -11,7 +11,9 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ProjectsPage from "./components/ProjectsPage";
 import ThankYou from "./components/ThankYou";
+import CalendlySection from "./components/CalendlySection";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import TawkTo from "./components/TawkTo";
 
 // Home Page Component
 const HomePage = () => {
@@ -36,10 +38,12 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/schedule" element={<CalendlySection />} />
           <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
         <Footer />
         <FloatingWhatsApp />
+        <TawkTo />
       </div>
     </Router>
   );

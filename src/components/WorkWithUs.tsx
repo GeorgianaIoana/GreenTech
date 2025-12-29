@@ -94,19 +94,19 @@ const WorkWithUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-teal-50">
-      <div className="container mx-auto px-6">
+    <section className="py-12 md:py-20 bg-teal-50">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-16">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 md:mb-16">
             <div className="lg:max-w-2xl mb-8 lg:mb-0">
               <h2
-                className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6"
                 style={{ fontFamily: "Merriweather, serif" }}
               >
                 When people
                 <br />
-                <span className="inline-flex items-center space-x-4">
+                <span className="inline-flex items-center space-x-2 md:space-x-4 flex-wrap">
                   <span
                     className={`transition-colors duration-300 ${
                       activeTab === "do" ? "text-teal-600" : "text-orange-400"
@@ -132,7 +132,7 @@ const WorkWithUs = () => {
                 </span>
               </h2>
               <p
-                className="text-lg text-gray-700 leading-relaxed"
+                className="text-base md:text-lg text-gray-700 leading-relaxed"
                 style={{ fontFamily: "Outfit, sans-serif" }}
               >
                 {activeTab === "do"
@@ -143,38 +143,38 @@ const WorkWithUs = () => {
           </div>
 
           {/* Content Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             {(activeTab === "do" ? doWorkWithUs : dontWorkWithUs).map(
               (item, index) => (
                 <div
                   key={item.title}
-                  className={`group p-8 rounded-2xl transition-all duration-500 hover:-translate-y-2 ${
+                  className={`group p-6 md:p-8 rounded-2xl transition-all duration-500 hover:-translate-y-2 ${
                     activeTab === "do"
                       ? "bg-white shadow-lg hover:shadow-2xl border-l-4 border-teal-500"
                       : "bg-white shadow-lg hover:shadow-2xl border-l-4 border-orange-400"
                   }`}
                 >
                   <div
-                    className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-6 ${
+                    className={`inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-lg mb-4 md:mb-6 ${
                       activeTab === "do" ? "bg-teal-100" : "bg-orange-100"
                     }`}
                   >
                     <item.icon
-                      className={`w-6 h-6 ${
+                      className={`w-5 h-5 md:w-6 md:h-6 ${
                         activeTab === "do" ? "text-teal-600" : "text-orange-400"
                       }`}
                     />
                   </div>
 
                   <h3
-                    className="text-xl font-bold text-slate-900 mb-4 transition-colors duration-300"
+                    className="text-lg md:text-xl font-bold text-slate-900 mb-3 md:mb-4 transition-colors duration-300"
                     style={{ fontFamily: "Outfit, sans-serif" }}
                   >
                     {item.title}
                   </h3>
 
                   <p
-                    className="text-gray-600 leading-relaxed"
+                    className="text-sm md:text-base text-gray-600 leading-relaxed"
                     style={{ fontFamily: "Outfit, sans-serif" }}
                   >
                     {item.description}
@@ -185,14 +185,14 @@ const WorkWithUs = () => {
           </div>
 
           {/* Call to Action */}
-          <div className="text-center mt-16">
+          <div className="text-center mt-12 md:mt-16">
             <button
               onClick={() =>
                 document
                   .getElementById("contact")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
-              className={`px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 ${
+              className={`px-6 py-3 md:px-8 md:py-4 rounded-full text-sm md:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 ${
                 activeTab === "do"
                   ? "bg-teal-600 hover:bg-teal-700 text-white"
                   : "bg-orange-400 hover:bg-yellow-400 text-white"

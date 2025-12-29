@@ -58,18 +58,18 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-teal-50">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 grid gap-10 items-start md:grid-cols-2">
+    <section id="contact" className="py-12 md:py-20 bg-teal-50">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 grid gap-8 md:gap-10 items-start md:grid-cols-2">
         {/* Coloană stângă: date de contact */}
         <div className="max-w-lg">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Contactează-ne
           </h2>
-          <p className="text-gray-700 mb-8">
+          <p className="text-base md:text-lg text-gray-700 mb-6 md:mb-8">
             Suntem aici să te ajutăm cu proiecte web sustenabile. Ne poți scrie
             sau suna direct folosind detaliile de mai jos.
           </p>
-          <ul className="space-y-5 text-slate-800">
+          <ul className="space-y-4 md:space-y-5 text-slate-800">
             <li className="flex items-start gap-3">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white mt-0.5">
                 <svg
@@ -144,12 +144,12 @@ const Contact: React.FC = () => {
             </li>
           </ul>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-6 md:mt-8 flex flex-wrap items-center gap-3 md:gap-4">
             <a
               href="https://wa.me/40123456789"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-4 py-2 font-semibold text-white hover:bg-green-700"
+              className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-3 py-2 md:px-4 text-sm md:text-base font-semibold text-white hover:bg-green-700"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -209,15 +209,15 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Coloană dreaptă: formular */}
-        <div className="w-full max-w-md justify-self-end bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+        <div className="w-full max-w-md justify-self-end bg-white rounded-2xl shadow-xl border border-gray-100 p-4 md:p-6">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2">
             Trimite-ne un mesaj
           </h3>
-          <p className="text-gray-600 mb-8">
+          <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8">
             Ne bucurăm să auzim de la tine. Trimite mesajul și revenim curând.
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             <div>
               <label
                 htmlFor="name"
@@ -232,7 +232,7 @@ const Contact: React.FC = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white"
                 placeholder="John Doe"
               />
             </div>
@@ -251,7 +251,7 @@ const Contact: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white"
                 placeholder="you@example.com"
               />
             </div>
@@ -297,27 +297,27 @@ const Contact: React.FC = () => {
                 required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white resize-none"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white resize-none"
                 placeholder="Cu ce te putem ajuta?"
               />
             </div>
 
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-2 md:gap-3">
               <input
                 id="consent"
                 type="checkbox"
                 checked={consent}
                 onChange={(e) => setConsent(e.target.checked)}
-                className="mt-1 h-5 w-5 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
+                className="mt-1 h-4 w-4 md:h-5 md:w-5 rounded border-gray-300 text-teal-600 focus:ring-teal-500 flex-shrink-0"
               />
-              <label htmlFor="consent" className="text-sm text-slate-700">
+              <label htmlFor="consent" className="text-xs md:text-sm text-slate-700 leading-relaxed">
                 Sunt de acord cu prelucrarea datelor mele conform Politicii de
                 confidențialitate.
               </label>
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+              <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 md:px-4 md:py-3 rounded-xl text-xs md:text-sm">
                 {error}
               </div>
             )}
@@ -325,7 +325,7 @@ const Contact: React.FC = () => {
             <button
               type="submit"
               disabled={!consent || loading}
-              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? "Se trimite..." : "Trimite mesajul"}
             </button>

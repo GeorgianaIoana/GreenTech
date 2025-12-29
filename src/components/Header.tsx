@@ -19,6 +19,8 @@ const Header = () => {
   const handleNavigation = (item: string) => {
     if (item === 'Projects') {
       navigate('/projects');
+    } else if (item === 'Schedule') {
+      navigate('/schedule');
     } else if (location.pathname !== '/') {
       // If we're not on home page, navigate to home first then scroll
       navigate('/');
@@ -34,7 +36,7 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-slate-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+      isScrolled ? 'bg-teal-700/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
@@ -50,7 +52,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 ">
-            {['Home', 'About', 'Services', 'Projects', 'Contact'].map((item) => (
+            {['Home', 'About', 'Services', 'Projects', 'Schedule', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => handleNavigation(item)}
@@ -70,11 +72,11 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+          {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-slate-900/95 backdrop-blur-sm">
+          <div className="md:hidden bg-teal-700/95 backdrop-blur-sm">
             <nav className="py-4 space-y-2">
-              {['Home', 'About', 'Services', 'Projects', 'Contact'].map((item) => (
+              {['Home', 'About', 'Services', 'Projects', 'Schedule', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => handleNavigation(item)}
