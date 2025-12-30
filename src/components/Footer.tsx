@@ -1,44 +1,75 @@
+import { useNavigate, useLocation } from 'react-router-dom';
+
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const currentYear = new Date().getFullYear();
+
+  const handleNavigation = (section: string) => {
+    if (section === 'Projects') {
+      navigate('/projects');
+    } else if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById(section.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById(section.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <footer className="bg-teal-800 text-white">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+            >
               <span className="text-2xl">🍃</span>
-              <span className="text-xl font-semibold">Green Tea Studio</span>
-            </div>
+              <span className="text-xl font-semibold text-white">Bloomsoft</span>
+            </button>
             <p className="mt-4 text-sm text-teal-100">
-              Construim site-uri rapide, sustenabile și frumoase. Orientați spre
-              performanță și experiențe verzi.
+              Make your business bloom
             </p>
           </div>
 
-          <nav aria-label="Linkuri rapide" className="md:justify-self-center">
+          <nav aria-label="Quick Links" className="md:justify-self-center">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-teal-200">
-              Linkuri
+              Navigation
             </h3>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
-                <a href="#about" className="hover:text-orange-300">
-                  Despre
-                </a>
+                <button
+                  onClick={() => handleNavigation('about')}
+                  className="hover:text-orange-300 text-left"
+                >
+                  About
+                </button>
               </li>
               <li>
-                <a href="#services" className="hover:text-orange-300">
-                  Servicii
-                </a>
+                <button
+                  onClick={() => handleNavigation('services')}
+                  className="hover:text-orange-300 text-left"
+                >
+                  Services
+                </button>
               </li>
               <li>
-                <a href="#projects" className="hover:text-orange-300">
-                  Proiecte
-                </a>
+                <button
+                  onClick={() => handleNavigation('Projects')}
+                  className="hover:text-orange-300 text-left"
+                >
+                  Projects
+                </button>
               </li>
               <li>
-                <a href="#contact" className="hover:text-orange-300">
+                <button
+                  onClick={() => handleNavigation('contact')}
+                  className="hover:text-orange-300 text-left"
+                >
                   Contact
-                </a>
+                </button>
               </li>
             </ul>
           </nav>
@@ -50,18 +81,17 @@ const Footer = () => {
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <a
-                  href="mailto:hello@greentea.studio"
+                  href="mailto:hello@bloomsoft.tech"
                   className="hover:text-orange-300"
                 >
-                  hello@greentea.studio
+                  hello@bloomsoft.tech
                 </a>
               </li>
               <li>
-                <a href="tel:+40123456789" className="hover:text-orange-300">
-                  +40 123 456 789
+                <a href="tel:+40742898793" className="hover:text-orange-300">
+                  +40 742 898 793
                 </a>
               </li>
-              <li className="text-teal-100">București, România</li>
             </ul>
             <div className="mt-6 flex gap-x-5">
               <a
@@ -102,35 +132,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                aria-label="X (Twitter)"
-                className="hover:text-orange-300"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  className="size-6"
-                >
-                  <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
-                </svg>
-              </a>
-              <a href="#" aria-label="GitHub" className="hover:text-orange-300">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  className="size-6"
-                >
-                  <path
-                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                    clipRule="evenodd"
-                    fillRule="evenodd"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#"
-                aria-label="YouTube"
+                aria-label="TikTok"
                 className="hover:text-orange-300"
               >
                 <svg
@@ -140,9 +142,7 @@ const Footer = () => {
                   className="size-6"
                 >
                   <path
-                    d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-                    clipRule="evenodd"
-                    fillRule="evenodd"
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"
                   />
                 </svg>
               </a>
@@ -150,19 +150,61 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-teal-100">
-          <p>
-            &copy; {currentYear} Green Tea Studio. Toate drepturile rezervate.
-          </p>
-          <p className="mt-2">
-            <a href="#" className="hover:text-orange-300">
-              Politica de confidențialitate
-            </a>
-            <span className="mx-2 opacity-50">•</span>
-            <a href="#" className="hover:text-orange-300">
-              Termeni
-            </a>
-          </p>
+        <div className="mt-12 border-t border-white/10 pt-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-teal-100">
+            {/* Left: Copyright */}
+            <div className="text-left md:text-left">
+              <p>
+                &copy; {currentYear} BloomSoft. All rights reserved.
+              </p>
+            </div>
+
+            {/* Center: Links and ANPC */}
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a href="#" className="hover:text-orange-300">
+                Privacy Policy
+              </a>
+              <a href="#" className="hover:text-orange-300">
+                Terms and Conditions
+              </a>
+              <a 
+                href="https://anpc.ro/ce-este-sal/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-teal-200 hover:text-orange-300"
+              >
+                ANPC-SAL
+              </a>
+              <a 
+                href="https://anpc.ro" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-teal-200 hover:text-orange-300"
+              >
+                ANPC
+              </a>
+            </div>
+
+            {/* Right: Payment Methods */}
+            <div className="flex items-center gap-2">
+              {/* VISA */}
+              <div className="bg-teal-900/50 border border-teal-700/30 rounded-lg px-3 py-1.5 flex items-center justify-center hover:bg-teal-800/50 transition-colors duration-200">
+                <span className="text-teal-100 font-bold text-xs">VISA</span>
+              </div>
+              {/* Mastercard */}
+              <div className="bg-teal-900/50 border border-teal-700/30 rounded-lg px-3 py-1.5 flex items-center justify-center hover:bg-teal-800/50 transition-colors duration-200">
+                <div className="flex items-center gap-1">
+                  <div className="w-4 h-4 rounded-full bg-red-500"></div>
+                  <div className="w-4 h-4 rounded-full bg-yellow-500 -ml-2"></div>
+                </div>
+                <span className="text-teal-100 text-xs ml-1">mastercard</span>
+              </div>
+              {/* PayPal */}
+              <div className="bg-teal-900/50 border border-teal-700/30 rounded-lg px-3 py-1.5 flex items-center justify-center hover:bg-teal-800/50 transition-colors duration-200">
+                <span className="text-teal-100 font-semibold text-xs">PayPal</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

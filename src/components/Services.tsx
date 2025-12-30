@@ -17,7 +17,7 @@ const Services = () => {
     {
       title: "Web Development",
       description: "Responsive websites, optimized for low energy use",
-      image: "/images/natural-office.png",
+      image: "/green-house.jpg",
       badge: "Sustainable",
       icon: Leaf,
     },

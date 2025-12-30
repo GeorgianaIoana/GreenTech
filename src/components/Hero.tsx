@@ -40,7 +40,7 @@ const Hero = () => {
             {/* Description */}
             <p className="text-base sm:text-lg md:text-lg lg:text-xl max-w-full md:max-w-[600px] lg:max-w-[500px] text-white mb-8 md:mb-10 lg:mb-8 leading-relaxed font-montserratAlt">
               We help your business shine online with fast websites, efficient
-              code, stunning UI/UX, and hosting that runs on clean solar energy.
+              code, stunning UI/UX, and hosting powered by clean solar energy.
             </p>
 
             {/* CTA Button */}
