@@ -14,7 +14,7 @@ const ProjectsPage = () => {
   const [buttonHighlighted, setButtonHighlighted] = useState(false);
   const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
   
-  const titleWords = ["My", "Personal", "Web", "Development", "Projects", "Portfolio"];
+  const titleWords = ["Selected", "Digital", "Works"];
 
   // Carousel navigation functions for mobile
   const nextCarousel = () => {
@@ -244,7 +244,7 @@ const ProjectsPage = () => {
                   className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 md:mb-8 leading-tight font-montserratAlt"
                 >
                   <span className="inline-block">
-                    {titleWords.slice(0, 4).map((word, index) => (
+                    {titleWords.slice(0, 2).map((word, index) => (
                       <span
                         key={index}
                         className={`inline-block ${
@@ -258,27 +258,27 @@ const ProjectsPage = () => {
                         }}
                       >
                         {word}
-                        {index < 3 && "\u00A0"}
+                        {index < 1 && "\u00A0"}
                       </span>
                     ))}
                   </span>
                   <br />
                   <span className="inline-block">
-                    {titleWords.slice(4).map((word, index) => (
+                    {titleWords.slice(2).map((word, index) => (
                       <span
-                        key={index + 4}
+                        key={index + 2}
                         className={`inline-block ${
-                          visibleWords > index + 4
+                          visibleWords > index + 2
                             ? "opacity-100 animate-bounce-in"
                             : "opacity-0 translate-y-8 scale-75"
                         }`}
                         style={{
-                          transitionDelay: `${(index + 4) * 150}ms`,
-                          animationDelay: `${(index + 4) * 150}ms`,
+                          transitionDelay: `${(index + 2) * 150}ms`,
+                          animationDelay: `${(index + 2) * 150}ms`,
                         }}
                       >
                         {word}
-                        {index < 1 && "\u00A0"}
+                        {index < titleWords.slice(2).length - 1 && "\u00A0"}
                       </span>
                     ))}
                   </span>

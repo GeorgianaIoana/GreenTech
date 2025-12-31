@@ -1,11 +1,9 @@
-import React from "react";
 import {
   Leaf,
   Users,
   TrendingUp,
   Lightbulb,
   Target,
-  Clock,
 } from "lucide-react";
 
 const Services = () => {
@@ -16,10 +14,11 @@ const Services = () => {
   const services = [
     {
       title: "Web Development",
-      description: "Responsive websites, optimized for low energy use",
+      description: "Responsive websites and clean code",
       image: "/green-house.jpg",
       badge: "Sustainable",
       icon: Leaf,
+      price: "From €600 - 2,500 / project",
     },
     {
       title: "UX/UI design in figma",
@@ -27,6 +26,7 @@ const Services = () => {
       image: "/images/plants.png",
       badge: "Eco-first",
       icon: Target,
+      price: "From €600",
     },
     {
       title: "Green Hosting",
@@ -34,21 +34,24 @@ const Services = () => {
       image: "/images/15.png",
       badge: "Planet-first",
       icon: TrendingUp,
+      price: "From €20 / month",
     },
     {
       title: "Website Maintenance and Technical Support",
-      description: "Keeping your website updated, secure, and energy-efficient",
+      description: "Keeping your website updated, secure, and optimised",
       image: "/images/green-hosting.jpg",
       badge: "Future-friendly",
       icon: Lightbulb,
+      price: "From €25 / hour",
     },
     {
-      title: "Team Building",
+      title: "Authentic Brand Identity",
       description:
-        "Team workshops in nature, fostering green minds through chess and eco challenges.",
+        "We use Adobe Illustrator to create an impactful brand identity.",
       image: "/images/tree-team.jpg",
       badge: "Nature-led",
       icon: Users,
+      price: "From €300",
     },
   ];
 
@@ -72,12 +75,7 @@ const Services = () => {
                 className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-[1100px]"
                 style={{ fontFamily: "Outfit, sans-serif" }}
               >
-                As online presence becomes increasingly essential, every website
-                visit, data transfer, and server operation consumes energy,
-                which adds to digital carbon footprint. Inspired by nature and
-                driven by our passion for web development, we create
-                eco-friendly websites that focus on design and technology to
-                reduce environmental impact
+                As a strong online presence becomes essential, we bridge the gap between sustainability and success. We create eco-friendly, high-performance websites that reduce digital carbon footprints while maximizing lead generation. By optimizing every server operation and design element, we ensure a lightning-fast experience that turns environmentally conscious visitors into loyal clients.
               </p>
             </div>
             <div className="mt-4 md:mt-6 lg:mt-0">
@@ -93,7 +91,7 @@ const Services = () => {
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-4 lg:gap-6">
             {/* First row - 3 cards */}
-            {services.slice(0, 3).map((service, index) => (
+            {services.slice(0, 3).map((service) => (
               <div
                 key={service.title}
                 className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500"
@@ -116,12 +114,17 @@ const Services = () => {
 
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
-                    <h3
-                      className="text-sm md:text-base lg:text-lg font-semibold text-white mb-1.5 md:mb-2"
-                      style={{ fontFamily: "Merriweather, serif" }}
-                    >
-                      {service.title}
-                    </h3>
+                    <div className="flex items-start justify-between mb-1.5 md:mb-2">
+                      <h3
+                        className="text-sm md:text-base lg:text-lg font-semibold text-white"
+                        style={{ fontFamily: "Merriweather, serif" }}
+                      >
+                        {service.title}
+                      </h3>
+                      <div className="bg-orange-400 text-slate-900 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap ml-2">
+                        {service.price}
+                      </div>
+                    </div>
                     <div className="space-y-0.5 md:space-y-1">
                       <p
                         className="text-gray-200 text-xs md:text-xs lg:text-sm leading-relaxed tracking-wide max-w-m"
@@ -168,12 +171,17 @@ const Services = () => {
 
                     {/* Content */}
                     <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
-                      <h3
-                        className="text-base md:text-lg lg:text-xl font-bold text-white mb-1.5 md:mb-2 lg:mb-3"
-                        style={{ fontFamily: "Merriweather, serif" }}
-                      >
-                        {service.title}
-                      </h3>
+                      <div className="flex items-start justify-between mb-1.5 md:mb-2 lg:mb-3">
+                        <h3
+                          className="text-base md:text-lg lg:text-xl font-bold text-white"
+                          style={{ fontFamily: "Merriweather, serif" }}
+                        >
+                          {service.title}
+                        </h3>
+                        <div className="bg-orange-400 text-slate-900 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap ml-2">
+                          {service.price}
+                        </div>
+                      </div>
                       <div className="space-y-0.5 md:space-y-1">
                         <p
                           className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l"

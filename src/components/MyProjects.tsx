@@ -116,12 +116,12 @@ const MyProjects = () => {
   return (
     <section
       id="my-projects"
-      className="bg-gradient-to-b from-teal-700 to-teal-50 overflow-hidden"
+      className="bg-gradient-to-b from-teal-700 to-teal-50 overflow-visible"
     >
       {/* Animated Projects Section */}
-      <div className="py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-24 xl:px-32 relative min-h-screen lg:min-h-screen flex flex-col overflow-hidden">
+      <div className="pt-6 md:pt-8 lg:pt-12 pb-32 md:pb-40 lg:pb-48 px-4 md:px-8 lg:px-24 xl:px-32 relative min-h-screen lg:min-h-screen flex flex-col overflow-visible">
         {/* Heading - Above cards */}
-        <div className="container mx-auto px-4 md:px-6 relative z-10 w-full mb-8 md:mb-12 lg:mb-16">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 w-full mb-6 md:mb-8 lg:mb-10">
           <div
             ref={textContentRef}
             className="max-w-4xl mx-auto text-center transition-all duration-500 ease-out"
@@ -132,7 +132,7 @@ const MyProjects = () => {
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-teal-50 mb-4"
               style={{ fontFamily: "Merriweather, serif" }}
             >
-              Some of our work
+              Proven Success Stories
             </h2>
 
             {/* Description */}
@@ -140,8 +140,7 @@ const MyProjects = () => {
               className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-full md:max-w-3xl mx-auto px-4"
               style={{ fontFamily: "Outfit, sans-serif" }}
             >
-              Each project in our collection reflects the passion and creativity
-              we bring to every digital endeavor. From sleek
+              Each project in our collection reflects the passion and creativity we bring to every digital endeavor. From sleek corporate identities to high-converting real estate platforms, we transform complex ideas into seamless user experiences.
             </p>
           </div>
         </div>
@@ -149,17 +148,19 @@ const MyProjects = () => {
         {/* Desktop Cards - Positioned below heading (lg and above) */}
         <div className="hidden lg:block relative flex items-center justify-center flex-1">
           {/* CTA Button - Center of cards */}
-          <button
-            onClick={scrollToContact}
-            className="absolute left-1/2 top-1/3 transform -translate-x-1/2 -translate-y-1/2 z-50 inline-flex items-center space-x-3 bg-orange-400 hover:bg-yellow-400 text-white px-5 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-sm md:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 pointer-events-auto"
-          >
-            <span className="text-black">Explore our work</span>
-          </button>
+          <div className="absolute left-1/2 top-1/3 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-auto">
+            <button
+              onClick={scrollToContact}
+              className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-5 md:py-2.5 lg:px-8 lg:py-4 rounded-full text-xs md:text-sm lg:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+            >
+              Explore our work
+            </button>
+          </div>
 
           {/* Left Side - 2 Cards */}
           <div
             ref={leftProjectsRef}
-            className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-4 pointer-events-none"
+            className="absolute left-1/2 top-[55%] transform -translate-x-1/2 -translate-y-1/2 flex space-x-4 pointer-events-none"
             style={{ marginLeft: "-180px" }}
           >
             {leftProjects.map((project, index) => (
@@ -198,7 +199,7 @@ const MyProjects = () => {
           {/* Right Side - 2 Cards */}
           <div
             ref={rightProjectsRef}
-            className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex -space-x-32 pointer-events-none"
+            className="absolute left-1/2 top-[55%] transform -translate-x-1/2 -translate-y-1/2 flex -space-x-32 pointer-events-none"
             style={{ marginLeft: "180px" }}
           >
             {rightProjects.map((project, index) => (
@@ -276,12 +277,14 @@ const MyProjects = () => {
               </div>
             ))}
             {/* CTA Button - Center of cards for mobile/tablet */}
-            <button
-              onClick={scrollToContact}
-              className="absolute left-1/2 top-1/3 transform -translate-x-1/2 -translate-y-1/2 z-50 inline-flex items-center space-x-3 bg-orange-400 hover:bg-yellow-400 text-white px-5 py-2.5 md:px-6 md:py-3 rounded-full text-sm md:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              <span className="text-black">Explore our work</span>
-            </button>
+            <div className="absolute left-1/2 top-1/3 transform -translate-x-1/2 -translate-y-1/2 z-40">
+              <button
+                onClick={scrollToContact}
+                className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+              >
+                Explore our work
+              </button>
+            </div>
           </div>
         </div>
       </div>

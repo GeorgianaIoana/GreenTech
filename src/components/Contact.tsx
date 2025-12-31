@@ -210,13 +210,15 @@ const Contact: React.FC = () => {
                 className="w-full border-2 border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white"
               >
                 <option value="">Select a service</option>
-                <option value="sustainable-website">Website</option>
+                <option value="sustainable-website">Landing page</option>
+                <option value="presentation-website">Presentation Website</option>
                 <option value="eco-webapp">Web Application</option>
                 <option value="green-ecommerce">E-Commerce</option>
                 <option value="brand-identity">
                   Brand Identity
                 </option>
-                <option value="consultation">Strategy Consultation</option>
+                <option value="ux-ui-design">Ux & Ui design</option>
+                <option value="website-technical-support">Website Technical Support</option>
                 <option value="other">Other</option>
               </select>
             </div>

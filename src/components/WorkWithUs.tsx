@@ -18,39 +18,39 @@ const WorkWithUs = () => {
   const doWorkWithUs = [
     {
       icon: Edit3,
-      title: "Creative Skills",
+      title: "Strategic Engineering",
       description:
-        "Unique designs crafted for your brand, engaging users with cutting-edge visuals",
+        "Whether leveraging a streamlined CMS or bespoke architecture, our custom digital assets are engineered to maximize your long-term return on financial investment.",
     },
     {
       icon: TrendingUp,
       title: "Responsive Designs",
       description:
-        "Delivering flawless experiences on every device, boosting user engagement and satisfaction.",
+        "Delivering flawless experiences on mobile, tablet and desktop, boosting user engagement and satisfaction.",
     },
     {
       icon: Search,
-      title: "Vision",
+      title: "Proven Digital Excellence",
       description:
-        "We focus on our clients’ requests, align with their vision, and implement the most effective solutions for their business growth.",
+        "With a proven track record in high-performance development, we leverage years of technical expertise to turn complex visions into scalable, profit-driven digital assets.",
     },
     {
       icon: Users,
       title: "Exceptional Support",
       description:
-        "Offering committed support throughout and after project completion to guarantee client satisfaction",
+        "Beyond the launch, we stand by your side as a dedicated digital partner. From proactive security monitoring to seamless technical updates, we ensure your website remains a high-performing asset, allowing you to focus entirely on growing your business while we handle the rest.",
     },
     {
       icon: Zap,
-      title: "Quick Turnaround",
+      title: "Optimized Speed",
       description:
-        "Consistently meeting deadlines and delivering dependable services without sacrificing quality or efficiency.",
+        "We build high-performance websites with lean, optimized code that ensures lightning-fast loading speeds across all devices. By prioritizing technical excellence, we help you capture every visitor’s attention and boost your search engine rankings through superior performance.",
     },
     {
       icon: Code,
-      title: "Custom Solutions",
+      title: "Tailored Digital Excellence",
       description:
-        "Designing custom websites tailored to your needs, improving functionality and user experience.",
+        "We move beyond off-the-shelf templates to engineer bespoke digital solutions that align perfectly with your brand identity. By focusing on intuitive functionality and a seamless user experience, we transform your vision into a high-converting platform designed to meet your specific business challenges.",
     },
   ];
 
@@ -59,13 +59,13 @@ const WorkWithUs = () => {
       icon: X,
       title: "Generic Templates",
       description:
-        "Cookie-cutter designs that look like everyone else, failing to capture your unique brand identity",
+        "Cookie-cutter designs that look like everyone else, failing to capture your unique brand identity. We prevent your business from blending into the background with uninspired, repetitive layouts.",
     },
     {
       icon: AlertTriangle,
       title: "Poor Mobile Experience",
       description:
-        "Websites that break on mobile devices, losing potential customers and damaging your reputation.",
+        "Websites that break on mobile devices, losing potential customers and damaging your reputation.We eliminate the frustration of unresponsive interfaces that drive users away.",
     },
     {
       icon: ThumbsDown,
@@ -77,19 +77,19 @@ const WorkWithUs = () => {
       icon: Clock,
       title: "Limited Support",
       description:
-        "Being left alone after launch with no ongoing support when issues arise or updates are needed",
+        "Being left alone after launch with no ongoing support when issues arise or updates are needed. We ensure you are never stranded with a broken site or outdated security patches.",
     },
     {
       icon: AlertTriangle,
       title: "Missed Deadlines",
       description:
-        "Unreliable delivery schedules that delay your launch and impact your business goals.",
+        "Vague timelines and broken promises that leave your projects stalled and your business growth on hold. We replace uncertainty with strict project management, ensuring every milestone is met without compromising on quality or your peace of mind.",
     },
     {
       icon: X,
-      title: "One-Size-Fits-All",
+      title: "Mass-Market Solutions",
       description:
-        "Generic solutions that don't address your specific business needs or growth objectives.",
+        "Generic solutions that don't address your specific business needs or growth objectives. We avoid rigid systems that fail to adapt to the unique requirements of your industry.",
     },
   ];
 
@@ -145,7 +145,7 @@ const WorkWithUs = () => {
           {/* Content Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             {(activeTab === "do" ? doWorkWithUs : dontWorkWithUs).map(
-              (item, index) => (
+              (item) => (
                 <div
                   key={item.title}
                   className={`group p-6 md:p-8 rounded-2xl transition-all duration-500 hover:-translate-y-2 ${
@@ -195,7 +195,7 @@ const WorkWithUs = () => {
               className={`px-6 py-3 md:px-8 md:py-4 rounded-full text-sm md:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 ${
                 activeTab === "do"
                   ? "bg-teal-600 hover:bg-teal-700 text-white"
-                  : "bg-orange-400 hover:bg-yellow-400 text-white"
+                  : "bg-orange-400 hover:bg-yellow-400 text-black"
               }`}
             >
               {activeTab === "do" ? "Start Your Project" : "Get Better Results"}
