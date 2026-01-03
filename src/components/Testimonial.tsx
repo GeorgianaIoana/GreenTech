@@ -1,10 +1,26 @@
-import React from "react";
 import { Leaf } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Testimonial = () => {
+  const { language } = useLanguage();
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const translations = {
+    en: {
+      title: "Ready to Bloom Your Business?",
+      description: "Let's create something amazing together. Get in touch and discover how we can help your business grow with a beautiful, sustainable digital presence.",
+      button: "Let's Talk Now",
+    },
+    ro: {
+      title: "Gata să-ți Dezvolți Afacerea?",
+      description: "Hai să construim ceva remarcabil împreună. Ia legătura cu noi și află cum te putem susține să-ți extinzi afacerea cu o identitate digitală atractivă și sustenabilă.",
+      button: "Să Discutăm",
+    },
+  };
+
+  const t = translations[language];
 
   return (
     <section id="testimonial" className="relative py-16 md:py-24 lg:py-32 overflow-hidden min-h-[60vh] md:min-h-[70vh] flex items-center">
@@ -25,30 +41,28 @@ const Testimonial = () => {
             {/* CTA Content */}
             <div className="text-white">
               <h2
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight font-montserratAlt"
                 style={{ 
-                  fontFamily: "Merriweather, serif",
                   textShadow: "2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5)"
                 }}
               >
-                Ready to Bloom Your Business?
+                {t.title}
               </h2>
 
               <p
-                className="text-lg md:text-xl lg:text-2xl mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto"
+                className="text-lg md:text-xl lg:text-2xl mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto font-inter"
                 style={{ 
-                  fontFamily: "Outfit, sans-serif",
                   textShadow: "1px 1px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 0, 0, 0.5)"
                 }}
               >
-                Let's create something amazing together. Get in touch and discover how we can help your business grow with a beautiful, sustainable digital presence.
+                {t.description}
               </p>
 
               <button
                 onClick={scrollToContact}
                 className="inline-flex items-center bg-orange-400 text-slate-900 px-8 py-4 md:px-10 md:py-5 rounded-full text-base md:text-lg font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                Let's Talk Now
+                {t.button}
               </button>
             </div>
           </div>

@@ -1,10 +1,11 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProjectCard from "./ProjectCard";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const ProjectsPage = () => {
+  const { language } = useLanguage();
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -14,7 +15,33 @@ const ProjectsPage = () => {
   const [buttonHighlighted, setButtonHighlighted] = useState(false);
   const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
   
-  const titleWords = ["Selected", "Digital", "Works"];
+  const translations = {
+    en: {
+      titleWords: ["Selected", "Digital", "Works"],
+      description: "Strategic design meets high-end engineering. Explore how our team transforms complex ideas into seamless digital experiences designed to drive growth and engage your target audience.",
+      getStarted: "Get Started",
+      stats: [
+        { number: "1", label: "Discovery" },
+        { number: "2", label: "Design" },
+        { number: "3", label: "Development" },
+        { number: "4", label: "Launch" },
+      ],
+    },
+    ro: {
+      titleWords: ["Lucrări", "Digitale", "Selectate"],
+      description: "Planificare strategică întâlnită cu execuție de nivel superior. Explorează modul în care echipa noastră convertește concepte elaborate în experiențe digitale naturale, proiectate pentru a accelera dezvoltarea și a capta atenția audienței tale.",
+      getStarted: "Începe Acum",
+      stats: [
+        { number: "1", label: "Analiză" },
+        { number: "2", label: "Proiectare" },
+        { number: "3", label: "Implementare" },
+        { number: "4", label: "Finalizare" },
+      ],
+    },
+  };
+
+  const t = translations[language];
+  const titleWords = t.titleWords;
 
   // Carousel navigation functions for mobile
   const nextCarousel = () => {
@@ -93,12 +120,7 @@ const ProjectsPage = () => {
     }
   };
 
-  const stats = [
-    { number: "1", label: "call" },
-    { number: "2", label: "meet" },
-    { number: "3", label: "development" },
-    { number: "4", label: "delivery" },
-  ];
+  const stats = t.stats;
 
 
   useEffect(() => {
@@ -120,36 +142,66 @@ const ProjectsPage = () => {
     }
   }, [visibleStats, stats.length]);
 
-  const projects = [
+  const projectsTranslations = {
+    en: [
+      {
+        title: "Chess Club Platform",
+        description: "Engineered a high-performance digital presence using React and TypeScript. From Figma-driven design to scalable deployment, we delivered a fast, maintainable asset focused on the club's brand identity and seamless community engagement.",
+        buttonText: "View Project",
+      },
+      {
+        title: "E-commerce Bags Shop",
+        description: "We believe online shopping should be a pleasure, not a chore. We prioritized speed and ease of use, ensuring that every customer enjoys a smooth, stress-free shopping experience.",
+        buttonText: "Let's start",
+      },
+      {
+        title: "Collaboration & Workflow",
+        description: "Great digital products are born from a structured workflow and clear communication. We combine our collective expertise in design and code to transform your ideas into high-performance assets. Ready to see what we can build for you?",
+        buttonText: "Let's start",
+      },
+    ],
+    ro: [
+      {
+        title: "Platformă Club de Șah",
+        description: "Am dezvoltat o soluție digitală performantă utilizând React și TypeScript. De la conceptul în Figma până la implementarea finală, am oferit o platformă rapidă și ușor de gestionat, axată pe identitatea clubului și pe conectarea membrilor comunității.",
+        buttonText: "Vezi Proiectul",
+      },
+      {
+        title: "Magazin E-commerce Genți",
+        description: "Considerăm că experiența de cumpărături online trebuie să fie plăcută, nu complicată. Am pus accent pe rapiditate și simplitate, garantând că fiecare client se bucură de un proces de cumpărare lin și relaxat.",
+        buttonText: "Să începem",
+      },
+      {
+        title: "Colaborare și Workflow",
+        description: "Soluțiile digitale de calitate provin dintr-o metodologie organizată și dialog eficient. Unim cunoștințele noastre în design și programare pentru a materializa ideile tale în produse performante. Vrei să vezi ce putem realiza pentru tine?",
+        buttonText: "Să începem",
+      },
+    ],
+  };
+
+  const projectsBase = [
     {
-      title: "Chess Club Platform",
-      description:
-    "Engineered a high-performance digital presence using React and TypeScript. From Figma-driven design to scalable deployment, we delivered a fast, maintainable asset focused on the club’s brand identity and seamless community engagement.",
-      buttonText: "View Project",
-      bgColor: "#fb923c", 
+      bgColor: "#fb923c",
       projectNumber: "01",
       image: "/first-card.webp",
       url: "https://www.thesquarechessclub.com/",
     },
     {
-      title: "E-commerce Bags Shop",
-      description:
-        " We believe online shopping should be a pleasure, not a chore. We prioritized speed and ease of use, ensuring that every customer enjoys a smooth, stress-free shopping experience.",
-      buttonText: "Let's start",
-      bgColor: "#fb7185", 
+      bgColor: "#fb7185",
       projectNumber: "02",
       image: "/2sn project.png",
     },
     {
-      title: "Collaboration & Workflow",
-      description:
-        "Great digital products are born from a structured workflow and clear communication. We combine our collective expertise in design and code to transform your ideas into high-performance assets. Ready to see what we can build for you?",
-      buttonText: "Let's start",
       bgColor: "#07615b",
       projectNumber: "03",
       image: "/your-project.jpg",
     },
   ];
+
+  const projects = projectsBase.map((base, index) => ({
+    ...base,
+    ...projectsTranslations[language][index],
+  }));
 
   const currentProject = projects[currentImageIndex];
 
@@ -292,12 +344,12 @@ const ProjectsPage = () => {
                 </h1>
 
                 <p
-                  className="text-sm sm:text-base md:text-lg text-white/80 mb-8 md:mb-12 lg:mb-40 font-montserratAlt max-w-full md:max-w-[400px]"
+                  className="text-sm sm:text-base md:text-lg text-white/80 mb-8 md:mb-12 lg:mb-40 font-inter max-w-full md:max-w-[400px]"
                   style={{
                     textShadow: '3px 3px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 0, 0, 0.4)'
                   }}
                 >
-                  Strategic design meets high-end engineering. Explore how our team transforms complex ideas into seamless digital experiences designed to drive growth and engage your target audience.
+                  {t.description}
                 </p>
               </div>
             </div>
@@ -343,7 +395,7 @@ const ProjectsPage = () => {
                   e.currentTarget.style.backgroundColor = "#fb923c";
                 }}
               >
-                <span>Get Started</span>
+                <span>{t.getStarted}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -389,7 +441,7 @@ const ProjectsPage = () => {
                   e.currentTarget.style.backgroundColor = "#fb923c";
                 }}
               >
-                <span>Get Started</span>
+                <span>{t.getStarted}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -434,7 +486,7 @@ const ProjectsPage = () => {
 
                   {/* Description */}
                   <p
-                    className="text-xl text-white/90 leading-relaxed max-w-[350px] mb-12 transition-all duration-1000 ease-in-out font-montserratAlt"
+                    className="text-xl text-white/90 leading-relaxed max-w-[350px] mb-12 transition-all duration-1000 ease-in-out font-inter"
                   >
                     {project.description}
                   </p>
@@ -591,7 +643,7 @@ const ProjectsPage = () => {
                   </h2>
 
                   {/* Description */}
-                  <p className="text-base text-white/90 leading-relaxed mb-8 font-montserratAlt">
+                  <p className="text-base text-white/90 leading-relaxed mb-8 font-inter">
                     {project.description}
                   </p>
 

@@ -1,6 +1,23 @@
 import { useEffect, useRef } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const MyProjects = () => {
+  const { language } = useLanguage();
+
+  const translations = {
+    en: {
+      title: "Proven Success Stories",
+      description: "Each project in our collection reflects the passion and creativity we bring to every digital endeavor. From sleek corporate identities to high-converting real estate platforms, we transform complex ideas into seamless user experiences.",
+      button: "Explore our work",
+    },
+    ro: {
+      title: "Povești de Succes Reale",
+      description: "Fiecare lucrare din colecția noastră ilustrează dedicarea și inovația pe care le aducem în fiecare demers digital. De la identități corporative sofisticate la platforme imobiliare cu rate de conversie remarcabile, convertim concepte elaborate în experiențe utilizator naturale și ușor de navigat.",
+      button: "Explorează Portofoliul",
+    },
+  };
+
+  const t = translations[language];
   const leftProjectsRef = useRef<HTMLDivElement>(null);
   const rightProjectsRef = useRef<HTMLDivElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
@@ -127,18 +144,16 @@ const MyProjects = () => {
           >
             {/* Main Heading */}
             <h2
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-teal-50 mb-4"
-              style={{ fontFamily: "Merriweather, serif" }}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-teal-50 mb-4 font-montserratAlt"
             >
-              Proven Success Stories
+              {t.title}
             </h2>
 
             {/* Description */}
             <p
-              className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-full md:max-w-3xl mx-auto px-4"
-              style={{ fontFamily: "Outfit, sans-serif" }}
+              className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-full md:max-w-3xl mx-auto px-4 font-inter"
             >
-              Each project in our collection reflects the passion and creativity we bring to every digital endeavor. From sleek corporate identities to high-converting real estate platforms, we transform complex ideas into seamless user experiences.
+              {t.description}
             </p>
           </div>
         </div>
@@ -151,7 +166,7 @@ const MyProjects = () => {
               onClick={scrollToContact}
               className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-5 md:py-2.5 lg:px-8 lg:py-4 rounded-full text-xs md:text-sm lg:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
-              Explore our work
+              {t.button}
             </button>
           </div>
 
@@ -280,7 +295,7 @@ const MyProjects = () => {
                 onClick={scrollToContact}
                 className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
               >
-                Explore our work
+                {t.button}
               </button>
             </div>
           </div>

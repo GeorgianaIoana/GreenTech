@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -12,6 +13,8 @@ import Footer from "./components/Footer";
 import ProjectsPage from "./components/ProjectsPage";
 import ThankYou from "./components/ThankYou";
 import CalendlySection from "./components/CalendlySection";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsAndConditions from "./components/TermsAndConditions";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import TawkTo from "./components/TawkTo";
 // Preload Calendly script by importing it
@@ -34,20 +37,24 @@ const HomePage = () => {
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen">
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/schedule" element={<CalendlySection />} />
-          <Route path="/thank-you" element={<ThankYou />} />
-        </Routes>
-        <Footer />
-        <FloatingWhatsApp />
-        <TawkTo />
-      </div>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <div className="min-h-screen">
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/schedule" element={<CalendlySection />} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+          </Routes>
+          <Footer />
+          <FloatingWhatsApp />
+          <TawkTo />
+        </div>
+      </Router>
+    </LanguageProvider>
   );
 }
 

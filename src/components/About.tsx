@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Leaf,
   Cpu,
@@ -14,22 +13,51 @@ import {
   Handshake,
   Palette,
 } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const About = () => {
-  const values = [
-    { icon: Leaf, label: "Sustainable" },
-    { icon: Cpu, label: "Intelligent technology" },
-    { icon: Recycle, label: "Carbon-aware" },
-    { icon: Sun, label: "Clean-tech" },
-    { icon: TreePine, label: "Nature-led" },
-    { icon: Brain, label: "Green minds" },
-    { icon: Eye, label: "Conscious" },
-    { icon: Feather, label: "Mindful" },
-    { icon: Rocket, label: "Future-friendly" },
-    { icon: ShieldCheck, label: "Responsible" },
-    { icon: Handshake, label: "Honest" },
-    { icon: Palette, label: "Refined design" },
-  ];
+  const { language } = useLanguage();
+
+  const translations = {
+    en: {
+      title: "Work with a team that gets it.",
+      description: "We understand how essential the ideal website is for your business, and we are delighted to create it for you. You've come to the right place! We shape your online presence with the latest technologies and a strong commitment to sustainable efficiency: refined design, optimized algorithms, high-speed performance, transparent communication, and solar-powered hosting. Excellence is our standard.",
+      values: [
+        { icon: Leaf, label: "Sustainable" },
+        { icon: Cpu, label: "Intelligent technology" },
+        { icon: Recycle, label: "Carbon-aware" },
+        { icon: Sun, label: "Clean-tech" },
+        { icon: TreePine, label: "Nature-led" },
+        { icon: Brain, label: "Green minds" },
+        { icon: Eye, label: "Conscious" },
+        { icon: Feather, label: "Mindful" },
+        { icon: Rocket, label: "Future-friendly" },
+        { icon: ShieldCheck, label: "Responsible" },
+        { icon: Handshake, label: "Honest" },
+        { icon: Palette, label: "Refined design" },
+      ],
+    },
+    ro: {
+      title: "Colaborează cu o echipă care înțelege nevoile tale.",
+      description: "Realizăm cât de crucial este un site web potrivit pentru succesul afacerii tale și ne bucurăm să îl construim alături de tine. Ai ales bine! Dezvoltăm identitatea ta digitală cu tehnologii de ultimă generație și un angajament puternic față de sustenabilitate: estetică îngrijită, cod optimizat, viteze de execuție ridicate, transparență în comunicare și servicii de hosting ecologice. Calitatea este principiul nostru fundamental.",
+      values: [
+        { icon: Leaf, label: "Durabil" },
+        { icon: Cpu, label: "Tehnologie inteligentă" },
+        { icon: Recycle, label: "Eco-conștient" },
+        { icon: Sun, label: "Tehnologie verde" },
+        { icon: TreePine, label: "Orientat către natură" },
+        { icon: Brain, label: "Gândire verde" },
+        { icon: Eye, label: "Conștient" },
+        { icon: Feather, label: "Atent" },
+        { icon: Rocket, label: "Orientat către viitor" },
+        { icon: ShieldCheck, label: "Responsabil" },
+        { icon: Handshake, label: "Onest" },
+        { icon: Palette, label: "Design rafinat" },
+      ],
+    },
+  };
+
+  const t = translations[language];
 
   return (
     <section
@@ -40,29 +68,21 @@ const About = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Heading */}
           <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 md:mb-8 leading-tight"
-            style={{ fontFamily: "Playfair Display, serif" }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 md:mb-8 leading-tight font-montserratAlt"
           >
-            Work with a team that gets it.
+            {t.title}
           </h2>
 
           {/* Description */}
           <p
-            className="text-base md:text-lg text-gray-700 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto px-4"
-            style={{ fontFamily: "Outfit, sans-serif" }}
+            className="text-base md:text-lg text-gray-700 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto px-4 font-inter"
           >
-            We understand how essential the ideal website is for your business,
-            and we are delighted to create it for you. You’ve come to the right
-            place! We shape your online presence with the latest technologies
-            and a strong commitment to sustainable efficiency: refined design,
-            optimized algorithms, high-speed performance, transparent
-            communication, and solar-powered hosting. Excellence is our
-            standard.
+            {t.description}
           </p>
 
           {/* Values/Badges */}
           <div className="flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4 px-4">
-            {values.map(({ icon: Icon, label }) => (
+            {t.values.map(({ icon: Icon, label }) => (
               <div
                 key={label}
                 className="flex items-center space-x-2 text-gray-700 bg-white/30 backdrop-blur-sm border border-teal-200 rounded-full px-2 py-1 md:px-3 shadow-sm hover:shadow transition"

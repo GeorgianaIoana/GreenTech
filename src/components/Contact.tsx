@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Contact: React.FC = () => {
+  const { language } = useLanguage();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,13 +13,81 @@ const Contact: React.FC = () => {
   const [error, setError] = useState("");
   const [consent, setConsent] = useState(false);
 
-  // Replace with your email address
   const recipientEmail = "georgiana17stanciu@gmail.com";
+
+  const translations = {
+    en: {
+      title: "Contact Us",
+      description: "We're here to help you bloom your business. You can write to us or call directly using the details below.",
+      phone: "Phone",
+      email: "Email",
+      businessHours: "Business Hours",
+      hours1: "Monday–Friday: 09:00–18:00",
+      hours2: "Saturday–Sunday: Closed",
+      address: "Address",
+      addressText: "Bucharest, Romania",
+      formTitle: "Send us a message",
+      formDescription: "We'd love to hear from you. Send us a message and we'll get back to you soon.",
+      fullName: "Full Name",
+      service: "Service",
+      selectService: "Select a service",
+      message: "Message",
+      consent: "I agree to the processing of my data in accordance with the Privacy Policy.",
+      sendMessage: "Send Message",
+      sending: "Sending...",
+      errorConsent: "Please accept data processing.",
+      errorSend: "An error occurred while sending the message. Please try again.",
+      services: {
+        landing: "Landing page",
+        presentation: "Presentation Website",
+        webapp: "Web Application",
+        ecommerce: "E-Commerce",
+        brand: "Brand Identity",
+        uxui: "Ux & Ui design",
+        support: "Website Technical Support",
+        other: "Other",
+      },
+    },
+    ro: {
+      title: "Contactează-ne",
+      description: "Suntem aici pentru a te susține în dezvoltarea afacerii tale. Poți să ne trimiți un mesaj sau să ne suni direct folosind informațiile de mai jos.",
+      phone: "Telefon",
+      email: "Email",
+      businessHours: "Program",
+      hours1: "Luni–Vineri: 09:00–18:00",
+      hours2: "Sâmbătă–Duminică: Închis",
+      address: "Adresă",
+      addressText: "București, România",
+      formTitle: "Scrie-ne un mesaj",
+      formDescription: "Ne-ar face plăcere să aflăm mai multe despre proiectul tău. Trimite-ne un mesaj și îți vom răspunde în cel mai scurt timp.",
+      fullName: "Nume complet",
+      service: "Serviciu",
+      selectService: "Selectează un serviciu",
+      message: "Mesaj",
+      consent: "Sunt de acord cu prelucrarea datelor mele conform Politicii de Confidențialitate.",
+      sendMessage: "Trimite Mesajul",
+      sending: "Se trimite...",
+      errorConsent: "Te rugăm să accepți prelucrarea datelor.",
+      errorSend: "A apărut o eroare la trimiterea mesajului. Te rugăm să încerci din nou.",
+      services: {
+        landing: "Pagină de destinație",
+        presentation: "Site de Prezentare",
+        webapp: "Aplicație Web",
+        ecommerce: "E-Commerce",
+        brand: "Identitate de Brand",
+        uxui: "Design UX & UI",
+        support: "Suport Tehnic Site",
+        other: "Altele",
+      },
+    },
+  };
+
+  const t = translations[language];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!consent) {
-      setError("Please accept data processing.");
+      setError(t.errorConsent);
       return;
     }
     
@@ -44,14 +114,13 @@ const Contact: React.FC = () => {
       const data = await response.json();
 
       if (data.success === "true" || response.ok) {
-        // Redirect to thank you page
         navigate("/thank-you");
       } else {
-        setError("An error occurred while sending the message. Please try again.");
+        setError(t.errorSend);
       }
     } catch (err) {
       console.error("FormSubmit error:", err);
-      setError("An error occurred while sending the message. Please try again.");
+      setError(t.errorSend);
     } finally {
       setLoading(false);
     }
@@ -62,12 +131,11 @@ const Contact: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 grid gap-8 md:gap-10 items-start md:grid-cols-2">
         {/* Coloană stângă: date de contact */}
         <div className="max-w-lg">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            Contact Us
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 font-montserratAlt">
+            {t.title}
           </h2>
-          <p className="text-base md:text-lg text-gray-700 mb-6 md:mb-8">
-            We're here to help you bloom your business. You can write to us
-            or call directly using the details below.
+          <p className="text-base md:text-lg text-gray-700 mb-6 md:mb-8 font-inter">
+            {t.description}
           </p>
           <ul className="space-y-4 md:space-y-5 text-slate-800">
             <li className="flex items-start gap-3">
@@ -82,8 +150,8 @@ const Contact: React.FC = () => {
                 </svg>
               </span>
               <div>
-                <div className="font-medium">Phone</div>
-                <a href="tel:+40742898793" className="hover:text-teal-700">
+                <div className="font-medium font-inter">{t.phone}</div>
+                <a href="tel:+40742898793" className="hover:text-teal-700 font-inter">
                   +40 742 898 793
                 </a>
               </div>
@@ -100,10 +168,10 @@ const Contact: React.FC = () => {
                 </svg>
               </span>
               <div>
-                <div className="font-medium">Email</div>
+                <div className="font-medium font-inter">{t.email}</div>
                 <a
                   href="mailto:hello@bloomsoft.tech"
-                  className="hover:text-teal-700"
+                  className="hover:text-teal-700 font-inter"
                 >
                   hello@bloomsoft.tech
                 </a>
@@ -121,9 +189,9 @@ const Contact: React.FC = () => {
                 </svg>
               </span>
               <div>
-                <div className="font-medium">Business Hours</div>
-                <p>Monday–Friday: 09:00–18:00</p>
-                <p>Saturday–Sunday: Closed</p>
+                <div className="font-medium font-inter">{t.businessHours}</div>
+                <p className="font-inter">{t.hours1}</p>
+                <p className="font-inter">{t.hours2}</p>
 
               </div>
             </li>
@@ -139,8 +207,8 @@ const Contact: React.FC = () => {
                 </svg>
               </span>
               <div>
-                <div className="font-medium">Address</div>
-                <p>Bucharest, Romania</p>
+                <div className="font-medium font-inter">{t.address}</div>
+                <p className="font-inter">{t.addressText}</p>
               </div>
             </li>
           </ul>
@@ -148,20 +216,20 @@ const Contact: React.FC = () => {
 
         {/* Coloană dreaptă: formular */}
         <div className="w-full max-w-md justify-self-end bg-white rounded-2xl shadow-xl border border-gray-100 p-4 md:p-6">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2">
-            Send us a message
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 font-montserratAlt">
+            {t.formTitle}
           </h3>
-          <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8">
-            We'd love to hear from you. Send us a message and we'll get back to you soon.
+          <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8 font-inter">
+            {t.formDescription}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-slate-700 mb-2"
+                className="block text-sm font-medium text-slate-700 mb-2 font-inter"
               >
-                Full Name
+                {t.fullName}
               </label>
               <input
                 id="name"
@@ -170,17 +238,17 @@ const Contact: React.FC = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white"
-                placeholder="Enter your name"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter"
+                placeholder={language === 'en' ? "Enter your name" : "Introdu numele tău"}
               />
             </div>
 
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-slate-700 mb-2"
+                className="block text-sm font-medium text-slate-700 mb-2 font-inter"
               >
-                Email
+                {t.email}
               </label>
               <input
                 id="email"
@@ -189,17 +257,17 @@ const Contact: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white"
-                placeholder="Enter your email"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter"
+                placeholder={language === 'en' ? "Enter your email" : "Introdu email-ul tău"}
               />
             </div>
 
             <div>
               <label
                 htmlFor="service"
-                className="block text-sm font-medium text-slate-700 mb-2"
+                className="block text-sm font-medium text-slate-700 mb-2 font-inter"
               >
-                Service
+                {t.service}
               </label>
               <select
                 id="service"
@@ -207,28 +275,26 @@ const Contact: React.FC = () => {
                 required
                 value={service}
                 onChange={(e) => setService(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white"
+                className="w-full border-2 border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter"
               >
-                <option value="">Select a service</option>
-                <option value="sustainable-website">Landing page</option>
-                <option value="presentation-website">Presentation Website</option>
-                <option value="eco-webapp">Web Application</option>
-                <option value="green-ecommerce">E-Commerce</option>
-                <option value="brand-identity">
-                  Brand Identity
-                </option>
-                <option value="ux-ui-design">Ux & Ui design</option>
-                <option value="website-technical-support">Website Technical Support</option>
-                <option value="other">Other</option>
+                <option value="">{t.selectService}</option>
+                <option value="sustainable-website">{t.services.landing}</option>
+                <option value="presentation-website">{t.services.presentation}</option>
+                <option value="eco-webapp">{t.services.webapp}</option>
+                <option value="green-ecommerce">{t.services.ecommerce}</option>
+                <option value="brand-identity">{t.services.brand}</option>
+                <option value="ux-ui-design">{t.services.uxui}</option>
+                <option value="website-technical-support">{t.services.support}</option>
+                <option value="other">{t.services.other}</option>
               </select>
             </div>
 
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-slate-700 mb-2"
+                className="block text-sm font-medium text-slate-700 mb-2 font-inter"
               >
-                Message
+                {t.message}
               </label>
               <textarea
                 id="message"
@@ -237,8 +303,8 @@ const Contact: React.FC = () => {
                 required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white resize-none"
-                placeholder="Enter your message"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white resize-none font-inter"
+                placeholder={language === 'en' ? "Enter your message" : "Introdu mesajul tău"}
               />
             </div>
 
@@ -250,8 +316,8 @@ const Contact: React.FC = () => {
                 onChange={(e) => setConsent(e.target.checked)}
                 className="mt-1 h-4 w-4 md:h-5 md:w-5 rounded border-gray-300 accent-green-600 focus:ring-green-500 focus:ring-2 flex-shrink-0 cursor-pointer"
               />
-              <label htmlFor="consent" className="text-xs md:text-sm text-slate-700 leading-relaxed">
-                I agree to the processing of my data in accordance with the Privacy Policy.
+              <label htmlFor="consent" className="text-xs md:text-sm text-slate-700 leading-relaxed font-inter">
+                {t.consent}
               </label>
             </div>
 
@@ -266,7 +332,7 @@ const Contact: React.FC = () => {
               disabled={!consent || loading}
               className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? "Sending..." : "Send Message"}
+              {loading ? t.sending : t.sendMessage}
             </button>
           </form>
         </div>

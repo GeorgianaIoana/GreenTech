@@ -5,55 +5,113 @@ import {
   Lightbulb,
   Target,
 } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Services = () => {
+  const { language } = useLanguage();
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const services = [
-    {
-      title: "Web Development",
-      description: "Responsive websites and clean code",
-      image: "/images/web-development.jpg",
-      badge: "Sustainable",
-      icon: Leaf,
-      price: "From €600 - 2,500 / project",
+  const translations = {
+    en: {
+      title: "What we offer",
+      description: "As a strong online presence becomes essential, we bridge the gap between sustainability and success. We create eco-friendly, high-performance websites that reduce digital carbon footprints while maximizing lead generation. By optimizing every server operation and design element, we ensure a lightning-fast experience that turns environmentally conscious visitors into loyal clients.",
+      button: "Work With Us",
+      services: [
+        {
+          title: "Web Development",
+          description: "Responsive websites and clean code",
+          image: "/images/web-development.jpg",
+          badge: "Sustainable",
+          icon: Leaf,
+          price: "From €600 - 2,500 / project",
+        },
+        {
+          title: "UX/UI design in figma",
+          description: "Clean designs built for speed and beauty.",
+          image: "/images/home-design.jpg",
+          badge: "Eco-first",
+          icon: Target,
+          price: "From €600",
+        },
+        {
+          title: "Green Hosting",
+          description: "Green hosting setup for lower digital carbon footprint",
+          image: "/images/green-hosting.jpg",
+          badge: "Planet-first",
+          icon: TrendingUp,
+          price: "From €20 / month",
+        },
+        {
+          title: "Website Maintenance and Technical Support",
+          description: "Keeping your website updated, secure, and optimised",
+          image: "/green-house.jpg",
+          badge: "Future-friendly",
+          icon: Lightbulb,
+          price: "From €30 / hour",
+        },
+        {
+          title: "Authentic Brand Identity",
+          description: "We use Adobe Illustrator to create an impactful brand identity.",
+          image: "/images/tree-team.jpg",
+          badge: "Nature-led",
+          icon: Users,
+          price: "From €300",
+        },
+      ],
     },
-    {
-      title: "UX/UI design in figma",
-      description: "Clean designs built for speed and beauty.",
-      image: "/images/home-design.jpg",
-      badge: "Eco-first",
-      icon: Target,
-      price: "From €600",
+    ro: {
+      title: "Ce oferim",
+      description: "În era digitală actuală, o prezență online solidă este fundamentală. Conectăm durabilitatea cu rezultatele concrete, construind site-uri ecologice de calitate superioară care minimizează impactul asupra mediului și cresc rata de conversie. Perfecționăm fiecare aspect - de la infrastructură la aspectul vizual - pentru o experiență optimă care transformă vizitatorii în clienți loiali.",
+      button: "Colaborează cu noi",
+      services: [
+        {
+          title: "Dezvoltare Web",
+          description: "Site-uri adaptabile cu cod eficient",
+          image: "/images/web-development.jpg",
+          badge: "Durabil",
+          icon: Leaf,
+          price: "De la €600 - 2,500 / proiect",
+        },
+        {
+          title: "Design UX/UI în Figma",
+          description: "Interfețe moderne, performante și estetice",
+          image: "/images/home-design.jpg",
+          badge: "Eco-first",
+          icon: Target,
+          price: "De la €600",
+        },
+        {
+          title: "Hosting Verde",
+          description: "Servicii de hosting ecologice pentru un impact redus asupra mediului",
+          image: "/images/green-hosting.jpg",
+          badge: "Planet-first",
+          icon: TrendingUp,
+          price: "De la €20 / lună",
+        },
+        {
+          title: "Întreținere și Suport Tehnic",
+          description: "Păstrăm site-ul tău la zi, securizat și performant",
+          image: "/green-house.jpg",
+          badge: "Future-friendly",
+          icon: Lightbulb,
+          price: "De la €30 / oră",
+        },
+        {
+          title: "Identitate de Brand",
+          description: "Dezvoltăm identități de brand memorabile cu Adobe Illustrator",
+          image: "/images/tree-team.jpg",
+          badge: "Nature-led",
+          icon: Users,
+          price: "De la €300",
+        },
+      ],
     },
-    {
-      title: "Green Hosting",
-      description: "Green hosting setup for lower digital carbon footprint",
-      image: "/images/green-hosting.jpg",
-      badge: "Planet-first",
-      icon: TrendingUp,
-      price: "From €20 / month",
-    },
-    {
-      title: "Website Maintenance and Technical Support",
-      description: "Keeping your website updated, secure, and optimised",
-      image: "/green-house.jpg",
-      badge: "Future-friendly",
-      icon: Lightbulb,
-      price: "From €25 / hour",
-    },
-    {
-      title: "Authentic Brand Identity",
-      description:
-        "We use Adobe Illustrator to create an impactful brand identity.",
-      image: "/images/tree-team.jpg",
-      badge: "Nature-led",
-      icon: Users,
-      price: "From €300",
-    },
-  ];
+  };
+
+  const t = translations[language];
+  const services = t.services;
 
   return (
     <section
@@ -68,12 +126,12 @@ const Services = () => {
               <h2
                 className="text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4 lg:mb-6 font-montserratAlt"
               >
-                What we offer
+                {t.title}
               </h2>
               <p
-                className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-[1100px] font-outfit"
+                className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-[1100px] font-inter"
               >
-                As a strong online presence becomes essential, we bridge the gap between sustainability and success. We create eco-friendly, high-performance websites that reduce digital carbon footprints while maximizing lead generation. By optimizing every server operation and design element, we ensure a lightning-fast experience that turns environmentally conscious visitors into loyal clients.
+                {t.description}
               </p>
             </div>
             <div className="mt-4 md:mt-6 lg:mt-0">
@@ -81,7 +139,7 @@ const Services = () => {
                 onClick={scrollToContact}
                 className="bg-orange-400 text-black px-5 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-sm md:text-sm lg:text-base font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                Work With Us
+                {t.button}
               </button>
             </div>
           </div>

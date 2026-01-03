@@ -5,6 +5,8 @@ export default {
     extend: {
       fontFamily: {
         outfit: ["Outfit", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        jakarta: ["Plus Jakarta Sans", "sans-serif"],
         pompiere: ["Pompiere", "cursive"],
         montserratAlt: ["Montserrat Alternates", "sans-serif"],
       },

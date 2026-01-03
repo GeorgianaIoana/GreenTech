@@ -1,13 +1,28 @@
-import React from "react";
-import { ArrowRight } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Hero = () => {
-  const scrollToServices = () => {
-    document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+  const { language } = useLanguage();
+
+  const translations = {
+    en: {
+      title1: "Web Development",
+      title2: "Powered by the Sun",
+      description: "We help your business shine online with fast websites, efficient code, stunning UI/UX, and hosting powered by clean solar energy.",
+      button: "Shine Online",
+      technologies: "Built with modern technologies:",
+    },
+    ro: {
+      title1: "Dezvoltare Web",
+      title2: "Alimentată de Soare",
+      description: "Îți oferim soluții digitale performante pentru afacerea ta. Realizăm site-uri rapide, cu cod eficient, interfețe atractive și servicii de hosting bazate pe energie solară.",
+      button: "Strălucește Online",
+      technologies: "Construit cu tehnologii moderne:",
+    },
   };
 
-  const scrollToProjects = () => {
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+  const t = translations[language];
+  const scrollToServices = () => {
+    document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -32,15 +47,14 @@ const Hero = () => {
           <div className="text-white pt-20 md:pt-24 lg:pt-0 lg:-mt-20">
             {/* Main Heading */}
             <h1 className="text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-bold mb-6 md:mb-8 lg:mb-12 leading-tight font-montserratAlt">
-              Web Development
+              {t.title1}
               <br />
-              Powered by the Sun
+              {t.title2}
             </h1>
 
             {/* Description */}
             <p className="text-base sm:text-lg md:text-lg lg:text-xl max-w-full md:max-w-[600px] lg:max-w-[500px] text-white mb-8 md:mb-10 lg:mb-8 leading-relaxed font-montserratAlt">
-              We help your business shine online with fast websites, efficient
-              code, stunning UI/UX, and hosting powered by clean solar energy.
+              {t.description}
             </p>
 
             {/* CTA Button */}
@@ -48,14 +62,14 @@ const Hero = () => {
               onClick={scrollToServices}
               className="mb-6 md:mb-8 lg:mb-0 inline-flex items-center justify-center bg-orange-400 text-slate-900 px-6 py-3 md:px-10 md:py-4 lg:px-8 lg:py-4 rounded-full text-sm md:text-lg lg:text-base font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt"
             >
-              Shine Online
+              {t.button}
             </button>
           </div>
 
           {/* Trust Section */}
           <div className="mt-4 md:mt-6 lg:mt-20 max-w-full md:max-w-2xl lg:max-w-md">
             <p className="text-white text-base md:text-lg lg:text-[18px] mb-4 md:mb-5 font-medium font-montserratAlt">
-              Built with modern technologies:
+              {t.technologies}
             </p>
 
             {/* Development Tools Carousel */}

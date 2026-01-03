@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Code2 } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Extend Window interface for TypeScript
 declare global {
@@ -14,6 +15,14 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { language, setLanguage } = useLanguage();
+
+  const navItems = {
+    en: ['Home', 'About', 'Services', 'Projects', 'Schedule', 'Contact'],
+    ro: ['Acasă', 'Despre', 'Servicii', 'Proiecte', 'Programare', 'Contact'],
+  };
+
+  const items = navItems[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,11 +70,26 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6 ">
-            {['Home', 'About', 'Services', 'Projects', 'Schedule', 'Contact'].map((item) => (
+          <nav className="hidden md:flex items-center space-x-4">
+            {/* Language Switcher */}
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'ro' : 'en')}
+              className="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-teal-600/50 transition-colors"
+              title={language === 'en' ? 'Switch to Romanian' : 'Comută la engleză'}
+            >
+              {language === 'en' ? (
+                <span className="text-lg">🇬🇧</span>
+              ) : (
+                <span className="text-lg">🇷🇴</span>
+              )}
+            </button>
+            
+            {items.map((item, index) => {
+              const englishItem = navItems.en[index];
+              return (
               <button
                 key={item}
-                onClick={() => handleNavigation(item)}
+                onClick={() => handleNavigation(englishItem)}
                 onMouseEnter={() => {
                   // Preload Calendly script when hovering over Schedule link
                   if (item === 'Schedule' && !window.Calendly && !document.querySelector('script[src*="calendly.com"]')) {
@@ -81,7 +105,8 @@ const Header = () => {
               >
                 {item}
               </button>
-            ))}
+            );
+            })}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -97,13 +122,35 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-teal-700/95 backdrop-blur-sm">
             <nav className="py-4 space-y-2">
-              {['Home', 'About', 'Services', 'Projects', 'Schedule', 'Contact'].map((item) => (
+              {/* Language Switcher Mobile */}
+              <button
+                onClick={() => {
+                  setLanguage(language === 'en' ? 'ro' : 'en');
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200 flex items-center space-x-2"
+              >
+                {language === 'en' ? (
+                  <>
+                    <span className="text-lg">🇬🇧</span>
+                    <span>English</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-lg">🇷🇴</span>
+                    <span>Română</span>
+                  </>
+                )}
+              </button>
+              
+              {items.map((item, index) => {
+                const englishItem = navItems.en[index];
+                return (
                 <button
                   key={item}
-                  onClick={() => handleNavigation(item)}
+                  onClick={() => handleNavigation(englishItem)}
                   onMouseEnter={() => {
                     // Preload Calendly script when hovering over Schedule link
-                    if (item === 'Schedule' && !window.Calendly && !document.querySelector('script[src*="calendly.com"]')) {
+                    if (englishItem === 'Schedule' && !window.Calendly && !document.querySelector('script[src*="calendly.com"]')) {
                       const script = document.createElement('script');
                       script.type = 'text/javascript';
                       script.src = 'https://assets.calendly.com/assets/external/widget.js';
@@ -116,7 +163,8 @@ const Header = () => {
                 >
                   {item}
                 </button>
-              ))}
+              );
+              })}
             </nav>
           </div>
         )}

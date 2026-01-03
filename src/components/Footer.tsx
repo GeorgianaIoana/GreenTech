@@ -1,9 +1,40 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
+  const { language } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   const currentYear = new Date().getFullYear();
+
+  const translations = {
+    en: {
+      tagline: "Make your business bloom",
+      navigation: "Navigation",
+      about: "About",
+      services: "Services",
+      projects: "Projects",
+      contact: "Contact",
+      contactTitle: "Contact",
+      copyright: `© ${currentYear} Bloomsoft. All rights reserved.`,
+      privacy: "Privacy Policy",
+      terms: "Terms and Conditions",
+    },
+    ro: {
+      tagline: "Fă-ți afacerea să prospere",
+      navigation: "Navigare",
+      about: "Despre",
+      services: "Servicii",
+      projects: "Proiecte",
+      contact: "Contact",
+      contactTitle: "Contact",
+      copyright: `© ${currentYear} Bloomsoft. Toate drepturile rezervate.`,
+      privacy: "Politica de Confidențialitate",
+      terms: "Termeni și Condiții",
+    },
+  };
+
+  const t = translations[language];
 
   const handleNavigation = (section: string) => {
     if (section === 'Projects') {
@@ -29,54 +60,54 @@ const Footer = () => {
               <span className="text-2xl">🍃</span>
               <span className="text-xl font-semibold text-white">Bloomsoft</span>
             </button>
-            <p className="mt-4 text-sm text-teal-100">
-              Make your business bloom
+            <p className="mt-4 text-sm text-teal-100 font-inter">
+              {t.tagline}
             </p>
           </div>
 
           <nav aria-label="Quick Links" className="md:justify-self-center">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-teal-200">
-              Navigation
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-teal-200 font-montserratAlt">
+              {t.navigation}
             </h3>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <button
                   onClick={() => handleNavigation('about')}
-                  className="hover:text-orange-300 text-left"
+                  className="hover:text-orange-300 text-left font-inter"
                 >
-                  About
+                  {t.about}
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => handleNavigation('services')}
-                  className="hover:text-orange-300 text-left"
+                  className="hover:text-orange-300 text-left font-inter"
                 >
-                  Services
+                  {t.services}
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => handleNavigation('Projects')}
-                  className="hover:text-orange-300 text-left"
+                  className="hover:text-orange-300 text-left font-inter"
                 >
-                  Projects
+                  {t.projects}
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => handleNavigation('contact')}
-                  className="hover:text-orange-300 text-left"
+                  className="hover:text-orange-300 text-left font-inter"
                 >
-                  Contact
+                  {t.contact}
                 </button>
               </li>
             </ul>
           </nav>
 
           <div className="md:justify-self-end">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-teal-200">
-              Contact
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-teal-200 font-montserratAlt">
+              {t.contactTitle}
             </h3>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
@@ -154,19 +185,25 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-teal-100">
             {/* Left: Copyright */}
             <div className="text-left md:text-left">
-              <p>
-                &copy; {currentYear} BloomSoft. All rights reserved.
+              <p className="font-inter">
+                {t.copyright}
               </p>
             </div>
 
             {/* Center: Links and ANPC */}
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <a href="#" className="hover:text-orange-300">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-orange-300">
-                Terms and Conditions
-              </a>
+              <button
+                onClick={() => navigate('/privacy')}
+                className="hover:text-orange-300 font-inter text-left"
+              >
+                {t.privacy}
+              </button>
+              <button
+                onClick={() => navigate('/terms')}
+                className="hover:text-orange-300 font-inter text-left"
+              >
+                {t.terms}
+              </button>
               <a 
                 href="https://anpc.ro/ce-este-sal/" 
                 target="_blank" 
