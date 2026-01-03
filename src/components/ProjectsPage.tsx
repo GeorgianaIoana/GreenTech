@@ -83,7 +83,14 @@ const ProjectsPage = () => {
   }, [visibleWords, titleWords.length]);
 
   const goToContact = () => {
-    navigate("/#contact");
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const stats = [
@@ -115,9 +122,9 @@ const ProjectsPage = () => {
 
   const projects = [
     {
-      title: "Chess Club Presentation Website",
+      title: "Chess Club Platform",
       description:
-        "We designed and developed a modern presentation website for a chess club, focused on clearly communicating the club’s identity, values, and activities through a clean and professional digital presence. The interface was designed in Figma with careful attention to branding and usability, then implemented using React and TypeScript to ensure a scalable, high-performance, and maintainable front-end solution.",
+    "Engineered a high-performance digital presence using React and TypeScript. From Figma-driven design to scalable deployment, we delivered a fast, maintainable asset focused on the club’s brand identity and seamless community engagement.",
       buttonText: "View Project",
       bgColor: "#fb923c", 
       projectNumber: "01",
@@ -127,8 +134,8 @@ const ProjectsPage = () => {
     {
       title: "E-commerce Bags Shop",
       description:
-        "This online store was initially designed in Figma and later developed using HTML, CSS, and JavaScript. The project combines the practical functionality of online sales with a modern, clean, and well-structured visual identity that effectively promotes both the brand and its products. Particular attention was given to usability, intuitive navigation, and visual hierarchy, ensuring a smooth shopping experience that guides users naturally from product discovery to purchase. ",
-      buttonText: "View Project",
+        " We believe online shopping should be a pleasure, not a chore. We prioritized speed and ease of use, ensuring that every customer enjoys a smooth, stress-free shopping experience.",
+      buttonText: "Let's start",
       bgColor: "#fb7185", 
       projectNumber: "02",
       image: "/2sn project.png",
@@ -136,7 +143,7 @@ const ProjectsPage = () => {
     {
       title: "Collaboration & Workflow",
       description:
-        "Every project is developed through a structured and transparent process, working alongside a dedicated team of designers and developers to ensure high-quality results. We collaborate closely with the client at every stage, from concept and strategy to design and development, transforming ideas into a refined digital product. By combining clear communication, industry best practices, and modern technologies, we deliver websites that are visually compelling, technically reliable, and tailored to support each client’s business goals.",
+        "Great digital products are born from a structured workflow and clear communication. We combine our collective expertise in design and code to transform your ideas into high-performance assets. Ready to see what we can build for you?",
       buttonText: "Let's start",
       bgColor: "#07615b",
       projectNumber: "03",
@@ -235,11 +242,11 @@ const ProjectsPage = () => {
           </video>
         </div>
 
-        <div className="container z-10 px-4 md:px-6">
+        <div className="container z-10 px-6">
           <div className="max-w-6xl mx-auto">
             {/* Main Title */}
             <div className="flex justify-start">
-              <div className="max-w-xl md:max-w-2xl text-left">
+              <div className="max-w-xl md:max-w-2xl text-left lg:pl-10">
                 <h1
                   className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 md:mb-8 leading-tight font-montserratAlt"
                 >
@@ -290,9 +297,7 @@ const ProjectsPage = () => {
                     textShadow: '3px 3px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 0, 0, 0.4)'
                   }}
                 >
-                  Explore my latest web development projects showcasing modern
-                  technologies, creative solutions, and user-centered design
-                  approaches.
+                  Strategic design meets high-end engineering. Explore how our team transforms complex ideas into seamless digital experiences designed to drive growth and engage your target audience.
                 </p>
               </div>
             </div>
@@ -370,7 +375,7 @@ const ProjectsPage = () => {
             </div>
 
             {/* Button for Desktop - below stats */}
-            <div className="hidden lg:flex flex-col sm:flex-row items-center justify-start gap-4 mt-4 md:mt-8 max-w-xl">
+            <div className="hidden lg:flex flex-col sm:flex-row items-center justify-start gap-4 mt-4 md:mt-8 max-w-xl lg:pl-10">
               <button
                 onClick={goToContact}
                 className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
@@ -406,28 +411,20 @@ const ProjectsPage = () => {
 
       <section
         id="featured-project"
-        className="relative py-20"
+        className="relative lg:py-20"
         style={{
           backgroundColor: blendedBgColor,
           transition: "background-color 0.3s ease-out",
-          minHeight: "350vh", // Scroll space for smooth animation with 3 projects
+          minHeight: "30vh", 
         }}
       >
         {/* Desktop Layout */}
         <div className="container mx-auto hidden lg:block">
           <div className="grid lg:grid-cols-2 gap-12 max-w-7xl">
             {/* Left Column - Text Sections */}
-            <div className="space-y-[80vh]">
+            <div className="space-y-[80vh] lg:pl-6">
               {projects.map((project, index) => (
                 <div key={project.projectNumber} className="py-20 max-w-[400px]">
-                  {/* Project Number */}
-                  <div className="flex items-center space-x-3 mb-8">
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <span className="text-sm font-medium tracking-wider uppercase text-white/80 font-montserratAlt">
-                      {project.projectNumber} Project
-                    </span>
-                  </div>
-
                   {/* Title */}
                   <h2
                     className="text-4xl lg:text-6xl font-bold leading-tight mb-8 text-white transition-all duration-1000 ease-in-out font-montserratAlt"
@@ -549,11 +546,17 @@ const ProjectsPage = () => {
                                   />
                                 </button>
                               ) : (
-                                <img
-                                  src={project.image}
-                                  alt={project.title}
-                                  className="w-full h-full object-cover"
-                                />
+                                <button
+                                  onClick={goToContact}
+                                  className="w-full h-full cursor-pointer hover:opacity-90 transition-opacity"
+                                  aria-label={`View ${project.title}`}
+                                >
+                                  <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="w-full h-full object-cover"
+                                  />
+                                </button>
                               )}
                             </div>
                           );
@@ -568,7 +571,7 @@ const ProjectsPage = () => {
         </div>
 
         {/* Tablet and Mobile Layout with Carousel */}
-        <div className="container mx-auto block lg:hidden px-4">
+        <div className="container mx-auto block lg:hidden px-4 pb-8">
           <div className="relative overflow-hidden">
             <div
               className="flex transition-transform duration-500 ease-in-out"
@@ -582,14 +585,6 @@ const ProjectsPage = () => {
                   className="w-full flex-shrink-0 px-2"
                 >
                 <div className="py-8">
-                  {/* Project Number */}
-                  <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <span className="text-sm font-medium tracking-wider uppercase text-white/80 font-montserratAlt">
-                      {project.projectNumber} Project
-                    </span>
-                  </div>
-
                   {/* Title */}
                   <h2 className="text-3xl font-bold leading-tight mb-6 text-white font-montserratAlt">
                     {project.title}
@@ -637,11 +632,17 @@ const ProjectsPage = () => {
                                 />
                               </button>
                             ) : (
-                              <img
-                                src={project.image}
-                                alt={project.title}
-                                className="w-full h-full object-contain"
-                              />
+                              <button
+                                onClick={goToContact}
+                                className="w-full h-full cursor-pointer hover:opacity-90 transition-opacity"
+                                aria-label={`View ${project.title}`}
+                              >
+                                <img
+                                  src={project.image}
+                                  alt={project.title}
+                                  className="w-full h-full object-contain"
+                                />
+                              </button>
                             )}
                           </div>
                         </div>
@@ -671,7 +672,7 @@ const ProjectsPage = () => {
             </div>
 
             {/* Carousel Navigation */}
-            <div className="flex justify-center items-center gap-4 mt-8">
+            <div className="flex justify-center items-center gap-4 mt-8 mb-4">
               <button
                 onClick={prevCarousel}
                 className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all"

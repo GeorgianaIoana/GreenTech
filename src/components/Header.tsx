@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Code2 } from 'lucide-react';
 
+// Extend Window interface for TypeScript
+declare global {
+  interface Window {
+    Calendly?: any;
+  }
+}
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -59,6 +66,17 @@ const Header = () => {
               <button
                 key={item}
                 onClick={() => handleNavigation(item)}
+                onMouseEnter={() => {
+                  // Preload Calendly script when hovering over Schedule link
+                  if (item === 'Schedule' && !window.Calendly && !document.querySelector('script[src*="calendly.com"]')) {
+                    const script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+                    script.async = true;
+                    script.defer = true;
+                    document.head.appendChild(script);
+                  }
+                }}
                 className="text-teal-50 font-montserratAlt font-medium tracking-wide hover:text-teal-400 transition-colors duration-200 font-medium"
               >
                 {item}
@@ -83,6 +101,17 @@ const Header = () => {
                 <button
                   key={item}
                   onClick={() => handleNavigation(item)}
+                  onMouseEnter={() => {
+                    // Preload Calendly script when hovering over Schedule link
+                    if (item === 'Schedule' && !window.Calendly && !document.querySelector('script[src*="calendly.com"]')) {
+                      const script = document.createElement('script');
+                      script.type = 'text/javascript';
+                      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+                      script.async = true;
+                      script.defer = true;
+                      document.head.appendChild(script);
+                    }
+                  }}
                   className="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200"
                 >
                   {item}

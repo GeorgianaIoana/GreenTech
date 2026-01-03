@@ -14,6 +14,8 @@ import ThankYou from "./components/ThankYou";
 import CalendlySection from "./components/CalendlySection";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import TawkTo from "./components/TawkTo";
+// Preload Calendly script by importing it
+import "./components/Calendly";
 
 // Home Page Component
 const HomePage = () => {

@@ -15,7 +15,7 @@ const Services = () => {
     {
       title: "Web Development",
       description: "Responsive websites and clean code",
-      image: "/green-house.jpg",
+      image: "/images/web-development.jpg",
       badge: "Sustainable",
       icon: Leaf,
       price: "From €600 - 2,500 / project",
@@ -23,7 +23,7 @@ const Services = () => {
     {
       title: "UX/UI design in figma",
       description: "Clean designs built for speed and beauty.",
-      image: "/images/plants.png",
+      image: "/images/home-design.jpg",
       badge: "Eco-first",
       icon: Target,
       price: "From €600",
@@ -31,7 +31,7 @@ const Services = () => {
     {
       title: "Green Hosting",
       description: "Green hosting setup for lower digital carbon footprint",
-      image: "/images/15.png",
+      image: "/images/green-hosting.jpg",
       badge: "Planet-first",
       icon: TrendingUp,
       price: "From €20 / month",
@@ -39,7 +39,7 @@ const Services = () => {
     {
       title: "Website Maintenance and Technical Support",
       description: "Keeping your website updated, secure, and optimised",
-      image: "/images/green-hosting.jpg",
+      image: "/green-house.jpg",
       badge: "Future-friendly",
       icon: Lightbulb,
       price: "From €25 / hour",
@@ -66,14 +66,12 @@ const Services = () => {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-8 md:mb-12 lg:mb-16">
             <div className="lg:max-w-2xl">
               <h2
-                className="text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4 lg:mb-6"
-                style={{ fontFamily: "Merriweather, serif" }}
+                className="text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4 lg:mb-6 font-montserratAlt"
               >
                 What we offer
               </h2>
               <p
-                className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-[1100px]"
-                style={{ fontFamily: "Outfit, sans-serif" }}
+                className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-[1100px] font-outfit"
               >
                 As a strong online presence becomes essential, we bridge the gap between sustainability and success. We create eco-friendly, high-performance websites that reduce digital carbon footprints while maximizing lead generation. By optimizing every server operation and design element, we ensure a lightning-fast experience that turns environmentally conscious visitors into loyal clients.
               </p>
@@ -94,7 +92,8 @@ const Services = () => {
             {services.slice(0, 3).map((service) => (
               <div
                 key={service.title}
-                className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500"
+                onClick={scrollToContact}
+                className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
               >
                 <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                   <img
@@ -105,7 +104,7 @@ const Services = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
                   {/* Badge */}
-                  <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4">
+                  <div className="absolute top-3 left-3 md:top-4 md:left-4">
                     <div className="flex items-center space-x-1.5 md:space-x-2 bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
                       <service.icon className="w-3 h-3 md:w-4 md:h-4" />
                       <span>{service.badge}</span>
@@ -116,8 +115,7 @@ const Services = () => {
                   <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
                     <div className="flex items-start justify-between mb-1.5 md:mb-2">
                       <h3
-                        className="text-sm md:text-base lg:text-lg font-semibold text-white"
-                        style={{ fontFamily: "Merriweather, serif" }}
+                        className="text-sm md:text-base lg:text-lg font-semibold text-white font-montserratAlt"
                       >
                         {service.title}
                       </h3>
@@ -127,15 +125,13 @@ const Services = () => {
                     </div>
                     <div className="space-y-0.5 md:space-y-1">
                       <p
-                        className="text-gray-200 text-xs md:text-xs lg:text-sm leading-relaxed tracking-wide max-w-m"
-                        style={{ fontFamily: "Outfit, sans-serif" }}
+                        className="text-gray-200 text-xs md:text-xs lg:text-sm leading-relaxed tracking-wide max-w-m font-montserratAlt"
                       >
                         {service.description.split(". ")[0]}.
                       </p>
                       {service.description.includes(". ") && (
                         <p
-                          className="text-gray-200 text-xs md:text-xs lg:text-sm leading-relaxed tracking-wide max-w-m"
-                          style={{ fontFamily: "Outfit, sans-serif" }}
+                          className="text-gray-200 text-xs md:text-xs lg:text-sm leading-relaxed tracking-wide max-w-m font-montserratAlt"
                         >
                           {service.description.split(". ").slice(1).join(". ")}
                         </p>
@@ -151,7 +147,8 @@ const Services = () => {
               {services.slice(3, 5).map((service) => (
                 <div
                   key={service.title}
-                  className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500"
+                  onClick={scrollToContact}
+                  className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
                 >
                   <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                     <img
@@ -162,7 +159,7 @@ const Services = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
                     {/* Badge */}
-                    <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4">
+                    <div className="absolute top-3 left-3 md:top-4 md:left-4">
                       <div className="flex items-center space-x-1.5 md:space-x-2 bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
                         <service.icon className="w-3 h-3 md:w-4 md:h-4" />
                         <span>{service.badge}</span>
@@ -173,8 +170,7 @@ const Services = () => {
                     <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
                       <div className="flex items-start justify-between mb-1.5 md:mb-2 lg:mb-3">
                         <h3
-                          className="text-base md:text-lg lg:text-xl font-bold text-white"
-                          style={{ fontFamily: "Merriweather, serif" }}
+                          className="text-base md:text-lg lg:text-xl font-bold text-white font-montserratAlt"
                         >
                           {service.title}
                         </h3>
@@ -184,15 +180,13 @@ const Services = () => {
                       </div>
                       <div className="space-y-0.5 md:space-y-1">
                         <p
-                          className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l"
-                          style={{ fontFamily: "Outfit, sans-serif" }}
+                          className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l font-montserratAlt"
                         >
                           {service.description.split(". ")[0]}.
                         </p>
                         {service.description.includes(". ") && (
                           <p
-                            className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l"
-                            style={{ fontFamily: "Outfit, sans-serif" }}
+                            className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l font-montserratAlt"
                           >
                             {service.description
                               .split(". ")

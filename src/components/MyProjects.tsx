@@ -3,8 +3,6 @@ import { useEffect, useRef } from "react";
 const MyProjects = () => {
   const leftProjectsRef = useRef<HTMLDivElement>(null);
   const rightProjectsRef = useRef<HTMLDivElement>(null);
-  const leftProjectsTabletRef = useRef<HTMLDivElement>(null);
-  const rightProjectsTabletRef = useRef<HTMLDivElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
