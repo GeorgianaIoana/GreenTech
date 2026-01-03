@@ -146,8 +146,8 @@ const Services = () => {
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-4 lg:gap-6">
-            {/* First row - 3 cards */}
-            {services.slice(0, 3).map((service) => (
+            {/* First row - 2 cards on tablet, 3 on desktop */}
+            {services.slice(0, 2).map((service) => (
               <div
                 key={service.title}
                 onClick={scrollToContact}
@@ -199,14 +199,242 @@ const Services = () => {
                 </div>
               </div>
             ))}
+            
+            {/* Third card - only visible on desktop */}
+            {services.slice(2, 3).map((service) => (
+              <div
+                key={service.title}
+                onClick={scrollToContact}
+                className="hidden lg:block group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+              >
+                <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-all duration-500 filter brightness-100 group-hover:brightness-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-            {/* Second row - 2 cards spanning wider */}
+                  {/* Badge */}
+                  <div className="absolute top-3 left-3 md:top-4 md:left-4">
+                    <div className="flex items-center space-x-1.5 md:space-x-2 bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
+                      <service.icon className="w-3 h-3 md:w-4 md:h-4" />
+                      <span>{service.badge}</span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
+                    <div className="flex items-start justify-between mb-1.5 md:mb-2">
+                      <h3
+                        className="text-sm md:text-base lg:text-lg font-semibold text-white font-montserratAlt"
+                      >
+                        {service.title}
+                      </h3>
+                      <div className="bg-orange-400 text-slate-900 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap ml-2">
+                        {service.price}
+                      </div>
+                    </div>
+                    <div className="space-y-0.5 md:space-y-1">
+                      <p
+                        className="text-gray-200 text-xs md:text-xs lg:text-sm leading-relaxed tracking-wide max-w-m font-montserratAlt"
+                      >
+                        {service.description.split(". ")[0]}.
+                      </p>
+                      {service.description.includes(". ") && (
+                        <p
+                          className="text-gray-200 text-xs md:text-xs lg:text-sm leading-relaxed tracking-wide max-w-m font-montserratAlt"
+                        >
+                          {service.description.split(". ").slice(1).join(". ")}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Second row - 2 cards on tablet (services[2] and services[3]), 2 cards on desktop (services[3] and services[4]) */}
             <div className="md:col-span-2 lg:col-span-3 grid md:grid-cols-2 gap-4 md:gap-4 lg:gap-6">
-              {services.slice(3, 5).map((service) => (
+              {/* Service 2 - visible on tablet only */}
+              {services.slice(2, 3).map((service) => (
+                <div
+                  key={service.title}
+                  onClick={scrollToContact}
+                  className="hidden md:block lg:hidden group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                >
+                  <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-all duration-500 filter brightness-100 group-hover:brightness-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                    {/* Badge */}
+                    <div className="absolute top-3 left-3 md:top-4 md:left-4">
+                      <div className="flex items-center space-x-1.5 md:space-x-2 bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
+                        <service.icon className="w-3 h-3 md:w-4 md:h-4" />
+                        <span>{service.badge}</span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
+                      <div className="flex items-start justify-between mb-1.5 md:mb-2 lg:mb-3">
+                        <h3
+                          className="text-base md:text-lg lg:text-xl font-bold text-white font-montserratAlt"
+                        >
+                          {service.title}
+                        </h3>
+                        <div className="bg-orange-400 text-slate-900 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap ml-2">
+                          {service.price}
+                        </div>
+                      </div>
+                      <div className="space-y-0.5 md:space-y-1">
+                        <p
+                          className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l font-montserratAlt"
+                        >
+                          {service.description.split(". ")[0]}.
+                        </p>
+                        {service.description.includes(". ") && (
+                          <p
+                            className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l font-montserratAlt"
+                          >
+                            {service.description
+                              .split(". ")
+                              .slice(1)
+                              .join(". ")}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              
+              {/* Service 3 - visible on all */}
+              {services.slice(3, 4).map((service) => (
                 <div
                   key={service.title}
                   onClick={scrollToContact}
                   className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                >
+                  <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-all duration-500 filter brightness-100 group-hover:brightness-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                    {/* Badge */}
+                    <div className="absolute top-3 left-3 md:top-4 md:left-4">
+                      <div className="flex items-center space-x-1.5 md:space-x-2 bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
+                        <service.icon className="w-3 h-3 md:w-4 md:h-4" />
+                        <span>{service.badge}</span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
+                      <div className="flex items-start justify-between mb-1.5 md:mb-2 lg:mb-3">
+                        <h3
+                          className="text-base md:text-lg lg:text-xl font-bold text-white font-montserratAlt"
+                        >
+                          {service.title}
+                        </h3>
+                        <div className="bg-orange-400 text-slate-900 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap ml-2">
+                          {service.price}
+                        </div>
+                      </div>
+                      <div className="space-y-0.5 md:space-y-1">
+                        <p
+                          className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l font-montserratAlt"
+                        >
+                          {service.description.split(". ")[0]}.
+                        </p>
+                        {service.description.includes(". ") && (
+                          <p
+                            className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l font-montserratAlt"
+                          >
+                            {service.description
+                              .split(". ")
+                              .slice(1)
+                              .join(". ")}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              
+              {/* Service 4 - visible on desktop only */}
+              {services.slice(4, 5).map((service) => (
+                <div
+                  key={service.title}
+                  onClick={scrollToContact}
+                  className="hidden lg:block group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                >
+                  <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-all duration-500 filter brightness-100 group-hover:brightness-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                    {/* Badge */}
+                    <div className="absolute top-3 left-3 md:top-4 md:left-4">
+                      <div className="flex items-center space-x-1.5 md:space-x-2 bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
+                        <service.icon className="w-3 h-3 md:w-4 md:h-4" />
+                        <span>{service.badge}</span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
+                      <div className="flex items-start justify-between mb-1.5 md:mb-2 lg:mb-3">
+                        <h3
+                          className="text-base md:text-lg lg:text-xl font-bold text-white font-montserratAlt"
+                        >
+                          {service.title}
+                        </h3>
+                        <div className="bg-orange-400 text-slate-900 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap ml-2">
+                          {service.price}
+                        </div>
+                      </div>
+                      <div className="space-y-0.5 md:space-y-1">
+                        <p
+                          className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l font-montserratAlt"
+                        >
+                          {service.description.split(". ")[0]}.
+                        </p>
+                        {service.description.includes(". ") && (
+                          <p
+                            className="text-gray-200 text-xs md:text-sm lg:text-base leading-relaxed tracking-wide max-w-l font-montserratAlt"
+                          >
+                            {service.description
+                              .split(". ")
+                              .slice(1)
+                              .join(". ")}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Third row - 1 card centered on tablet, hidden on desktop */}
+            <div className="md:col-span-2 md:col-start-1 lg:hidden flex md:justify-center">
+              {services.slice(4, 5).map((service) => (
+                <div
+                  key={service.title}
+                  onClick={scrollToContact}
+                  className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer w-full md:max-w-md"
                 >
                   <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                     <img

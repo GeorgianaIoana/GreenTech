@@ -277,7 +277,7 @@ const ProjectsPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Video */}
-      <section className="min-h-screen md:min-h-[90vh] relative overflow-hidden flex items-center py-12 md:py-20">
+      <section className="min-h-screen md:min-h-[90vh] relative overflow-hidden flex items-center pt-24 pb-12 md:py-20">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
@@ -384,19 +384,24 @@ const ProjectsPage = () => {
             <div className="flex lg:hidden flex-col sm:flex-row items-center justify-start gap-4 mt-4 mb-6 max-w-xl">
               <button
                 onClick={goToContact}
-                className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
-                  buttonHighlighted ? "animate-pulse ring-4 ring-yellow-500 ring-opacity-75" : ""
+                className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-500 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
+                  buttonHighlighted 
+                    ? "animate-bounce-in scale-105 shadow-2xl shadow-yellow-400/50 ring-2 ring-yellow-400 ring-offset-2 ring-offset-transparent" 
+                    : ""
                 }`}
-                style={{ backgroundColor: "#fb923c" }}
+                style={{ 
+                  backgroundColor: buttonHighlighted ? "#f59e0b" : "#fb923c",
+                  transition: "all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+                }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = "#eab308";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#fb923c";
+                  e.currentTarget.style.backgroundColor = buttonHighlighted ? "#f59e0b" : "#fb923c";
                 }}
               >
                 <span>{t.getStarted}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${buttonHighlighted ? "animate-pulse" : ""}`} />
               </button>
             </div>
 
@@ -430,19 +435,24 @@ const ProjectsPage = () => {
             <div className="hidden lg:flex flex-col sm:flex-row items-center justify-start gap-4 mt-4 md:mt-8 max-w-xl lg:pl-10">
               <button
                 onClick={goToContact}
-                className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
-                  buttonHighlighted ? "animate-pulse ring-4 ring-yellow-500 ring-opacity-75" : ""
+                className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-500 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
+                  buttonHighlighted 
+                    ? "animate-bounce-in scale-105 shadow-2xl shadow-yellow-400/50 ring-2 ring-yellow-400 ring-offset-2 ring-offset-transparent" 
+                    : ""
                 }`}
-                style={{ backgroundColor: "#fb923c" }}
+                style={{ 
+                  backgroundColor: buttonHighlighted ? "#f59e0b" : "#fb923c",
+                  transition: "all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+                }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = "#eab308";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#fb923c";
+                  e.currentTarget.style.backgroundColor = buttonHighlighted ? "#f59e0b" : "#fb923c";
                 }}
               >
                 <span>{t.getStarted}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${buttonHighlighted ? "animate-pulse" : ""}`} />
               </button>
             </div>
           </div>

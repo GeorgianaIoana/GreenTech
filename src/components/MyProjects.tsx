@@ -253,11 +253,11 @@ const MyProjects = () => {
 
         {/* Tablet & Mobile Cards - Grid layout (below lg) */}
         <div className="block lg:hidden mt-8 relative z-10">
-          <div className="grid grid-cols-2 gap-4 px-4 relative">
+          <div className="grid grid-cols-2 gap-3 md:gap-4 px-4 relative md:max-w-2xl md:mx-auto">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className={`relative rounded-xl overflow-hidden shadow-xl aspect-[3/4] transition-transform duration-500 ease-out ${
+                className={`relative rounded-xl overflow-hidden shadow-xl aspect-[3/4] md:aspect-[3/4] transition-transform duration-500 ease-out ${
                   project.id === 2 ? "md:-mt-8" : ""
                 }`}
                 style={{ opacity: 1 }}
@@ -271,17 +271,17 @@ const MyProjects = () => {
                     }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                  <div className="absolute top-3 right-3">
-                    <div className="text-white text-sm font-bold">
+                  <div className="absolute top-3 md:top-4 right-3 md:right-4">
+                    <div className="text-white text-xs md:text-sm font-bold">
                       {project.number}
                     </div>
                   </div>
-                  <div className="absolute bottom-3 left-3 right-3">
+                  <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 right-3 md:right-4">
                     <div className="text-white">
-                      <div className="text-xs text-gray-300 mb-1">
+                      <div className="text-xs md:text-sm text-gray-300 mb-1 md:mb-1">
                         {project.category}
                       </div>
-                      <div className="font-bold text-base leading-tight">
+                      <div className="font-bold text-sm md:text-base leading-tight">
                         {project.title}
                       </div>
                     </div>
@@ -290,10 +290,10 @@ const MyProjects = () => {
               </div>
             ))}
             {/* CTA Button - Center of cards for mobile/tablet */}
-            <div className="absolute left-1/2 top-1/3 transform -translate-x-1/2 -translate-y-1/2 z-40">
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40">
               <button
                 onClick={scrollToContact}
-                className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+                className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-6 md:py-3 rounded-full text-xs md:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
               >
                 {t.button}
               </button>
