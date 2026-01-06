@@ -21,7 +21,7 @@ const Footer = () => {
       terms: "Terms and Conditions",
     },
     ro: {
-      tagline: "Fă-ți afacerea să prospere",
+      tagline: "",
       navigation: "Navigare",
       about: "Despre",
       services: "Servicii",
@@ -124,7 +124,7 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-            <div className="mt-6 flex gap-x-5">
+            <div className="mt-6 flex gap-x-5 hidden">
               <a
                 href="#"
                 aria-label="Facebook"

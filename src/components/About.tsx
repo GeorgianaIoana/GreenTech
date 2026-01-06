@@ -38,8 +38,8 @@ const About = () => {
       ],
     },
     ro: {
-      title: "Colaborează cu o echipă care înțelege nevoile tale.",
-      description: "Realizăm cât de crucial este un site web potrivit pentru succesul afacerii tale și ne bucurăm să îl construim alături de tine. Ai ales bine! Dezvoltăm identitatea ta digitală cu tehnologii de ultimă generație și un angajament puternic față de sustenabilitate: estetică îngrijită, cod optimizat, viteze de execuție ridicate, transparență în comunicare și servicii de hosting ecologice. Calitatea este principiul nostru fundamental.",
+      title: "O echipă dedicată care transformă obiectivele tale în realitate.",
+      description: "Dezvoltăm identitatea ta digitală cu tehnologii de ultimă generație și un angajament puternic față de sustenabilitate: estetică îngrijită, cod optimizat, viteze de execuție ridicate, transparență în comunicare și servicii de hosting ecologice. Calitatea este principiul nostru fundamental.",
       values: [
         { icon: Leaf, label: "Durabil" },
         { icon: Cpu, label: "Tehnologie inteligentă" },

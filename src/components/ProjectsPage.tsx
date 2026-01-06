@@ -28,7 +28,7 @@ const ProjectsPage = () => {
       ],
     },
     ro: {
-      titleWords: ["Lucrări", "Digitale", "Selectate"],
+      titleWords: ["Selecție", "de Proiecte"],
       description: "Planificare strategică întâlnită cu execuție de nivel superior. Explorează modul în care echipa noastră convertește concepte elaborate în experiențe digitale naturale, proiectate pentru a accelera dezvoltarea și a capta atenția audienței tale.",
       getStarted: "Începe Acum",
       stats: [
@@ -150,7 +150,7 @@ const ProjectsPage = () => {
         buttonText: "View Project",
       },
       {
-        title: "E-commerce Bags Shop",
+        title: "Magazin E-commerce",
         description: "We believe online shopping should be a pleasure, not a chore. We prioritized speed and ease of use, ensuring that every customer enjoys a smooth, stress-free shopping experience.",
         buttonText: "Let's start",
       },
@@ -163,17 +163,17 @@ const ProjectsPage = () => {
     ro: [
       {
         title: "Platformă Club de Șah",
-        description: "Am dezvoltat o soluție digitală performantă utilizând React și TypeScript. De la conceptul în Figma până la implementarea finală, am oferit o platformă rapidă și ușor de gestionat, axată pe identitatea clubului și pe conectarea membrilor comunității.",
+        description: "Am creat o soluție digitală performantă, dezvoltată integral în React și TypeScript. Am parcurs întregul proces, de la conceptul vizual în Figma până la implementarea finală, livrând o platformă rapidă și intuitivă. Proiectul transformă prezența online a clubului într-un punct de legătură esențial pentru membrii comunității.",
         buttonText: "Vezi Proiectul",
       },
       {
-        title: "Magazin E-commerce Genți",
-        description: "Considerăm că experiența de cumpărături online trebuie să fie plăcută, nu complicată. Am pus accent pe rapiditate și simplitate, garantând că fiecare client se bucură de un proces de cumpărare lin și relaxat.",
+        title: "Magazin E-commerce",
+        description: "Experiența de shopping online trebuie să fie plăcută și intuitivă. Ne-am concentrat pe simplitate și viteză de reacție, garantând un parcurs fluid de la primul click până la finalizarea comenzii.",
         buttonText: "Să începem",
       },
       {
         title: "Colaborare și Workflow",
-        description: "Soluțiile digitale de calitate provin dintr-o metodologie organizată și dialog eficient. Unim cunoștințele noastre în design și programare pentru a materializa ideile tale în produse performante. Vrei să vezi ce putem realiza pentru tine?",
+        description: "Construim soluții digitale de top prin design strategic și inginerie software. Transformăm concepte complexe în produse simple, rapide și scalabile. Te invităm să ne contactezi pentru a crea împreună experiența digitală potrivită afacerii tale.",
         buttonText: "Să începem",
       },
     ],

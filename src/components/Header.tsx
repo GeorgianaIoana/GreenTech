@@ -19,7 +19,7 @@ const Header = () => {
 
   const navItems = {
     en: ['Home', 'About', 'Services', 'Projects', 'Schedule', 'Contact'],
-    ro: ['Acasă', 'Despre', 'Servicii', 'Proiecte', 'Programare', 'Contact'],
+    ro: ['Acasă', 'Despre Noi', 'Servicii', 'Proiecte', 'Programare', 'Contact'],
   };
 
   const items = navItems[language];

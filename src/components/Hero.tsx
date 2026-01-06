@@ -12,10 +12,10 @@ const Hero = () => {
       technologies: "Built with modern technologies:",
     },
     ro: {
-      title1: "Dezvoltare Web",
-      title2: "Alimentată de Soare",
-      description: "Îți oferim soluții digitale performante pentru afacerea ta. Realizăm site-uri rapide, cu cod eficient, interfețe atractive și servicii de hosting bazate pe energie solară.",
-      button: "Strălucește Online",
+      title1: "Design modern,",
+      title2: "cod impecabil.",
+      description: "Îți oferim soluții digitale performante pentru afacerea ta. Realizăm site-uri rapide, cu cod eficient, interfețe atractive și servicii de hosting alimentate cu energie solară.",
+      button: "Vezi soluțiile",
       technologies: "Construit cu tehnologii moderne:",
     },
   };
@@ -150,6 +150,32 @@ const Hero = () => {
                       GitHub
                     </span>
                   </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.222.083.343-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/>
+                    </svg>
+                    <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
+                      Canva
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 0h16a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4zm7.883 16.894c.702 0 1.3-.044 1.794-.132v-2.916c-.494.088-1.092.132-1.794.132-1.236 0-2.12-.22-2.65-.66-.53-.44-.795-1.078-.795-1.914 0-.836.265-1.474.795-1.914.53-.44 1.414-.66 2.65-.66.702 0 1.3.044 1.794.132V5.238c-.494-.088-1.092-.132-1.794-.132-2.64 0-4.632.616-5.976 1.848C3.143 8.186 2.471 9.72 2.471 11.5c0 1.78.672 3.314 2.016 4.546C5.831 17.278 7.823 17.894 10.463 17.894c.702 0 1.3-.044 1.794-.132v-2.916c-.494.088-1.092.132-1.794.132zm5.617 0c2.64 0 4.632-.616 5.976-1.848C23.857 14.814 24.529 13.28 24.529 11.5c0-1.78-.672-3.314-2.016-4.546C21.169 5.722 19.177 5.106 16.537 5.106c-.702 0-1.3.044-1.794.132v2.916c.494-.088 1.092-.132 1.794-.132 1.236 0 2.12.22 2.65.66.53.44.795 1.078.795 1.914 0 .836-.265 1.474-.795 1.914-.53.44-1.414.66-2.65.66-.702 0-1.3-.044-1.794-.132v2.916c.494.088 1.092.132 1.794.132z"/>
+                    </svg>
+                    <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
+                      Framer
+                    </span>
+                  </div>
                 </div>
                 {/* Duplicate set for seamless loop */}
                 <div className="flex items-center space-x-6 md:space-x-8 flex-shrink-0">
@@ -224,6 +250,32 @@ const Hero = () => {
                     </svg>
                     <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
                       GitHub
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.222.083.343-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/>
+                    </svg>
+                    <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
+                      Canva
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 0h16a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4zm7.883 16.894c.702 0 1.3-.044 1.794-.132v-2.916c-.494.088-1.092.132-1.794.132-1.236 0-2.12-.22-2.65-.66-.53-.44-.795-1.078-.795-1.914 0-.836.265-1.474.795-1.914.53-.44 1.414-.66 2.65-.66.702 0 1.3.044 1.794.132V5.238c-.494-.088-1.092-.132-1.794-.132-2.64 0-4.632.616-5.976 1.848C3.143 8.186 2.471 9.72 2.471 11.5c0 1.78.672 3.314 2.016 4.546C5.831 17.278 7.823 17.894 10.463 17.894c.702 0 1.3-.044 1.794-.132v-2.916c-.494.088-1.092.132-1.794.132zm5.617 0c2.64 0 4.632-.616 5.976-1.848C23.857 14.814 24.529 13.28 24.529 11.5c0-1.78-.672-3.314-2.016-4.546C21.169 5.722 19.177 5.106 16.537 5.106c-.702 0-1.3.044-1.794.132v2.916c.494-.088 1.092-.132 1.794-.132 1.236 0 2.12.22 2.65.66.53.44.795 1.078.795 1.914 0 .836-.265 1.474-.795 1.914-.53.44-1.414.66-2.65.66-.702 0-1.3-.044-1.794-.132v2.916c.494.088 1.092.132 1.794.132z"/>
+                    </svg>
+                    <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
+                      Framer
                     </span>
                   </div>
                 </div>

@@ -12,7 +12,7 @@ const MyProjects = () => {
     },
     ro: {
       title: "Povești de Succes Reale",
-      description: "Fiecare lucrare din colecția noastră ilustrează dedicarea și inovația pe care le aducem în fiecare demers digital. De la identități corporative sofisticate la platforme imobiliare cu rate de conversie remarcabile, convertim concepte elaborate în experiențe utilizator naturale și ușor de navigat.",
+      description: "Fiecare proiect din portofoliul nostru reflectă echilibrul dintre creativitate și rigoare tehnică. De la identități vizuale sofisticate până la platforme imobiliare orientate spre performanță, transformăm idei complexe în experiențe digitale intuitive și memorabile.",
       button: "Explorează Portofoliul",
     },
   };

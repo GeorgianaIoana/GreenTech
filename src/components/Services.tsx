@@ -6,11 +6,16 @@ import {
   Target,
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 const Services = () => {
   const { language } = useLanguage();
+  const navigate = useNavigate();
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
+  const goToSchedule = () => {
+    navigate("/schedule");
   };
 
   const translations = {
@@ -63,12 +68,12 @@ const Services = () => {
     },
     ro: {
       title: "Ce oferim",
-      description: "În era digitală actuală, o prezență online solidă este fundamentală. Conectăm durabilitatea cu rezultatele concrete, construind site-uri ecologice de calitate superioară care minimizează impactul asupra mediului și cresc rata de conversie. Perfecționăm fiecare aspect - de la infrastructură la aspectul vizual - pentru o experiență optimă care transformă vizitatorii în clienți loiali.",
-      button: "Colaborează cu noi",
+      description: "Într-o lume digitală în continuă schimbare, succesul unei afaceri începe cu o prezență online responsabilă. Construim platforme de înaltă performanță, unde sustenabilitatea întâlnește eficiența comercială. Optimizăm fiecare detaliu, de la estetică până la funcționalitate, pentru a oferi o experiență fluidă care transformă vizitatorii în clienți loiali.",
+      button: "Programează o conversație",
       services: [
         {
-          title: "Dezvoltare Web",
-          description: "Site-uri adaptabile cu cod eficient",
+          title: "Transpunerea afacerii tale în online",
+          description: "Site-uri rapide, gândite să reziste în timp.",
           image: "/images/web-development.jpg",
           badge: "Durabil",
           icon: Leaf,
@@ -76,15 +81,15 @@ const Services = () => {
         },
         {
           title: "Design UX/UI în Figma",
-          description: "Interfețe moderne, performante și estetice",
+          description: "Interfețe moderne și performante",
           image: "/images/home-design.jpg",
           badge: "Eco-first",
           icon: Target,
           price: "De la €600",
         },
         {
-          title: "Hosting Verde",
-          description: "Servicii de hosting ecologice pentru un impact redus asupra mediului",
+          title: "Hosting alimentat prin energie solară",
+          description: "Performanță online, energie sustenabilă.",
           image: "/images/green-hosting.jpg",
           badge: "Planet-first",
           icon: TrendingUp,
@@ -92,7 +97,7 @@ const Services = () => {
         },
         {
           title: "Întreținere și Suport Tehnic",
-          description: "Păstrăm site-ul tău la zi, securizat și performant",
+          description: "Monitorizăm constant performanța și securitatea, ca tu să te poți ocupa de afacere.",
           image: "/green-house.jpg",
           badge: "Future-friendly",
           icon: Lightbulb,
@@ -100,7 +105,7 @@ const Services = () => {
         },
         {
           title: "Identitate de Brand",
-          description: "Dezvoltăm identități de brand memorabile cu Adobe Illustrator",
+          description: "Creăm identități de brand memorabile cu Adobe Illustrator",
           image: "/images/tree-team.jpg",
           badge: "Nature-led",
           icon: Users,
@@ -136,7 +141,7 @@ const Services = () => {
             </div>
             <div className="mt-4 md:mt-6 lg:mt-0">
               <button
-                onClick={scrollToContact}
+                onClick={goToSchedule}
                 className="bg-orange-400 text-black px-5 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-sm md:text-sm lg:text-base font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 {t.button}

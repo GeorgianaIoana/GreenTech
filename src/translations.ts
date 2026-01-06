@@ -74,7 +74,7 @@ export const translations = {
   ro: {
     header: {
       home: "Acasă",
-      about: "Despre",
+      about: "Despre noi",
       services: "Servicii",
       projects: "Proiecte",
       schedule: "Programare",

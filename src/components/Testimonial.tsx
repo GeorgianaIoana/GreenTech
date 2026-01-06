@@ -15,7 +15,7 @@ const Testimonial = () => {
     },
     ro: {
       title: "Gata să-ți Dezvolți Afacerea?",
-      description: "Hai să construim ceva remarcabil împreună. Ia legătura cu noi și află cum te putem susține să-ți extinzi afacerea cu o identitate digitală atractivă și sustenabilă.",
+      description: "Transformăm viziunea ta într-o identitate digitală remarcabilă. Contactează-ne și află cum putem susține creșterea sustenabilă a afacerii tale.",
       button: "Să Discutăm",
     },
   };
