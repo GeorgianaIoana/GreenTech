@@ -95,6 +95,7 @@ const Contact: React.FC = () => {
     setError("");
 
     try {
+      // Trimite email către companie
       const response = await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
         method: "POST",
         headers: {
@@ -107,13 +108,43 @@ const Contact: React.FC = () => {
           service: service,
           message: message,
           _subject: `New Contact Form: ${name}`,
-          _captcha: "false", // Set to "true" if you want to enable reCAPTCHA
+          _captcha: "false",
         }),
       });
 
       const data = await response.json();
 
       if (data.success === "true" || response.ok) {
+        // Trimite email de confirmare către client
+        const confirmationSubject = language === 'en' 
+          ? "Thank you for contacting Bloomsoft" 
+          : "Mulțumim că ne-ai contactat - Bloomsoft";
+        
+        const confirmationMessage = language === 'en'
+          ? `Hello ${name},\n\nThank you for contacting Bloomsoft! We have received your message and will get back to you as soon as possible.\n\nYour message:\n${message}\n\nBest regards,\nBloomsoft Team`
+          : `Bună ${name},\n\nMulțumim că ne-ai contactat! Am primit mesajul tău și îți vom răspunde cât mai curând posibil.\n\nMesajul tău:\n${message}\n\nCu respect,\nEchipa Bloomsoft`;
+
+        try {
+          await fetch(`https://formsubmit.co/ajax/${email}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              name: "Bloomsoft",
+              email: "hello@bloomsoft.tech",
+              message: confirmationMessage,
+              _subject: confirmationSubject,
+              _captcha: "false",
+            }),
+          });
+        } catch (confirmationErr) {
+          // Nu afișăm eroare dacă email-ul de confirmare nu se trimite
+          // Email-ul către companie a fost trimis cu succes
+          console.log("Confirmation email error (non-critical):", confirmationErr);
+        }
+
         navigate("/thank-you");
       } else {
         setError(t.errorSend);

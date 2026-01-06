@@ -6,8 +6,8 @@ type FloatingWhatsAppProps = {
 };
 
 const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
-  phone = "40123456789",
-  message = "Salut! As dori mai multe detalii.",
+  phone = "40742898793",
+  message = "Buna!",
 }) => {
   const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 

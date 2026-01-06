@@ -109,7 +109,7 @@ const ThankYou: React.FC = () => {
             {t.urgentResponse}
           </p>
           <a
-            href="https://wa.me/40123456789"
+            href="https://wa.me/40742898793?text=Buna!"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt"
