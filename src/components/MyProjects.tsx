@@ -170,7 +170,7 @@ const MyProjects = () => {
       image: "/images/e-commerce-wood.png",
       category: "E-commerce",
       number: "04",
-      link: "https://precontinental-inductively-kenda.ngrok-free.dev",
+      link: "https://bags-psi-one.vercel.app/",
     },
   ];
 
