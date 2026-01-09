@@ -23,14 +23,47 @@ const MyProjects = () => {
   const textContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Ultra-smooth easing function (easeOutCubic)
+    const easeOutCubic = (t: number): number => {
+      return 1 - Math.pow(1 - t, 3);
+    };
+
+    // Even smoother easing (easeInOutQuad)
+    const easeInOutQuad = (t: number): number => {
+      return t < 0.5
+        ? 2 * t * t
+        : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    };
+
+    let animationFrameId: number;
+    let rafScheduled = false;
+    let currentProgress = 0;
+    let targetProgress = 0;
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const sectionTop = document.getElementById("my-projects")?.offsetTop || 0;
       const sectionHeight = window.innerHeight;
-      const scrollProgress = Math.max(
-        0,
-        Math.min((scrollY - sectionTop + sectionHeight) / sectionHeight, 1)
-      );
+      
+      // Much larger scroll area for very slow, gradual transitions
+      const scrollArea = sectionHeight * 2.5; // Increased significantly
+      const rawProgress = (scrollY - sectionTop + sectionHeight) / scrollArea;
+      targetProgress = Math.max(0, Math.min(rawProgress, 1));
+
+      // Schedule animation frame only if not already scheduled
+      if (!rafScheduled) {
+        rafScheduled = true;
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    const animate = () => {
+      // Smooth interpolation between current and target progress
+      const smoothing = 0.15; // Lower = smoother but slower response
+      currentProgress += (targetProgress - currentProgress) * smoothing;
+      
+      // Apply ultra-smooth easing
+      const easedProgress = easeInOutQuad(currentProgress);
 
       const leftProjects = leftProjectsRef.current;
       const rightProjects = rightProjectsRef.current;
@@ -44,10 +77,12 @@ const MyProjects = () => {
         const cards = leftProjects.children;
         for (let i = 0; i < cards.length; i++) {
           const card = cards[i] as HTMLElement;
-          const rotation = scrollProgress * (-12 - i * 6);
-          const translateX = -scrollProgress * (180 + i * 50);
-          const translateY = scrollProgress * (i * 40);
-          card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotation}deg)`;
+          const rotation = easedProgress * (-12 - i * 6);
+          const translateX = -easedProgress * (180 + i * 50);
+          const translateY = easedProgress * (i * 40);
+          // Use transform3d for hardware acceleration + will-change for GPU optimization
+          card.style.willChange = 'transform';
+          card.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotation}deg)`;
         }
       }
 
@@ -56,10 +91,12 @@ const MyProjects = () => {
         const cards = rightProjects.children;
         for (let i = 0; i < cards.length; i++) {
           const card = cards[i] as HTMLElement;
-          const rotation = scrollProgress * (12 + i * 6);
-          const translateX = scrollProgress * (180 + i * 50);
-          const translateY = scrollProgress * (i * 40);
-          card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotation}deg)`;
+          const rotation = easedProgress * (12 + i * 6);
+          const translateX = easedProgress * (180 + i * 50);
+          const translateY = easedProgress * (i * 40);
+          // Use transform3d for hardware acceleration + will-change for GPU optimization
+          card.style.willChange = 'transform';
+          card.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotation}deg)`;
         }
       }
 
@@ -67,26 +104,37 @@ const MyProjects = () => {
       if (textContent) {
         if (isDesktop) {
           // Desktop: original animation
-          const textOpacity = scrollProgress;
-          const textScale = 0.9 + scrollProgress * 0.1;
-        textContent.style.opacity = Math.min(textOpacity * 1.5, 1).toString();
-        textContent.style.transform = `scale(${textScale})`;
+          const textOpacity = easedProgress;
+          const textScale = 0.9 + easedProgress * 0.1;
+          textContent.style.opacity = Math.min(textOpacity * 1.5, 1).toString();
+          textContent.style.transform = `scale(${textScale})`;
         } else {
           // Mobile/Tablet: text visible from start, subtle fade-in
-          const textOpacity = Math.min(0.3 + scrollProgress * 0.7, 1);
+          const textOpacity = Math.min(0.3 + easedProgress * 0.7, 1);
           textContent.style.opacity = textOpacity.toString();
           textContent.style.transform = "scale(1)";
         }
       }
+
+      // Continue animating if we haven't reached target
+      if (Math.abs(targetProgress - currentProgress) > 0.001) {
+        rafScheduled = false;
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        rafScheduled = false;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll); // Recalculate on resize
     handleScroll(); // Initial call
     
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
   }, []);
 
@@ -122,6 +170,7 @@ const MyProjects = () => {
       image: "/images/e-commerce-wood.png",
       category: "E-commerce",
       number: "04",
+      link: "https://precontinental-inductively-kenda.ngrok-free.dev",
     },
   ];
 
@@ -179,7 +228,7 @@ const MyProjects = () => {
             {leftProjects.map((project, index) => (
               <div
                 key={project.id}
-                className="w-80 h-96 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 ease-out"
+                className="w-80 h-96 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-[2000ms] ease-in-out"
                 style={{ zIndex: 10 + index }}
               >
                 <div className="relative w-full h-full">
@@ -220,8 +269,13 @@ const MyProjects = () => {
                 key={project.id}
                 className={`w-80 h-96 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 ease-out ${
                   index === 1 ? "-mt-8" : ""
-                }`}
+                } ${project.link ? "cursor-pointer" : ""}`}
                 style={{ zIndex: 10 + index }}
+                onClick={() => {
+                  if (project.link) {
+                    window.open(project.link, "_blank", "noopener,noreferrer");
+                  }
+                }}
               >
                 <div className="relative w-full h-full">
                   <img
@@ -259,8 +313,13 @@ const MyProjects = () => {
                 key={project.id}
                 className={`relative rounded-xl overflow-hidden shadow-xl aspect-[3/4] md:aspect-[3/4] transition-transform duration-500 ease-out ${
                   project.id === 2 ? "md:-mt-8" : ""
-                }`}
+                } ${project.link ? "cursor-pointer" : ""}`}
                 style={{ opacity: 1 }}
+                onClick={() => {
+                  if (project.link) {
+                    window.open(project.link, "_blank", "noopener,noreferrer");
+                  }
+                }}
               >
                 <div className="relative w-full h-full">
                   <img

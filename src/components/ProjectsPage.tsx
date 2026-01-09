@@ -190,6 +190,7 @@ const ProjectsPage = () => {
       bgColor: "#fb7185",
       projectNumber: "02",
       image: "/2sn project.png",
+      url: "https://precontinental-inductively-kenda.ngrok-free.dev",
     },
     {
       bgColor: "#07615b",
