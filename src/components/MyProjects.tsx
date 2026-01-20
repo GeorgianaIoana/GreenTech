@@ -23,11 +23,6 @@ const MyProjects = () => {
   const textContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Ultra-smooth easing function (easeOutCubic)
-    const easeOutCubic = (t: number): number => {
-      return 1 - Math.pow(1 - t, 3);
-    };
-
     // Even smoother easing (easeInOutQuad)
     const easeInOutQuad = (t: number): number => {
       return t < 0.5
@@ -41,13 +36,35 @@ const MyProjects = () => {
     let targetProgress = 0;
 
     const handleScroll = () => {
+      const section = document.getElementById("my-projects");
+      if (!section) return;
+
       const scrollY = window.scrollY;
-      const sectionTop = document.getElementById("my-projects")?.offsetTop || 0;
-      const sectionHeight = window.innerHeight;
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
       
-      // Much larger scroll area for very slow, gradual transitions
-      const scrollArea = sectionHeight * 2.5; // Increased significantly
-      const rawProgress = (scrollY - sectionTop + sectionHeight) / scrollArea;
+      // Calculate when section enters viewport
+      const sectionStart = sectionTop - viewportHeight;
+      const sectionEnd = sectionTop + sectionHeight;
+      
+      // Calculate progress: 0 when section starts entering, 1 when fully in viewport
+      let rawProgress = 0;
+      
+      if (scrollY < sectionStart) {
+        // Before section
+        rawProgress = 0;
+      } else if (scrollY >= sectionStart && scrollY <= sectionEnd) {
+        // Section is in viewport - calculate progress
+        // Cards should be fully open when section is centered in viewport
+        const scrollArea = viewportHeight * 1.5; // Reduced for faster opening
+        const scrollProgress = (scrollY - sectionStart) / scrollArea;
+        rawProgress = Math.min(scrollProgress, 1);
+      } else {
+        // Past section
+        rawProgress = 1;
+      }
+      
       targetProgress = Math.max(0, Math.min(rawProgress, 1));
 
       // Schedule animation frame only if not already scheduled
@@ -80,8 +97,7 @@ const MyProjects = () => {
           const rotation = easedProgress * (-12 - i * 6);
           const translateX = -easedProgress * (180 + i * 50);
           const translateY = easedProgress * (i * 40);
-          // Use transform3d for hardware acceleration + will-change for GPU optimization
-          card.style.willChange = 'transform';
+          // Use transform3d for hardware acceleration
           card.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotation}deg)`;
         }
       }
@@ -94,8 +110,7 @@ const MyProjects = () => {
           const rotation = easedProgress * (12 + i * 6);
           const translateX = easedProgress * (180 + i * 50);
           const translateY = easedProgress * (i * 40);
-          // Use transform3d for hardware acceleration + will-change for GPU optimization
-          card.style.willChange = 'transform';
+          // Use transform3d for hardware acceleration
           card.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotation}deg)`;
         }
       }
@@ -117,21 +132,47 @@ const MyProjects = () => {
       }
 
       // Continue animating if we haven't reached target
-      if (Math.abs(targetProgress - currentProgress) > 0.001) {
+      const progressDiff = Math.abs(targetProgress - currentProgress);
+      if (progressDiff > 0.001) {
         rafScheduled = false;
         animationFrameId = requestAnimationFrame(animate);
       } else {
         rafScheduled = false;
+        // Remove will-change when animation is complete to free up resources
+        if (isDesktop) {
+          if (leftProjects) {
+            for (let i = 0; i < leftProjects.children.length; i++) {
+              (leftProjects.children[i] as HTMLElement).style.willChange = 'auto';
+            }
+          }
+          if (rightProjects) {
+            for (let i = 0; i < rightProjects.children.length; i++) {
+              (rightProjects.children[i] as HTMLElement).style.willChange = 'auto';
+            }
+          }
+        }
       }
     };
 
+    // Debounce resize handler to prevent excessive recalculations
+    let resizeTimeout: number;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        handleScroll();
+      }, 150);
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll); // Recalculate on resize
+    window.addEventListener("resize", handleResize);
     handleScroll(); // Initial call
     
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
       }
@@ -210,7 +251,7 @@ const MyProjects = () => {
         {/* Desktop Cards - Positioned below heading (lg and above) */}
         <div className="hidden lg:block relative flex items-center justify-center flex-1">
           {/* CTA Button - Center of cards */}
-          <div className="absolute left-1/2 top-1/3 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-auto">
+          <div className="absolute left-1/2 top-[55%] transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-auto">
             <button
               onClick={scrollToContact}
               className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-5 md:py-2.5 lg:px-8 lg:py-4 rounded-full text-xs md:text-sm lg:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
@@ -228,7 +269,7 @@ const MyProjects = () => {
             {leftProjects.map((project, index) => (
               <div
                 key={project.id}
-                className="w-80 h-96 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-[2000ms] ease-in-out"
+                className="w-80 h-96 rounded-2xl overflow-hidden shadow-2xl"
                 style={{ zIndex: 10 + index }}
               >
                 <div className="relative w-full h-full">
@@ -267,7 +308,7 @@ const MyProjects = () => {
             {rightProjects.map((project, index) => (
               <div
                 key={project.id}
-                className={`w-80 h-96 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 ease-out ${
+                className={`w-80 h-96 rounded-2xl overflow-hidden shadow-2xl ${
                   index === 1 ? "-mt-8" : ""
                 } ${project.link ? "cursor-pointer" : ""}`}
                 style={{ zIndex: 10 + index }}

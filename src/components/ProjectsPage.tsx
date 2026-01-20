@@ -14,6 +14,7 @@ const ProjectsPage = () => {
   const [visibleStats, setVisibleStats] = useState(0);
   const [buttonHighlighted, setButtonHighlighted] = useState(false);
   const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   
   const translations = {
     en: {
@@ -278,17 +279,31 @@ const ProjectsPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Video */}
-      <section className="min-h-screen md:min-h-[90vh] relative overflow-hidden flex items-center pt-24 pb-12 md:py-20">
+      <section className="min-h-screen md:min-h-[90vh] relative overflow-hidden flex items-center pt-24 pb-12 md:py-20 bg-gradient-to-br from-teal-800 via-teal-700 to-teal-900">
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
-            className="w-full h-full object-cover object-center"
+            className={`w-full h-full object-cover object-center transition-opacity duration-500 ${
+              videoLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
             style={{ width: '100%', height: '100%' }}
+            onLoadedData={(e) => {
+              // Video loaded, ensure it plays
+              const video = e.currentTarget;
+              setVideoLoaded(true);
+              video.play().catch(() => {
+                // Auto-play might be blocked, but video is loaded
+              });
+            }}
+            onCanPlay={(e) => {
+              // Video can start playing
+              setVideoLoaded(true);
+            }}
           >
             <source src="/projects-banner.mp4" type="video/mp4" />
             Browser-ul tău nu suportă tag-ul video.
