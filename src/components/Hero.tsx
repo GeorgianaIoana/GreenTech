@@ -176,6 +176,34 @@ const Hero = () => {
                       Framer
                     </span>
                   </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M4.603 16.032a6.47 6.47 0 0 1-.502-1.42c-.143-.547-.143-1.074-.143-1.074s0-.527.143-1.074c.143-.547.357-1.145.746-1.754a6.793 6.793 0 0 1 1.468-1.748 6.875 6.875 0 0 1 1.942-1.217 6.52 6.52 0 0 1 2.17-.514h.025c.225-.014.55-.017.8-.017.25 0 .575.003.8.017h.025a6.52 6.52 0 0 1 2.17.514 6.875 6.875 0 0 1 1.942 1.217 6.793 6.793 0 0 1 1.468 1.748c.389.61.603 1.207.746 1.754.143.547.143 1.074.143 1.074s0 .527-.143 1.074a6.47 6.47 0 0 1-.502 1.42l5.1 2.946-5.1 2.946a6.47 6.47 0 0 1-.244.578c-.143.547-.357 1.145-.746 1.754a6.793 6.793 0 0 1-1.468 1.748 6.875 6.875 0 0 1-1.942 1.217 6.52 6.52 0 0 1-2.17.514h-.025c-.225.014-.55.017-.8.017-.25 0-.575-.003-.8-.017h-.025a6.52 6.52 0 0 1-2.17-.514 6.875 6.875 0 0 1-1.942-1.217 6.793 6.793 0 0 1-1.468-1.748c-.389-.61-.603-1.207-.746-1.754a6.47 6.47 0 0 1-.244-.578L0 18.978l4.603-2.946zM12 8.5a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/>
+                    </svg>
+                    <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
+                      Claude
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z"/>
+                      <path d="M20 5L21 8L24 9L21 10L20 13L19 10L16 9L19 8L20 5Z" opacity="0.7"/>
+                      <path d="M4 14L5 17L8 18L5 19L4 22L3 19L0 18L3 17L4 14Z" opacity="0.7"/>
+                    </svg>
+                    <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
+                      Google AI
+                    </span>
+                  </div>
                 </div>
                 {/* Duplicate set for seamless loop */}
                 <div className="flex items-center space-x-6 md:space-x-8 flex-shrink-0">
@@ -276,6 +304,34 @@ const Hero = () => {
                     </svg>
                     <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
                       Framer
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M4.603 16.032a6.47 6.47 0 0 1-.502-1.42c-.143-.547-.143-1.074-.143-1.074s0-.527.143-1.074c.143-.547.357-1.145.746-1.754a6.793 6.793 0 0 1 1.468-1.748 6.875 6.875 0 0 1 1.942-1.217 6.52 6.52 0 0 1 2.17-.514h.025c.225-.014.55-.017.8-.017.25 0 .575.003.8.017h.025a6.52 6.52 0 0 1 2.17.514 6.875 6.875 0 0 1 1.942 1.217 6.793 6.793 0 0 1 1.468 1.748c.389.61.603 1.207.746 1.754.143.547.143 1.074.143 1.074s0 .527-.143 1.074a6.47 6.47 0 0 1-.502 1.42l5.1 2.946-5.1 2.946a6.47 6.47 0 0 1-.244.578c-.143.547-.357 1.145-.746 1.754a6.793 6.793 0 0 1-1.468 1.748 6.875 6.875 0 0 1-1.942 1.217 6.52 6.52 0 0 1-2.17.514h-.025c-.225.014-.55.017-.8.017-.25 0-.575-.003-.8-.017h-.025a6.52 6.52 0 0 1-2.17-.514 6.875 6.875 0 0 1-1.942-1.217 6.793 6.793 0 0 1-1.468-1.748c-.389-.61-.603-1.207-.746-1.754a6.47 6.47 0 0 1-.244-.578L0 18.978l4.603-2.946zM12 8.5a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/>
+                    </svg>
+                    <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
+                      Claude
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z"/>
+                      <path d="M20 5L21 8L24 9L21 10L20 13L19 10L16 9L19 8L20 5Z" opacity="0.7"/>
+                      <path d="M4 14L5 17L8 18L5 19L4 22L3 19L0 18L3 17L4 14Z" opacity="0.7"/>
+                    </svg>
+                    <span className="text-white text-sm md:text-base lg:text-lg font-medium font-montserratAlt tracking-[0.1em] whitespace-nowrap">
+                      Google AI
                     </span>
                   </div>
                 </div>
