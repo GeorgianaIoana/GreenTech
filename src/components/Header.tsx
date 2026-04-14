@@ -58,14 +58,17 @@ const Header = () => {
       shouldShowBackground ? 'bg-teal-700/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20 sm:h-24">
           <div className="flex items-center space-x-2">
             <button
               onClick={() => navigate('/')}
-              className="sm:text-[30px] text-[22px] font-bold text-white tracking-wide hover:opacity-80 transition-opacity cursor-pointer"
-              style={{ fontFamily: 'Merriweather, serif' }}
+              className="hover:opacity-80 transition-opacity cursor-pointer"
             >
-              Bloomsoft
+              <img
+                src="/bloomsoft-logo.png"
+                alt="Bloomsoft"
+                className="h-16 sm:h-20 w-auto"
+              />
             </button>
           </div>
 

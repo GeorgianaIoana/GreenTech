@@ -87,12 +87,14 @@ const ProjectsPage = () => {
       setCardVisible(shouldShowCard);
 
       // Determine which project to show based on scroll progress
-      if (progress < 0.33) {
+      if (progress < 0.25) {
         setCurrentImageIndex(0);
-      } else if (progress < 0.66) {
+      } else if (progress < 0.50) {
         setCurrentImageIndex(1);
-      } else {
+      } else if (progress < 0.75) {
         setCurrentImageIndex(2);
+      } else {
+        setCurrentImageIndex(3);
       }
     };
 
@@ -151,9 +153,14 @@ const ProjectsPage = () => {
         buttonText: "View Project",
       },
       {
-        title: "Magazin E-commerce",
+        title: "Cool Bag Store",
         description: "We believe online shopping should be a pleasure, not a chore. We prioritized speed and ease of use, ensuring that every customer enjoys a smooth, stress-free shopping experience.",
         buttonText: "Let's start",
+      },
+      {
+        title: "Open The Square",
+        description: "A dynamic chess community platform designed to connect players, organize tournaments, and celebrate the art of strategic thinking. Built with passion for the game and its dedicated community.",
+        buttonText: "View Project",
       },
       {
         title: "Collaboration & Workflow",
@@ -163,14 +170,19 @@ const ProjectsPage = () => {
     ],
     ro: [
       {
-        title: "Platformă Club de Șah",
+        title: "Platforma\nClubului de Șah",
         description: "Am creat o soluție digitală performantă, dezvoltată integral în React și TypeScript. Am parcurs întregul proces, de la conceptul vizual în Figma până la implementarea finală, livrând o platformă rapidă și intuitivă. Proiectul transformă prezența online a clubului într-un punct de legătură esențial pentru membrii comunității.",
         buttonText: "Vezi Proiectul",
       },
       {
-        title: "Magazin E-commerce",
+        title: "Boutique de Genți",
         description: "Experiența de shopping online trebuie să fie plăcută și intuitivă. Ne-am concentrat pe simplitate și viteză de reacție, garantând un parcurs fluid de la primul click până la finalizarea comenzii.",
         buttonText: "Să începem",
+      },
+      {
+        title: "Concurs The Square",
+        description: "O platformă dinamică pentru comunitatea de șah, creată pentru a conecta jucători, organiza turnee și celebra arta gândirii strategice. Construită cu pasiune pentru joc și comunitatea sa dedicată.",
+        buttonText: "Vezi Proiectul",
       },
       {
         title: "Colaborare și Workflow",
@@ -194,8 +206,14 @@ const ProjectsPage = () => {
       url: "https://bags-psi-one.vercel.app/",
     },
     {
-      bgColor: "#07615b",
+      bgColor: "#acbbe3",
       projectNumber: "03",
+      image: "/openthesquare.png",
+      url: "https://www.openthesquare.ro/",
+    },
+    {
+      bgColor: "#07615b",
+      projectNumber: "04",
       image: "/your-project.jpg",
     },
   ];
@@ -235,23 +253,31 @@ const ProjectsPage = () => {
 
   // Calculate blended background color based on scroll progress
   const getBlendedBackgroundColor = () => {
-    if (scrollProgress <= 0.33) {
+    if (scrollProgress <= 0.25) {
       // Pure first color - matches transition SVG exactly
       return projects[0].bgColor;
-    } else if (scrollProgress < 0.66) {
+    } else if (scrollProgress < 0.50) {
       // Transition from first to second color
-      const localProgress = (scrollProgress - 0.33) / 0.33;
+      const localProgress = (scrollProgress - 0.25) / 0.25;
       return interpolateColor(
         projects[0].bgColor,
         projects[1].bgColor,
         localProgress
       );
-    } else {
+    } else if (scrollProgress < 0.75) {
       // Transition from second to third color
-      const localProgress = (scrollProgress - 0.66) / 0.34;
+      const localProgress = (scrollProgress - 0.50) / 0.25;
       return interpolateColor(
         projects[1].bgColor,
         projects[2].bgColor,
+        localProgress
+      );
+    } else {
+      // Transition from third to fourth color
+      const localProgress = (scrollProgress - 0.75) / 0.25;
+      return interpolateColor(
+        projects[2].bgColor,
+        projects[3].bgColor,
         localProgress
       );
     }
@@ -314,7 +340,7 @@ const ProjectsPage = () => {
           <div className="max-w-6xl mx-auto">
             {/* Main Title */}
             <div className="flex justify-start">
-              <div className="max-w-xl md:max-w-2xl text-left lg:pl-10">
+              <div className="max-w-xl md:max-w-2xl text-left lg:pl-10 mt-12 md:mt-16">
                 <h1
                   className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 md:mb-8 leading-tight font-montserratAlt"
                 >
@@ -505,7 +531,7 @@ const ProjectsPage = () => {
                 <div key={project.projectNumber} className="py-20 max-w-[400px]">
                   {/* Title */}
                   <h2
-                    className="text-4xl lg:text-6xl font-bold leading-tight mb-8 text-white transition-all duration-1000 ease-in-out font-montserratAlt"
+                    className="text-2xl lg:text-4xl font-bold leading-tight mb-8 text-white transition-all duration-1000 ease-in-out font-montserratAlt whitespace-pre-line"
                   >
                     {project.title}
                   </h2>
@@ -540,7 +566,7 @@ const ProjectsPage = () => {
               <div
                 className={`rounded-3xl px-8 lg:px-12 py-16 lg:py-24 h-[75vh] flex items-center shadow-2xl mx-8 lg:mx-20 relative overflow-hidden`}
                 style={{
-                  background: currentImageIndex === 2 
+                  background: currentImageIndex === 3
                     ? `linear-gradient(to bottom right, #fce6e7 0%, #e8c5ca 50%, #c79fa5 100%)`
                     : `linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.15) 45%, ${blendedBgColor} 60%, ${shadowBgColor} 85%, ${shadowBgColor} 100%)`,
                   transition: "background 0.3s ease-out",
@@ -556,46 +582,66 @@ const ProjectsPage = () => {
                         {projects.map((project, index) => {
                           let translateY = 0;
 
-                          // Adjust scroll regions to start transition after text
-                          if (scrollProgress < 0.33) {
+                          // Adjust scroll regions to start transition after text (4 projects)
+                          if (scrollProgress < 0.25) {
                             // First image region
                             if (index === 0) {
                               translateY = 0;
                             } else if (index === 1) {
-                              // Start transition only after 0.25 (after first text)
+                              // Start transition only after 0.19 (after first text)
                               const localProgress = Math.max(
                                 0,
-                                (scrollProgress - 0.25) / 0.08
+                                (scrollProgress - 0.19) / 0.06
                               );
                               translateY = 100 - localProgress * 100;
                             } else {
                               translateY = 100;
                             }
-                          } else if (scrollProgress < 0.66) {
+                          } else if (scrollProgress < 0.50) {
                             // Second image region
                             if (index === 0) {
                               const localProgress =
-                                (scrollProgress - 0.33) / 0.08;
+                                (scrollProgress - 0.25) / 0.06;
                               translateY = -(localProgress * 100);
                             } else if (index === 1) {
                               translateY = 0;
                             } else if (index === 2) {
-                              // Start transition only after 0.58 (after second text)
+                              // Start transition only after 0.44 (after second text)
                               const localProgress = Math.max(
                                 0,
-                                (scrollProgress - 0.58) / 0.08
+                                (scrollProgress - 0.44) / 0.06
                               );
                               translateY = 100 - localProgress * 100;
+                            } else {
+                              translateY = 100;
                             }
-                          } else {
+                          } else if (scrollProgress < 0.75) {
                             // Third image region
                             if (index === 0) {
                               translateY = -100;
                             } else if (index === 1) {
                               const localProgress =
-                                (scrollProgress - 0.66) / 0.08;
+                                (scrollProgress - 0.50) / 0.06;
                               translateY = -(localProgress * 100);
                             } else if (index === 2) {
+                              translateY = 0;
+                            } else if (index === 3) {
+                              // Start transition only after 0.69 (after third text)
+                              const localProgress = Math.max(
+                                0,
+                                (scrollProgress - 0.69) / 0.06
+                              );
+                              translateY = 100 - localProgress * 100;
+                            }
+                          } else {
+                            // Fourth image region
+                            if (index === 0 || index === 1) {
+                              translateY = -100;
+                            } else if (index === 2) {
+                              const localProgress =
+                                (scrollProgress - 0.75) / 0.06;
+                              translateY = -(localProgress * 100);
+                            } else if (index === 3) {
                               translateY = 0;
                             }
                           }
@@ -664,7 +710,7 @@ const ProjectsPage = () => {
                 >
                 <div className="py-8">
                   {/* Title */}
-                  <h2 className="text-3xl font-bold leading-tight mb-6 text-white font-montserratAlt">
+                  <h2 className="text-2xl font-bold leading-tight mb-6 text-white font-montserratAlt whitespace-pre-line">
                     {project.title}
                   </h2>
 
@@ -678,7 +724,7 @@ const ProjectsPage = () => {
                     <div
                       className="rounded-2xl p-4 md:p-6 min-h-[60vh] md:min-h-[70vh] flex items-center shadow-2xl relative overflow-hidden"
                       style={{
-                        background: index === 2
+                        background: index === 3
                           ? `linear-gradient(to bottom right, #fce6e7 0%, #e8c5ca 50%, #c79fa5 100%)`
                           : `linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.15) 45%, ${project.bgColor} 60%, ${project.bgColor} 100%)`,
                       }}

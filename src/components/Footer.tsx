@@ -55,12 +55,15 @@ const Footer = () => {
           <div>
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+              className="hover:opacity-80 transition-opacity cursor-pointer"
             >
-              <span className="text-2xl">🍃</span>
-              <span className="text-xl font-semibold text-white">Bloomsoft</span>
+              <img
+                src="/bloomsoft-logo.png"
+                alt="Bloomsoft"
+                className="h-40 w-auto"
+              />
             </button>
-            <p className="mt-4 text-sm text-teal-100 font-inter">
+            <p className="mt-4 text-xl text-teal-100 font-inter">
               {t.tagline}
             </p>
           </div>
