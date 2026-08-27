@@ -15,7 +15,6 @@ import CalendlySection from "./components/CalendlySection";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsAndConditions from "./components/TermsAndConditions";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
-import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./components/NotFound";
 // Preload Calendly script by importing it
 import "./components/Calendly";
@@ -52,7 +51,6 @@ function App() {
           </Routes>
           <Footer />
           <FloatingWhatsApp />
-          <ScrollToTop />
         </div>
       </Router>
     </LanguageProvider>

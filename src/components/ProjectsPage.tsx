@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProjectCard from "./ProjectCard";
 import { useLanguage } from "../contexts/LanguageContext";
+import ScrollToTop from "./ScrollToTop";
 
 const ProjectsPage = () => {
   const { language } = useLanguage();
@@ -725,6 +726,7 @@ const ProjectsPage = () => {
         </div>
       </section>
 
+      <ScrollToTop />
     </div>
   );
 };
