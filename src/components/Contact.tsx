@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -12,6 +12,26 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [consent, setConsent] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const recipientEmail = "georgiana17stanciu@gmail.com";
 
@@ -158,19 +178,23 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-12 md:py-20 bg-teal-50">
+    <section ref={sectionRef} id="contact" className="py-12 md:py-20 bg-teal-50">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 grid gap-8 md:gap-10 items-start md:grid-cols-2">
         {/* Coloană stângă: date de contact */}
         <div className="max-w-lg">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 font-montserratAlt">
+          <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 font-montserratAlt opacity-0 ${
+            isVisible ? 'animate-fadeInLeft' : ''
+          }`}>
             {t.title}
           </h2>
-          <p className="text-base md:text-lg text-gray-700 mb-6 md:mb-8 font-inter">
+          <p className={`text-base md:text-lg text-gray-700 mb-6 md:mb-8 font-inter opacity-0 ${
+            isVisible ? 'animate-fadeInLeft delay-200' : ''
+          }`}>
             {t.description}
           </p>
           <ul className="space-y-4 md:space-y-5 text-slate-800">
-            <li className="flex items-start gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white mt-0.5">
+            <li className={`flex items-start gap-3 opacity-0 ${isVisible ? 'animate-fadeInLeft delay-300' : ''}`}>
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white mt-0.5 icon-bounce">
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -187,8 +211,8 @@ const Contact: React.FC = () => {
                 </a>
               </div>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white mt-0.5">
+            <li className={`flex items-start gap-3 opacity-0 ${isVisible ? 'animate-fadeInLeft delay-400' : ''}`}>
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white mt-0.5 icon-bounce">
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -202,32 +226,14 @@ const Contact: React.FC = () => {
                 <div className="font-medium font-inter">{t.email}</div>
                 <a
                   href="mailto:hello@bloomsoft.tech"
-                  className="hover:text-teal-700 font-inter"
+                  className="hover:text-teal-700 font-inter link-underline"
                 >
                   hello@bloomsoft.tech
                 </a>
               </div>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white mt-0.5">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                >
-                  <path d="M12 2C8.134 2 5 5.134 5 9v2H4a2 2 0 00-2 2v7a2 2 0 002 2h16a2 2 0 002-2v-7a2 2 0 00-2-2h-1V9c0-3.866-3.134-7-7-7zm5 9H7V9a5 5 0 0110 0v2z" />
-                </svg>
-              </span>
-              <div>
-                <div className="font-medium font-inter">{t.businessHours}</div>
-                <p className="font-inter">{t.hours1}</p>
-                <p className="font-inter">{t.hours2}</p>
-
-              </div>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white mt-0.5">
+            <li className={`flex items-start gap-3 opacity-0 ${isVisible ? 'animate-fadeInLeft delay-500' : ''}`}>
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white mt-0.5 icon-bounce">
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -246,7 +252,9 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Coloană dreaptă: formular */}
-        <div className="w-full max-w-md justify-self-end bg-white rounded-2xl shadow-xl border border-gray-100 p-4 md:p-6">
+        <div className={`w-full max-w-md justify-self-end bg-white rounded-2xl shadow-xl border border-gray-100 p-4 md:p-6 opacity-0 ${
+          isVisible ? 'animate-fadeInRight delay-300' : ''
+        }`}>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 font-montserratAlt">
             {t.formTitle}
           </h3>
@@ -269,7 +277,7 @@ const Contact: React.FC = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter transition-all duration-300 focus:shadow-md"
                 placeholder={language === 'en' ? "Enter your name" : "Introdu numele tău"}
               />
             </div>
@@ -288,7 +296,7 @@ const Contact: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter transition-all duration-300 focus:shadow-md"
                 placeholder={language === 'en' ? "Enter your email" : "Introdu email-ul tău"}
               />
             </div>
@@ -306,7 +314,7 @@ const Contact: React.FC = () => {
                 required
                 value={service}
                 onChange={(e) => setService(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter"
+                className="w-full border-2 border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white font-inter transition-all duration-300 focus:shadow-md"
               >
                 <option value="">{t.selectService}</option>
                 <option value="sustainable-website">{t.services.landing}</option>
@@ -334,7 +342,7 @@ const Contact: React.FC = () => {
                 required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white resize-none font-inter"
+                className="w-full border-2 border-gray-200 rounded-xl px-3 py-2 md:px-4 md:py-3 text-sm md:text-base focus:outline-none focus:border-teal-500 bg-gray-50 focus:bg-white resize-none font-inter transition-all duration-300 focus:shadow-md"
                 placeholder={language === 'en' ? "Enter your message" : "Introdu mesajul tău"}
               />
             </div>
@@ -361,7 +369,7 @@ const Contact: React.FC = () => {
             <button
               type="submit"
               disabled={!consent || loading}
-              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed btn-animated hover:shadow-lg hover:-translate-y-0.5"
             >
               {loading ? t.sending : t.sendMessage}
             </button>

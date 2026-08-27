@@ -62,7 +62,7 @@ const Header = () => {
           <div className="flex items-center space-x-2">
             <button
               onClick={() => navigate('/')}
-              className="hover:opacity-80 transition-opacity cursor-pointer"
+              className="hover:opacity-80 transition-all duration-300 cursor-pointer hover:scale-105"
             >
               <img
                 src="/bloomsoft-logo.png"
@@ -81,9 +81,19 @@ const Header = () => {
               title={language === 'en' ? 'Switch to Romanian' : 'Comută la engleză'}
             >
               {language === 'en' ? (
-                <span className="text-lg">🇬🇧</span>
+                <svg className="w-6 h-4 rounded-sm" viewBox="0 0 60 40" aria-label="English">
+                  <rect width="60" height="40" fill="#012169"/>
+                  <path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" strokeWidth="6"/>
+                  <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" strokeWidth="4"/>
+                  <path d="M30,0 V40 M0,20 H60" stroke="#fff" strokeWidth="10"/>
+                  <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" strokeWidth="6"/>
+                </svg>
               ) : (
-                <span className="text-lg">🇷🇴</span>
+                <svg className="w-6 h-4 rounded-sm" viewBox="0 0 60 40" aria-label="Română">
+                  <rect x="0" width="20" height="40" fill="#002B7F"/>
+                  <rect x="20" width="20" height="40" fill="#FCD116"/>
+                  <rect x="40" width="20" height="40" fill="#CE1126"/>
+                </svg>
               )}
             </button>
             
@@ -104,7 +114,7 @@ const Header = () => {
                     document.head.appendChild(script);
                   }
                 }}
-                className="text-teal-50 font-montserratAlt font-medium tracking-wide hover:text-teal-400 transition-colors duration-200 font-medium"
+                className="text-teal-50 font-montserratAlt font-medium tracking-wide hover:text-teal-300 transition-all duration-200 link-underline hover:scale-105"
               >
                 {item}
               </button>
@@ -134,12 +144,22 @@ const Header = () => {
               >
                 {language === 'en' ? (
                   <>
-                    <span className="text-lg">🇬🇧</span>
+                    <svg className="w-6 h-4 rounded-sm" viewBox="0 0 60 40" aria-label="English">
+                      <rect width="60" height="40" fill="#012169"/>
+                      <path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" strokeWidth="6"/>
+                      <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" strokeWidth="4"/>
+                      <path d="M30,0 V40 M0,20 H60" stroke="#fff" strokeWidth="10"/>
+                      <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" strokeWidth="6"/>
+                    </svg>
                     <span>English</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-lg">🇷🇴</span>
+                    <svg className="w-6 h-4 rounded-sm" viewBox="0 0 60 40" aria-label="Română">
+                      <rect x="0" width="20" height="40" fill="#002B7F"/>
+                      <rect x="20" width="20" height="40" fill="#FCD116"/>
+                      <rect x="40" width="20" height="40" fill="#CE1126"/>
+                    </svg>
                     <span>Română</span>
                   </>
                 )}

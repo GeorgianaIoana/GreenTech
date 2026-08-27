@@ -10,9 +10,6 @@ const ProjectsPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [cardVisible, setCardVisible] = useState(false);
-  const [visibleWords, setVisibleWords] = useState(0);
-  const [visibleStats, setVisibleStats] = useState(0);
-  const [buttonHighlighted, setButtonHighlighted] = useState(false);
   const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
   const [videoLoaded, setVideoLoaded] = useState(false);
   
@@ -102,16 +99,6 @@ const ProjectsPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Animate title words appearing one by one
-  useEffect(() => {
-    if (visibleWords < titleWords.length) {
-      const timer = setTimeout(() => {
-        setVisibleWords(visibleWords + 1);
-      }, 300); // 300ms delay between each word
-      return () => clearTimeout(timer);
-    }
-  }, [visibleWords, titleWords.length]);
-
   const goToContact = () => {
     if (window.location.pathname !== '/') {
       navigate('/');
@@ -125,41 +112,21 @@ const ProjectsPage = () => {
 
   const stats = t.stats;
 
-
-  useEffect(() => {
-    if (visibleWords === titleWords.length && visibleStats < stats.length) {
-      const timer = setTimeout(() => {
-        setVisibleStats(visibleStats + 1);
-      }, 400); // 400ms delay between each stat
-      return () => clearTimeout(timer);
-    }
-  }, [visibleWords, visibleStats, titleWords.length, stats.length]);
-
-
-  useEffect(() => {
-    if (visibleStats === stats.length) {
-      const timer = setTimeout(() => {
-        setButtonHighlighted(true);
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [visibleStats, stats.length]);
-
   const projectsTranslations = {
     en: [
       {
-        title: "Chess Club Platform",
-        description: "Engineered a high-performance digital presence using React and TypeScript. From Figma-driven design to scalable deployment, we delivered a fast, maintainable asset focused on the club's brand identity and seamless community engagement.",
+        title: "Open The Square",
+        description: "A dynamic chess community platform designed to connect players, organize tournaments, and celebrate the art of strategic thinking. Built with passion for the game and its dedicated community.",
         buttonText: "View Project",
       },
       {
         title: "Cool Bag Store",
-        description: "We believe online shopping should be a pleasure, not a chore. We prioritized speed and ease of use, ensuring that every customer enjoys a smooth, stress-free shopping experience.",
-        buttonText: "Let's start",
+        description: "A modern e-commerce concept built for speed and visual impact. Clean product displays, smooth animations, and intuitive navigation.",
+        buttonText: "View Project",
       },
       {
-        title: "Open The Square",
-        description: "A dynamic chess community platform designed to connect players, organize tournaments, and celebrate the art of strategic thinking. Built with passion for the game and its dedicated community.",
+        title: "Digital Journey Congress",
+        description: "Event landing page for the First Central & Eastern European Digital Dentistry Congress. Speaker profiles, 3-day programme, venue gallery, and registration flow.",
         buttonText: "View Project",
       },
       {
@@ -170,18 +137,18 @@ const ProjectsPage = () => {
     ],
     ro: [
       {
-        title: "Platforma\nClubului de Șah",
-        description: "Am creat o soluție digitală performantă, dezvoltată integral în React și TypeScript. Am parcurs întregul proces, de la conceptul vizual în Figma până la implementarea finală, livrând o platformă rapidă și intuitivă. Proiectul transformă prezența online a clubului într-un punct de legătură esențial pentru membrii comunității.",
+        title: "Concurs The Square",
+        description: "O platformă dinamică pentru comunitatea de șah, creată pentru a conecta jucători, organiza turnee și celebra arta gândirii strategice. Construită cu pasiune pentru joc și comunitatea sa dedicată.",
         buttonText: "Vezi Proiectul",
       },
       {
         title: "Boutique de Genți",
-        description: "Experiența de shopping online trebuie să fie plăcută și intuitivă. Ne-am concentrat pe simplitate și viteză de reacție, garantând un parcurs fluid de la primul click până la finalizarea comenzii.",
-        buttonText: "Să începem",
+        description: "O experiență e-commerce modernă, construită pentru viteză și simplitate. Prezentare elegantă a produselor, navigare intuitivă și un proces de checkout fără fricțiuni.",
+        buttonText: "Vezi Proiectul",
       },
       {
-        title: "Concurs The Square",
-        description: "O platformă dinamică pentru comunitatea de șah, creată pentru a conecta jucători, organiza turnee și celebra arta gândirii strategice. Construită cu pasiune pentru joc și comunitatea sa dedicată.",
+        title: "Congres Digital Journey",
+        description: "Un landing page premium pentru primul Congres de Stomatologie Digitală din Europa Centrală și de Est. Include profile interactive ale speakerilor, program detaliat pe 3 zile, prezentarea locației și un sistem de înregistrare optimizat pentru conversie.",
         buttonText: "Vezi Proiectul",
       },
       {
@@ -196,8 +163,8 @@ const ProjectsPage = () => {
     {
       bgColor: "#fb923c",
       projectNumber: "01",
-      image: "/first-card.webp",
-      url: "https://www.thesquarechessclub.com/",
+      image: "/openthesquare.png",
+      url: "https://www.openthesquare.ro/",
     },
     {
       bgColor: "#fb7185",
@@ -206,10 +173,11 @@ const ProjectsPage = () => {
       url: "https://bags-psi-one.vercel.app/",
     },
     {
-      bgColor: "#acbbe3",
+      bgColor: "#1e3a8a",
       projectNumber: "03",
-      image: "/openthesquare.png",
-      url: "https://www.openthesquare.ro/",
+      image: "/dental-congress.png",
+      url: "https://www.dentaldepot.ro/congres-2026",
+      imageClass: "object-contain",
     },
     {
       bgColor: "#07615b",
@@ -253,34 +221,19 @@ const ProjectsPage = () => {
 
   // Calculate blended background color based on scroll progress
   const getBlendedBackgroundColor = () => {
-    if (scrollProgress <= 0.25) {
-      // Pure first color - matches transition SVG exactly
-      return projects[0].bgColor;
-    } else if (scrollProgress < 0.50) {
-      // Transition from first to second color
-      const localProgress = (scrollProgress - 0.25) / 0.25;
-      return interpolateColor(
-        projects[0].bgColor,
-        projects[1].bgColor,
-        localProgress
-      );
-    } else if (scrollProgress < 0.75) {
-      // Transition from second to third color
-      const localProgress = (scrollProgress - 0.50) / 0.25;
-      return interpolateColor(
-        projects[1].bgColor,
-        projects[2].bgColor,
-        localProgress
-      );
-    } else {
-      // Transition from third to fourth color
-      const localProgress = (scrollProgress - 0.75) / 0.25;
-      return interpolateColor(
-        projects[2].bgColor,
-        projects[3].bgColor,
-        localProgress
-      );
+    const segmentSize = 1 / projects.length;
+    const currentSegment = Math.floor(scrollProgress / segmentSize);
+    const localProgress = (scrollProgress - currentSegment * segmentSize) / segmentSize;
+
+    if (currentSegment >= projects.length - 1) {
+      return projects[projects.length - 1].bgColor;
     }
+
+    return interpolateColor(
+      projects[currentSegment].bgColor,
+      projects[currentSegment + 1].bgColor,
+      localProgress
+    );
   };
 
   const blendedBgColor = getBlendedBackgroundColor();
@@ -344,45 +297,9 @@ const ProjectsPage = () => {
                 <h1
                   className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 md:mb-8 leading-tight font-montserratAlt"
                 >
-                  <span className="inline-block">
-                    {titleWords.slice(0, 2).map((word, index) => (
-                      <span
-                        key={index}
-                        className={`inline-block ${
-                          visibleWords > index
-                            ? "opacity-100 animate-bounce-in"
-                            : "opacity-0 translate-y-8 scale-75"
-                        }`}
-                        style={{
-                          transitionDelay: `${index * 150}ms`,
-                          animationDelay: `${index * 150}ms`,
-                        }}
-                      >
-                        {word}
-                        {index < 1 && "\u00A0"}
-                      </span>
-                    ))}
-                  </span>
+                  {titleWords.slice(0, 2).join(" ")}
                   <br />
-                  <span className="inline-block">
-                    {titleWords.slice(2).map((word, index) => (
-                      <span
-                        key={index + 2}
-                        className={`inline-block ${
-                          visibleWords > index + 2
-                            ? "opacity-100 animate-bounce-in"
-                            : "opacity-0 translate-y-8 scale-75"
-                        }`}
-                        style={{
-                          transitionDelay: `${(index + 2) * 150}ms`,
-                          animationDelay: `${(index + 2) * 150}ms`,
-                        }}
-                      >
-                        {word}
-                        {index < titleWords.slice(2).length - 1 && "\u00A0"}
-                      </span>
-                    ))}
-                  </span>
+                  {titleWords.slice(2).join(" ")}
                 </h1>
 
                 <p
@@ -398,17 +315,10 @@ const ProjectsPage = () => {
 
             {/* Stats on the right side - vertical (Desktop/Tablet) */}
             <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 flex-col gap-8 items-center pr-2 md:pr-4 z-20 md:mr-14 md:mt-10">
-              {stats.map(({ number, label }, index) => (
+              {stats.map(({ number, label }) => (
                 <div
                   key={label}
-                  className={`flex flex-col items-center transition-all duration-500 ${
-                    visibleStats > index
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 translate-x-8"
-                  }`}
-                  style={{
-                    transitionDelay: `${index * 100}ms`,
-                  }}
+                  className="flex flex-col items-center"
                 >
                   <div className="inline-flex items-center justify-center w-12 h-12 border border-yellow-100/30 rounded-full mb-2">
                     <span className="text-lg font-bold text-yellow-100">
@@ -426,40 +336,19 @@ const ProjectsPage = () => {
             <div className="flex lg:hidden flex-col sm:flex-row items-center justify-start gap-4 mt-4 mb-6 max-w-xl">
               <button
                 onClick={goToContact}
-                className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-500 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
-                  buttonHighlighted 
-                    ? "animate-bounce-in scale-105 shadow-2xl shadow-yellow-400/50 ring-2 ring-yellow-400 ring-offset-2 ring-offset-transparent" 
-                    : ""
-                }`}
-                style={{ 
-                  backgroundColor: buttonHighlighted ? "#f59e0b" : "#fb923c",
-                  transition: "all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#eab308";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = buttonHighlighted ? "#f59e0b" : "#fb923c";
-                }}
+                className="inline-flex items-center space-x-2 bg-orange-400 hover:bg-yellow-400 text-white px-6 py-3 rounded-full text-sm font-semibold transition-colors duration-300 shadow-lg hover:shadow-xl font-montserratAlt"
               >
                 <span>{t.getStarted}</span>
-                <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${buttonHighlighted ? "animate-pulse" : ""}`} />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
 
             {/* Stats horizontal (Mobile/Tablet) */}
             <div className="flex lg:hidden flex-row gap-4 justify-center items-center mb-6">
-              {stats.map(({ number, label }, index) => (
+              {stats.map(({ number, label }) => (
                 <div
                   key={label}
-                  className={`flex flex-col items-center transition-all duration-500 ${
-                    visibleStats > index
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-4"
-                  }`}
-                  style={{
-                    transitionDelay: `${index * 100}ms`,
-                  }}
+                  className="flex flex-col items-center"
                 >
                   <div className="inline-flex items-center justify-center w-10 h-10 border border-yellow-100/30 rounded-full mb-1">
                     <span className="text-base font-bold text-yellow-100">
@@ -477,24 +366,10 @@ const ProjectsPage = () => {
             <div className="hidden lg:flex flex-col sm:flex-row items-center justify-start gap-4 mt-4 md:mt-8 max-w-xl lg:pl-10">
               <button
                 onClick={goToContact}
-                className={`inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-500 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-montserratAlt ${
-                  buttonHighlighted 
-                    ? "animate-bounce-in scale-105 shadow-2xl shadow-yellow-400/50 ring-2 ring-yellow-400 ring-offset-2 ring-offset-transparent" 
-                    : ""
-                }`}
-                style={{ 
-                  backgroundColor: buttonHighlighted ? "#f59e0b" : "#fb923c",
-                  transition: "all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#eab308";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = buttonHighlighted ? "#f59e0b" : "#fb923c";
-                }}
+                className="inline-flex items-center space-x-2 bg-orange-400 hover:bg-yellow-400 text-white px-6 py-3 rounded-full text-sm font-semibold transition-colors duration-300 shadow-lg hover:shadow-xl font-montserratAlt"
               >
                 <span>{t.getStarted}</span>
-                <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${buttonHighlighted ? "animate-pulse" : ""}`} />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -532,6 +407,9 @@ const ProjectsPage = () => {
                   {/* Title */}
                   <h2
                     className="text-2xl lg:text-4xl font-bold leading-tight mb-8 text-white transition-all duration-1000 ease-in-out font-montserratAlt whitespace-pre-line"
+                    style={{
+                      textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
+                    }}
                   >
                     {project.title}
                   </h2>
@@ -539,6 +417,9 @@ const ProjectsPage = () => {
                   {/* Description */}
                   <p
                     className="text-xl text-white/90 leading-relaxed max-w-[350px] mb-12 transition-all duration-1000 ease-in-out font-inter"
+                    style={{
+                      textShadow: '0 1px 2px rgba(0, 0, 0, 0.25)'
+                    }}
                   >
                     {project.description}
                   </p>
@@ -666,7 +547,8 @@ const ProjectsPage = () => {
                                   <img
                                     src={project.image}
                                     alt={project.title}
-                                    className="w-full h-full object-cover"
+                                    loading="lazy"
+                                    className={`w-full h-full ${project.imageClass || 'object-cover'}`}
                                   />
                                 </button>
                               ) : (
@@ -678,7 +560,8 @@ const ProjectsPage = () => {
                                   <img
                                     src={project.image}
                                     alt={project.title}
-                                    className="w-full h-full object-cover"
+                                    loading="lazy"
+                                    className={`w-full h-full ${project.imageClass || 'object-cover'}`}
                                   />
                                 </button>
                               )}
@@ -710,12 +593,22 @@ const ProjectsPage = () => {
                 >
                 <div className="py-8">
                   {/* Title */}
-                  <h2 className="text-2xl font-bold leading-tight mb-6 text-white font-montserratAlt whitespace-pre-line">
+                  <h2
+                    className="text-2xl font-bold leading-tight mb-6 text-white font-montserratAlt whitespace-pre-line"
+                    style={{
+                      textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3)'
+                    }}
+                  >
                     {project.title}
                   </h2>
 
                   {/* Description */}
-                  <p className="text-base text-white/90 leading-relaxed mb-8 font-inter">
+                  <p
+                    className="text-base text-white/90 leading-relaxed mb-8 font-inter"
+                    style={{
+                      textShadow: '1px 1px 6px rgba(0, 0, 0, 0.4), 0 0 12px rgba(0, 0, 0, 0.2)'
+                    }}
+                  >
                     {project.description}
                   </p>
 
@@ -752,7 +645,8 @@ const ProjectsPage = () => {
                                 <img
                                   src={project.image}
                                   alt={project.title}
-                                  className="w-full h-full object-contain"
+                                  loading="lazy"
+                                  className={`w-full h-full ${project.imageClass || 'object-contain'}`}
                                 />
                               </button>
                             ) : (
@@ -764,7 +658,8 @@ const ProjectsPage = () => {
                                 <img
                                   src={project.image}
                                   alt={project.title}
-                                  className="w-full h-full object-contain"
+                                  loading="lazy"
+                                  className={`w-full h-full ${project.imageClass || 'object-contain'}`}
                                 />
                               </button>
                             )}

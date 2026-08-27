@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   Leaf,
   Users,
@@ -11,6 +12,26 @@ import { useNavigate } from "react-router-dom";
 const Services = () => {
   const { language } = useLanguage();
   const navigate = useNavigate();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -120,6 +141,7 @@ const Services = () => {
 
   return (
     <section
+      ref={sectionRef}
       id="services"
       className="py-12 md:py-14 lg:py-20 bg-gradient-to-b from-teal-50 to-teal-700"
     >
@@ -129,20 +151,24 @@ const Services = () => {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-8 md:mb-12 lg:mb-16">
             <div className="lg:max-w-2xl">
               <h2
-                className="text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4 lg:mb-6 font-montserratAlt"
+                className={`text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4 lg:mb-6 font-montserratAlt opacity-0 ${
+                  isVisible ? 'animate-fadeInLeft' : ''
+                }`}
               >
                 {t.title}
               </h2>
               <p
-                className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-[1100px] font-inter"
+                className={`text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed max-w-[1100px] font-inter opacity-0 ${
+                  isVisible ? 'animate-fadeInLeft delay-200' : ''
+                }`}
               >
                 {t.description}
               </p>
             </div>
-            <div className="mt-4 md:mt-6 lg:mt-0">
+            <div className={`mt-4 md:mt-6 lg:mt-0 opacity-0 ${isVisible ? 'animate-fadeInRight delay-300' : ''}`}>
               <button
                 onClick={goToSchedule}
-                className="bg-orange-400 text-black px-5 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-sm md:text-sm lg:text-base font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="bg-orange-400 text-black px-5 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-sm md:text-sm lg:text-base font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 btn-animated"
               >
                 {t.button}
               </button>
@@ -152,16 +178,20 @@ const Services = () => {
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-4 lg:gap-6">
             {/* First row - 2 cards on tablet, 3 on desktop */}
-            {services.slice(0, 2).map((service) => (
+            {services.slice(0, 2).map((service, index) => (
               <div
                 key={service.title}
                 onClick={scrollToContact}
-                className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                className={`group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer card-hover opacity-0 ${
+                  isVisible ? 'animate-fadeInUp' : ''
+                }`}
+                style={{ animationDelay: isVisible ? `${400 + index * 150}ms` : '0ms' }}
               >
                 <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-all duration-500 filter brightness-100 group-hover:brightness-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -210,12 +240,16 @@ const Services = () => {
               <div
                 key={service.title}
                 onClick={scrollToContact}
-                className="hidden lg:block group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                className={`hidden lg:block group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer card-hover opacity-0 ${
+                  isVisible ? 'animate-fadeInUp' : ''
+                }`}
+                style={{ animationDelay: isVisible ? '700ms' : '0ms' }}
               >
                 <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-all duration-500 filter brightness-100 group-hover:brightness-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -266,7 +300,10 @@ const Services = () => {
                 <div
                   key={service.title}
                   onClick={scrollToContact}
-                  className="hidden md:block lg:hidden group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className={`hidden md:block lg:hidden group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer card-hover opacity-0 ${
+                    isVisible ? 'animate-fadeInUp' : ''
+                  }`}
+                  style={{ animationDelay: isVisible ? '700ms' : '0ms' }}
                 >
                   <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                     <img
@@ -323,7 +360,10 @@ const Services = () => {
                 <div
                   key={service.title}
                   onClick={scrollToContact}
-                  className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className={`group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer card-hover opacity-0 ${
+                    isVisible ? 'animate-fadeInUp' : ''
+                  }`}
+                  style={{ animationDelay: isVisible ? '850ms' : '0ms' }}
                 >
                   <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                     <img
@@ -380,7 +420,10 @@ const Services = () => {
                 <div
                   key={service.title}
                   onClick={scrollToContact}
-                  className="hidden lg:block group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className={`hidden lg:block group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer card-hover opacity-0 ${
+                    isVisible ? 'animate-fadeInUp' : ''
+                  }`}
+                  style={{ animationDelay: isVisible ? '1000ms' : '0ms' }}
                 >
                   <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                     <img
@@ -439,7 +482,10 @@ const Services = () => {
                 <div
                   key={service.title}
                   onClick={scrollToContact}
-                  className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer w-full md:max-w-md"
+                  className={`group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer w-full md:max-w-md card-hover opacity-0 ${
+                    isVisible ? 'animate-fadeInUp' : ''
+                  }`}
+                  style={{ animationDelay: isVisible ? '1000ms' : '0ms' }}
                 >
                   <div className="aspect-[5/3] md:aspect-[4/3] relative overflow-hidden">
                     <img
