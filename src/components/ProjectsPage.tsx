@@ -120,13 +120,13 @@ const ProjectsPage = () => {
         buttonText: "View Project",
       },
       {
-        title: "Cool Bag Store",
-        description: "A modern e-commerce concept built for speed and visual impact. Clean product displays, smooth animations, and intuitive navigation.",
+        title: "Digital Journey Congress",
+        description: "Event landing page for the First Central & Eastern European Digital Dentistry Congress. Speaker profiles, 3-day programme, venue gallery, and registration flow.",
         buttonText: "View Project",
       },
       {
-        title: "Digital Journey Congress",
-        description: "Event landing page for the First Central & Eastern European Digital Dentistry Congress. Speaker profiles, 3-day programme, venue gallery, and registration flow.",
+        title: "Cool Bag Store",
+        description: "A modern e-commerce concept built for speed and visual impact. Clean product displays, smooth animations, and intuitive navigation.",
         buttonText: "View Project",
       },
       {
@@ -142,13 +142,13 @@ const ProjectsPage = () => {
         buttonText: "Vezi Proiectul",
       },
       {
-        title: "Boutique de Genți",
-        description: "O experiență e-commerce modernă, construită pentru viteză și simplitate. Prezentare elegantă a produselor, navigare intuitivă și un proces de checkout fără fricțiuni.",
+        title: "Congres Digital Journey",
+        description: "Un landing page premium pentru primul Congres de Stomatologie Digitală din Europa Centrală și de Est. Include profile interactive ale speakerilor, program detaliat pe 3 zile, prezentarea locației și un sistem de înregistrare optimizat pentru conversie.",
         buttonText: "Vezi Proiectul",
       },
       {
-        title: "Congres Digital Journey",
-        description: "Un landing page premium pentru primul Congres de Stomatologie Digitală din Europa Centrală și de Est. Include profile interactive ale speakerilor, program detaliat pe 3 zile, prezentarea locației și un sistem de înregistrare optimizat pentru conversie.",
+        title: "Boutique de Genți",
+        description: "O experiență e-commerce modernă, construită pentru viteză și simplitate. Prezentare elegantă a produselor, navigare intuitivă și un proces de checkout fără fricțiuni.",
         buttonText: "Vezi Proiectul",
       },
       {
@@ -167,17 +167,17 @@ const ProjectsPage = () => {
       url: "https://www.openthesquare.ro/",
     },
     {
-      bgColor: "#fb7185",
-      projectNumber: "02",
-      image: "/2sn project.png",
-      url: "https://bags-psi-one.vercel.app/",
-    },
-    {
       bgColor: "#1e3a8a",
-      projectNumber: "03",
+      projectNumber: "02",
       image: "/dental-congress.png",
       url: "https://www.dentaldepot.ro/congres-2026",
       imageClass: "object-contain",
+    },
+    {
+      bgColor: "#fb7185",
+      projectNumber: "03",
+      image: "/2sn project.png",
+      url: "https://bags-psi-one.vercel.app/",
     },
     {
       bgColor: "#07615b",
