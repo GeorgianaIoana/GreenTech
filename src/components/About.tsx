@@ -111,7 +111,7 @@ const About = () => {
             {t.values.map(({ icon: Icon, label }, index) => (
               <div
                 key={label}
-                className={`flex items-center space-x-2 text-slate-600 bg-white/90 backdrop-blur-xl border border-white rounded-full px-3 py-1.5 md:px-4 md:py-2 shadow-md hover:shadow-lg hover:bg-white transition-all duration-300 card-hover icon-bounce opacity-0 ${
+                className={`flex items-center space-x-2 text-slate-600 bg-white/90 backdrop-blur-xl border border-white rounded-full px-3 py-1.5 md:px-4 md:py-2 shadow-md hover:shadow-lg hover:bg-white transition-all duration-300 opacity-0 ${
                   isVisible ? 'animate-scaleIn' : ''
                 }`}
                 style={{ animationDelay: isVisible ? `${300 + index * 50}ms` : '0ms' }}
