@@ -75,7 +75,7 @@ const Services = () => {
           image: "/green-house.jpg",
           badge: "Future-friendly",
           icon: Lightbulb,
-          price: "From €30 / hour",
+          price: "From €40 / hour",
         },
         {
           title: "Authentic Brand Identity",
@@ -122,7 +122,7 @@ const Services = () => {
           image: "/green-house.jpg",
           badge: "Future-friendly",
           icon: Lightbulb,
-          price: "De la €30 / oră",
+          price: "De la €40 / oră",
         },
         {
           title: "Identitate de Brand",
