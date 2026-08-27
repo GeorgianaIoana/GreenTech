@@ -13,6 +13,15 @@ const ProjectsPage = () => {
   const [cardVisible, setCardVisible] = useState(false);
   const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   const translations = {
     en: {
@@ -237,7 +246,8 @@ const ProjectsPage = () => {
     );
   };
 
-  const blendedBgColor = getBlendedBackgroundColor();
+  // On mobile, keep orange; on desktop, blend colors
+  const blendedBgColor = isMobile ? "#fb923c" : getBlendedBackgroundColor();
 
   // Function to darken a color for shadow effect
   const darkenColor = (color: string, factor: number = 0.3) => {
