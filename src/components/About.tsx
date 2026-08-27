@@ -42,7 +42,7 @@ const About = () => {
   const translations = {
     en: {
       title: "Work with a team that gets it.",
-      description: "We understand how essential the ideal website is for your business, and we are delighted to create it for you. You've come to the right place! We shape your online presence with the latest technologies and a strong commitment to sustainable efficiency: refined design, optimized algorithms, high-speed performance, transparent communication, and solar-powered hosting. Excellence is our standard.",
+      description: "We understand how essential the right website is for your business. We shape your online presence with cutting-edge technologies and a commitment to sustainability: refined design, optimized code, high-speed performance, transparent communication, and solar-powered hosting. Excellence is our standard.",
       values: [
         { icon: Leaf, label: "Sustainable" },
         { icon: Cpu, label: "Intelligent technology" },

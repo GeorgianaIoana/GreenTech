@@ -42,7 +42,7 @@ const Services = () => {
   const translations = {
     en: {
       title: "What we offer",
-      description: "As a strong online presence becomes essential, we bridge the gap between sustainability and success. We create eco-friendly, high-performance websites that reduce digital carbon footprints while maximizing lead generation. By optimizing every server operation and design element, we ensure a lightning-fast experience that turns environmentally conscious visitors into loyal clients.",
+      description: "A strong online presence is essential for modern businesses. We combine sustainability with success, creating eco-friendly, high-performance websites that reduce digital carbon footprints while maximizing lead generation. By optimizing every detail, we deliver lightning-fast experiences that turn visitors into loyal clients.",
       button: "Work With Us",
       services: [
         {
