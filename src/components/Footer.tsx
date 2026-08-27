@@ -9,7 +9,6 @@ const Footer = () => {
 
   const translations = {
     en: {
-      tagline: "Make your business bloom",
       navigation: "Navigation",
       about: "About",
       services: "Services",
@@ -21,7 +20,6 @@ const Footer = () => {
       terms: "Terms and Conditions",
     },
     ro: {
-      tagline: "",
       navigation: "Navigare",
       about: "Despre",
       services: "Servicii",
@@ -63,9 +61,6 @@ const Footer = () => {
                 className="h-40 w-auto"
               />
             </button>
-            <p className="mt-4 text-xl text-teal-100 font-inter">
-              {t.tagline}
-            </p>
           </div>
 
           <nav aria-label="Quick Links" className="md:justify-self-center">

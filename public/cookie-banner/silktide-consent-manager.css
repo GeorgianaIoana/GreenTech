@@ -153,8 +153,8 @@
 }
 
 #silktide-banner.bottomLeft {
-  bottom: 16px;
-  left: 16px;
+  bottom: 24px;
+  left: 24px;
   position: fixed;
 }
 
@@ -472,12 +472,12 @@
 #silktide-cookie-icon {
   display: none;
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 24px;
+  left: 20px;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   padding: 0px;
   border: none;
@@ -490,7 +490,7 @@
 
 #silktide-cookie-icon.bottomRight {
   left: auto;
-  right: 10px;
+  right: 24px;
 }
 
 #silktide-cookie-icon svg {

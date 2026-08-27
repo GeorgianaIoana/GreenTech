@@ -75,7 +75,7 @@ const Calendly: React.FC = () => {
           setTimeout(() => {
             if (window.Calendly && widget && !widget.querySelector('iframe')) {
               window.Calendly.initInlineWidget({
-                url: 'https://calendly.com/georgiana17stanciu/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=3dceda',
+                url: 'https://calendly.com/georgiana17stanciu/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=14b8a6',
                 parentElement: widget,
               });
             }
@@ -91,7 +91,7 @@ const Calendly: React.FC = () => {
     <div 
       ref={widgetRef}
       className="calendly-inline-widget" 
-      data-url="https://calendly.com/georgiana17stanciu/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=3dceda" 
+      data-url="https://calendly.com/georgiana17stanciu/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=14b8a6" 
       style={{ minWidth: '320px', height: '700px' }}>
     </div>
   );

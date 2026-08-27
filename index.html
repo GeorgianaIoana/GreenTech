@@ -4,47 +4,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%2395f5e3'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z'/%3E%3C/svg%3E" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://assets.calendly.com" />
-    <link rel="preconnect" href="https://calendly.com" />
     <link rel="dns-prefetch" href="https://assets.calendly.com" />
-    <link rel="dns-prefetch" href="https://calendly.com" />
-    <link rel="preload" href="https://assets.calendly.com/assets/external/widget.js" as="script" />
-    <link rel="preload" href="/projects-banner.mp4" as="video" type="video/mp4" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pompiere&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat+Alternates:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <title>Bloomsoft Technology</title>
-    <!-- Cookie Banner -->
-    <link rel="stylesheet" id="silktide-consent-manager-css" href="/cookie-banner/silktide-consent-manager.css">
-    <script src="/cookie-banner/silktide-consent-manager.js"></script>
-    <script>
-      silktideCookieBannerManager.updateCookieBannerConfig({
+    <!-- Cookie Banner - deferred for performance -->
+    <link rel="stylesheet" id="silktide-consent-manager-css" href="/cookie-banner/silktide-consent-manager.css" media="print" onload="this.media='all'">
+    <script src="/cookie-banner/silktide-consent-manager.js" defer></script>
+    <script defer>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (typeof silktideCookieBannerManager !== 'undefined') {
+          silktideCookieBannerManager.updateCookieBannerConfig({
         background: {
           showBackground: true
         },
@@ -136,10 +110,10 @@
         position: {
           banner: "bottomLeft"
         }
+          });
+        }
       });
     </script>
-    <!-- Preload Calendly script for instant loading -->
-    <script src="https://assets.calendly.com/assets/external/widget.js" async defer></script>
   </head>
   <body>
     <div id="root"></div>

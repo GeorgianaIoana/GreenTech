@@ -8,7 +8,7 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
-    host: true, // Allow external connections
+    host: true,
     port: 5175,
     strictPort: false,
     cors: true,
@@ -18,4 +18,27 @@ export default defineConfig({
   },
   base: '/',
   publicDir: 'public',
+  build: {
+    // Optimize chunk splitting
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          icons: ['lucide-react'],
+        },
+      },
+    },
+    // Minify for production
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    // Enable source maps for debugging (optional)
+    sourcemap: false,
+    // Target modern browsers
+    target: 'es2020',
+  },
 });

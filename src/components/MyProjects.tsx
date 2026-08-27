@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const MyProjects = () => {
   const { language } = useLanguage();
+  const navigate = useNavigate();
 
   const translations = {
     en: {
@@ -179,8 +181,8 @@ const MyProjects = () => {
     };
   }, []);
 
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  const goToProjects = () => {
+    navigate("/projects");
   };
 
   const projects = [
@@ -253,7 +255,7 @@ const MyProjects = () => {
           {/* CTA Button - Center of cards */}
           <div className="absolute left-1/2 top-[55%] transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-auto">
             <button
-              onClick={scrollToContact}
+              onClick={goToProjects}
               className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-5 md:py-2.5 lg:px-8 lg:py-4 rounded-full text-xs md:text-sm lg:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
               {t.button}
@@ -276,6 +278,7 @@ const MyProjects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     className={`w-full h-full object-cover ${
                       project.id === 4 ? "object-left" : ""
                     }`}
@@ -322,6 +325,7 @@ const MyProjects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     className={`w-full h-full object-cover ${
                       project.id === 4 ? "object-left" : ""
                     }`}
@@ -366,6 +370,7 @@ const MyProjects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     className={`w-full h-full object-cover ${
                       project.id === 4 ? "object-left" : ""
                     }`}
@@ -392,7 +397,7 @@ const MyProjects = () => {
             {/* CTA Button - Center of cards for mobile/tablet */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40">
               <button
-                onClick={scrollToContact}
+                onClick={goToProjects}
                 className="inline-flex items-center space-x-2 md:space-x-3 bg-orange-400 hover:bg-yellow-400 text-slate-900 px-4 py-2 md:px-6 md:py-3 rounded-full text-xs md:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
               >
                 {t.button}

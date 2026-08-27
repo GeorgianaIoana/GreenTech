@@ -16,7 +16,6 @@ import CalendlySection from "./components/CalendlySection";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsAndConditions from "./components/TermsAndConditions";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
-import TawkTo from "./components/TawkTo";
 // Preload Calendly script by importing it
 import "./components/Calendly";
 
@@ -51,7 +50,6 @@ function App() {
           </Routes>
           <Footer />
           <FloatingWhatsApp />
-          <TawkTo />
         </div>
       </Router>
     </LanguageProvider>
