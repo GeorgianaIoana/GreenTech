@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Header from "./components/Header";
@@ -16,6 +15,8 @@ import CalendlySection from "./components/CalendlySection";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsAndConditions from "./components/TermsAndConditions";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import ScrollToTop from "./components/ScrollToTop";
+import NotFound from "./components/NotFound";
 // Preload Calendly script by importing it
 import "./components/Calendly";
 
@@ -47,9 +48,11 @@ function App() {
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
           <FloatingWhatsApp />
+          <ScrollToTop />
         </div>
       </Router>
     </LanguageProvider>
