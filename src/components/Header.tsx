@@ -113,7 +113,7 @@ const Header = () => {
                   <button
                     key={item}
                     onClick={() => handleNavigation(englishItem)}
-                    className="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200"
+                    className="block w-full text-left px-4 py-2 text-white hover:bg-teal-600/50 transition-colors duration-200"
                   >
                     {item}
                   </button>
