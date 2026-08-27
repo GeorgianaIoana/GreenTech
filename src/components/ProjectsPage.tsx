@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProjectCard from "./ProjectCard";
 import { useLanguage } from "../contexts/LanguageContext";
-import ScrollToTop from "./ScrollToTop";
 
 const ProjectsPage = () => {
   const { language } = useLanguage();
@@ -14,6 +13,11 @@ const ProjectsPage = () => {
   const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Detect mobile
   useEffect(() => {
@@ -735,8 +739,6 @@ const ProjectsPage = () => {
           </div>
         </div>
       </section>
-
-      <ScrollToTop />
     </div>
   );
 };
