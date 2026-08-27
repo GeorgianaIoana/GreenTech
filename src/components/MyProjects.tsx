@@ -237,6 +237,7 @@ const MyProjects = () => {
             {/* Main Heading */}
             <h2
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-teal-50 mb-4 font-montserratAlt"
+              style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2)' }}
             >
               {t.title}
             </h2>
@@ -244,6 +245,7 @@ const MyProjects = () => {
             {/* Description */}
             <p
               className="text-sm md:text-base lg:text-lg text-white/90 leading-relaxed max-w-full md:max-w-3xl mx-auto px-4 font-inter"
+              style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2)' }}
             >
               {t.description}
             </p>
