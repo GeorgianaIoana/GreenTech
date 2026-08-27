@@ -243,7 +243,7 @@ const MyProjects = () => {
 
             {/* Description */}
             <p
-              className="text-sm md:text-base lg:text-lg text-white/90 leading-relaxed max-w-full md:max-w-3xl mx-auto px-4 font-inter"
+              className="text-sm md:text-base lg:text-lg text-slate-900 leading-relaxed max-w-full md:max-w-3xl mx-auto px-4 font-inter"
             >
               {t.description}
             </p>
