@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 declare global {
   interface Window {
@@ -13,8 +14,14 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { language } = useLanguage();
 
-  const navItems = ['Home', 'About', 'Services', 'Projects', 'Schedule', 'Contact'];
+  const navItems = {
+    en: ['Home', 'About', 'Services', 'Projects', 'Schedule', 'Contact'],
+    ro: ['Acasă', 'Despre Noi', 'Servicii', 'Proiecte', 'Programare', 'Contact'],
+  };
+
+  const items = navItems[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,25 +70,28 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-4">
-            {navItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => handleNavigation(item)}
-                onMouseEnter={() => {
-                  if (item === 'Schedule' && !window.Calendly && !document.querySelector('script[src*="calendly.com"]')) {
-                    const script = document.createElement('script');
-                    script.type = 'text/javascript';
-                    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-                    script.async = true;
-                    script.defer = true;
-                    document.head.appendChild(script);
-                  }
-                }}
-                className="text-teal-50 font-montserratAlt font-medium tracking-wide hover:text-teal-300 transition-all duration-200 link-underline hover:scale-105"
-              >
-                {item}
-              </button>
-            ))}
+            {items.map((item, index) => {
+              const englishItem = navItems.en[index];
+              return (
+                <button
+                  key={item}
+                  onClick={() => handleNavigation(englishItem)}
+                  onMouseEnter={() => {
+                    if (englishItem === 'Schedule' && !window.Calendly && !document.querySelector('script[src*="calendly.com"]')) {
+                      const script = document.createElement('script');
+                      script.type = 'text/javascript';
+                      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+                      script.async = true;
+                      script.defer = true;
+                      document.head.appendChild(script);
+                    }
+                  }}
+                  className="text-teal-50 font-montserratAlt font-medium tracking-wide hover:text-teal-300 transition-all duration-200 link-underline hover:scale-105"
+                >
+                  {item}
+                </button>
+              );
+            })}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -97,15 +107,18 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-teal-700/95 backdrop-blur-sm">
             <nav className="py-4 space-y-2">
-              {navItems.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => handleNavigation(item)}
-                  className="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200"
-                >
-                  {item}
-                </button>
-              ))}
+              {items.map((item, index) => {
+                const englishItem = navItems.en[index];
+                return (
+                  <button
+                    key={item}
+                    onClick={() => handleNavigation(englishItem)}
+                    className="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200"
+                  >
+                    {item}
+                  </button>
+                );
+              })}
             </nav>
           </div>
         )}
