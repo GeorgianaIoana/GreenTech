@@ -168,7 +168,7 @@ const Services = () => {
             <div className={`mt-4 md:mt-6 lg:mt-0 opacity-0 ${isVisible ? 'animate-fadeInRight delay-300' : ''}`}>
               <button
                 onClick={goToSchedule}
-                className="bg-orange-400 text-black px-5 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-sm md:text-sm lg:text-base font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 btn-animated"
+                className="bg-orange-400 text-black px-5 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-sm md:text-sm lg:text-base font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 {t.button}
               </button>
